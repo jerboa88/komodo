@@ -1,0 +1,14 @@
+{
+	"$schema": "https://johng.io/schema/project-metadata.json",
+	"name": "TODO",
+	"tagline": "TODO",
+	"background": "TODO.",
+	"logoPath": "TODO",
+	"category": "TODO",
+	"subcategory": "TODO",
+	"schema": {
+		"type": "TODO",
+		"applicationCategory": "TODO",
+		"operatingSystem": "TODO"
+	}
+}
