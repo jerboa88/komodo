@@ -1,14 +1,12 @@
 {
 	"$schema": "https://johng.io/schema/project-metadata.json",
-	"name": "TODO",
-	"tagline": "TODO",
-	"background": "TODO.",
-	"logoPath": "TODO",
-	"category": "TODO",
-	"subcategory": "TODO",
+	"name": "Enhancements for Komoot",
+	"logoPath": "src/logo.png",
+	"category": "Script",
+	"subcategory": "User",
 	"schema": {
-		"type": "TODO",
-		"applicationCategory": "TODO",
-		"operatingSystem": "TODO"
+		"type": "Software",
+		"applicationCategory": "Sports",
+		"operatingSystem": "Any"
 	}
 }

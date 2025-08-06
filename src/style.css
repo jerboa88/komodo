@@ -1,0 +1,175 @@
+/* Variables */
+/* ---------- */
+:root {
+	--efk-spacing: 0.375rem;
+
+	--efk-pill-bg-color: var(--theme-ui-colors-primary);
+	--efk-pill-text-color: var(--theme-ui-colors-textOnDark);
+
+	--efk-button-bg-color: var(--theme-ui-colors-white);
+	--efk-button-border-color: var(--efk-button-bg-color);
+	--efk-button-text-color: var(--theme-ui-colors-secondary);
+
+	--efk-button-hover-bg-color: rgba(0, 119, 217, 0.1);
+	--efk-button-hover-border-color: #0065b8;
+	--efk-button-hover-text-color: #0065b8;
+
+	--efk-button-disabled-bg-color: var(--theme-ui-colors-muted);
+	--efk-button-disabled-border-color: var(--efk-button-disabled-bg-color);
+	--efk-button-disabled-text-color: var(--theme-ui-colors-disabled);
+}
+
+/* Overrides */
+/* --------- */
+
+/* Enable flex gap and wrapping on filter container */
+.efk-filter-container {
+	flex-wrap: wrap;
+	gap: var(--efk-spacing);
+
+	/* Remove margin from filter buttons because we use flex gap instead */
+	> button {
+		margin-right: 0 !important;
+	}
+}
+
+/* Align buttons in button container */
+div:has(> a[href='/upload']) {
+	align-items: center;
+}
+
+/* Utilities */
+/* --------- */
+.efk-hide {
+	display: none;
+}
+
+/* Custom elements */
+/* --------------- */
+
+.efk-tag-filter-container {
+	flex: 1 1 auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--efk-spacing);
+}
+
+.efk-tag-filter {
+	border-width: 1px;
+	font-weight: 700;
+	border-radius: 8px;
+	padding: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	flex: 1 1 0%;
+	background-color: var(--theme-ui-colors-card);
+	color: var(--theme-ui-colors-text);
+	border-color: var(--theme-ui-colors-black20);
+
+	&:hover {
+		border-color: var(--theme-ui-colors-black30);
+	}
+
+	> label {
+		font-weight: 700;
+	}
+
+	> select {
+		display: block;
+		width: 100%;
+		margin-top: var(--efk-spacing);
+	}
+}
+
+.efk-tag-pill-container {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: var(--efk-spacing);
+	gap: var(--efk-spacing);
+}
+
+.efk-pill {
+	align-items: center;
+	background-color: var(--efk-pill-bg-color);
+	border-radius: 4px;
+	color: var(--efk-pill-text-color);
+	display: inline-flex;
+	justify-content: center;
+	min-width: 2em;
+	text-align: center;
+	font-size: 12px;
+	font-weight: 700;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	text-transform: inherit;
+	flex-shrink: 0;
+}
+
+.efk-button {
+	align-items: center;
+	appearance: none;
+	background-color: var(--efk-button-bg-color);
+	border-color: var(--efk-button-border-color);
+	border-radius: 8px;
+	border-style: solid;
+	color: var(--efk-button-text-color);
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	pointer-events: auto;
+	text-align: center;
+	width: unset;
+	border-width: 0.0625rem;
+	text-decoration: none;
+	transition: all 200ms;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.5rem;
+	padding-left: 0.6875rem;
+	padding-right: 0.6875rem;
+	padding-top: 0.4375rem;
+	padding-bottom: 0.4375rem;
+
+	&:hover {
+		background-color: var(--efk-button-hover-bg-color);
+		border-color: var(--efk-button-hover-border-color);
+		color: var(--efk-button-hover-text-color);
+	}
+
+	&:disabled {
+		cursor: default;
+		background-color: var(--efk-button-disabled-bg-color);
+		border-color: var(--efk-button-disabled-border-color);
+		color: var(--efk-button-disabled-text-color);
+	}
+
+	> svg {
+		color: inherit;
+	}
+
+	> span {
+		display: inline-flex;
+		text-align: center;
+		flex-flow: column;
+		padding-left: 0.25rem;
+		padding-right: 0;
+	}
+}
+
+/* Originating elements needs to be positioned relatively */
+.efk-new {
+	position: relative;
+}
+
+/* Add an icon to newly added elements */
+.efk-new::after {
+	content: '🦎';
+	position: absolute;
+	top: 0;
+	right: calc(var(--efk-spacing) * -1);
+	z-index: 1;
+	font-size: small;
+	line-height: 0;
+}

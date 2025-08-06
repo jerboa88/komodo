@@ -1,0 +1,65 @@
+{
+  "name": "enhancements-for-komoot",
+  "version": "0.1.0",
+  "description": "A userscript that adds additional features for route planning on Komoot.com.",
+  "keywords": [
+    "typescript",
+    "javascript",
+    "userscript",
+    "fitness",
+    "greasemonkey",
+    "userscripts",
+    "tampermonkey",
+    "route-planning",
+    "violentmonkey",
+    "user-script",
+    "komoot"
+  ],
+  "homepage": "https://johng.io/p/enhancements-for-komoot",
+  "bugs": "https://github.com/jerboa88/enhancements-for-komoot/issues",
+  "license": "MIT",
+  "author": {
+    "name": "John Goodliff",
+    "url": "https://johng.io"
+  },
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://johng.io/funding"
+    },
+    {
+      "type": "GitHub Sponsors",
+      "url": "https://github.com/sponsors/jerboa88"
+    },
+    {
+      "type": "Patreon",
+      "url": "https://patreon.com/jerboa88"
+    },
+    {
+      "type": "Brave Creators",
+      "url": "https://publishers.basicattentiontoken.org/en/c/johng"
+    }
+  ],
+  "module": "dist/enhancements-for-komoot.user.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerboa88/enhancements-for-komoot.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "format": "biome format --write .",
+    "lint": "biome lint ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.6",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.3",
+    "vite": "^7.0.5",
+    "vite-plugin-monkey": "^6.0.0"
+  }
+}
