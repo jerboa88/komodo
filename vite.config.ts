@@ -1,5 +1,11 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import monkey from 'vite-plugin-monkey';
+
+const iconPath = resolve(__dirname, 'src/logo_static.png');
+const iconBuffer = readFileSync(iconPath);
+const iconBase64 = `data:image/png;base64,${iconBuffer.toString('base64')}`;
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,7 +14,7 @@ export default defineConfig({
 			entry: 'src/main.ts',
 			userscript: {
 				name: 'Enhancements for Komoot',
-				icon: '../src/logo.svg',
+				icon: iconBase64,
 				namespace: 'https://github.com/jerboa88',
 				match: [
 					'https://www.komoot.com/user/*/routes',
