@@ -40,7 +40,10 @@
       "url": "https://publishers.basicattentiontoken.org/en/c/johng"
     }
   ],
-  "module": "dist/enhancements-for-komoot.user.js",
+  "main": "./dist/enhancements-for-komoot.user.js",
+  "exports": {
+    ".": "./dist/enhancements-for-komoot.user.js"
+  },
   "type": "module",
   "repository": {
     "type": "git",
@@ -51,11 +54,27 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "biome format --write .",
-    "lint": "biome lint ."
+    "lint": "biome lint .",
+    "commit": "cz",
+    "prepare": "husky",
+    "postversion": "tsc && vite build"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
-    "@types/bun": "latest"
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@semantic-release/git": "^10.0.1",
+    "@types/bun": "latest",
+    "commitizen": "^4.3.1",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "cz-git": "^1.12.0",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.7"
   },
   "peerDependencies": {
     "typescript": "^5.8.3",
