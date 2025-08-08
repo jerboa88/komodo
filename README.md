@@ -203,6 +203,20 @@ This project is not affiliated with or endorsed by Komoot in any way.
 
 - **[Better Segments for Strava]** - A userscript for Strava that adds additional stats and features to the starred segments page.
 
+## 💕 Funding
+
+Find this project useful? [Sponsoring me] will help me cover costs and **_commit_** more time to open-source.
+
+If you can't donate but still want to contribute, don't worry. There are many other ways to help out, like:
+
+- 📢 reporting (submitting feature requests & bug reports)
+- 👨‍💻 coding (implementing features & fixing bugs)
+- 📝 writing (documenting & translating)
+- 💬 spreading the word
+- ⭐ starring the project
+
+I appreciate the support!
+
 [Better Segments for Strava]: https://github.com/jerboa88/better-segments-for-strava
 [Biome]: https://biomejs.dev/
 [Bun]: https://bun.sh/
@@ -221,6 +235,7 @@ This project is not affiliated with or endorsed by Komoot in any way.
 [LICENSE]: LICENSE
 [MIT License]: https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE
 [Semantic Release]: https://semantic-release.gitbook.io/semantic-release/
+[Sponsoring me]: https://johng.io/funding
 [src/constants.ts]: src/constants.ts
 [src/styles.css]: src/styles.css
 [Stylus]: https://github.com/openstyles/stylus
