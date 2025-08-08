@@ -43,9 +43,9 @@ Using [Komoot] for route planning? This script may help. It runs in your browser
 
 ### Screenshots
 
-| ![Screenshot of Komoot's route list page with Komodo ](screenshots/route-list-page.png) |
+| ![Screenshot of Komoot's route list page with Komodo](screenshots/route-list-page.png) |
 | ---------------------------------------------------------------------------------- |
-| _Komoot's route list page with Komodo  - v0.1.0_           |
+| _Komoot's route list page with Komodo - v0.1.0_           |
 
 ## 📦 Installation
 >
