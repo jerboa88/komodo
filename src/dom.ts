@@ -133,3 +133,48 @@ export const showElement = <T extends HTMLElement>(
 
 	return true;
 };
+
+/**
+ * Wait for React to be mounted before calling the callback.
+ *
+ * @param callback - The callback function to call
+ */
+export const onReactMounted = (callback: () => void) => {
+	const canaryClassName = 'ReactModalPortal';
+
+	const continueCall = () => {
+		debug('React has been mounted');
+
+		callback();
+	};
+
+	const canaries = document.body.getElementsByClassName(canaryClassName);
+
+	if (canaries.length > 0) {
+		continueCall();
+
+		return;
+	}
+
+	const observer = new MutationObserver((mutations) => {
+		debug('Mutations observed on body', mutations);
+
+		for (const mutation of mutations) {
+			for (const newNode of mutation.addedNodes) {
+				if (
+					newNode instanceof HTMLElement &&
+					newNode.classList.contains(canaryClassName)
+				) {
+					observer.disconnect();
+					continueCall();
+
+					return;
+				}
+			}
+		}
+	});
+
+	debug('Waiting for React to be mounted');
+
+	observer.observe(document.body, { childList: true });
+};

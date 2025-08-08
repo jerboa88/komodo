@@ -111,7 +111,39 @@
     return select;
   };
   const showElement = (element, visible) => {
-    element.classList.toggle(CLASS.HIDE, !visible);
+    const shouldHide = !visible;
+    const isHidden = element.classList.contains(CLASS.HIDE);
+    if (isHidden === shouldHide) {
+      return false;
+    }
+    element.classList.toggle(CLASS.HIDE, shouldHide);
+    return true;
+  };
+  const onReactMounted = (callback) => {
+    const canaryClassName = "ReactModalPortal";
+    const continueCall = () => {
+      debug("React has been mounted");
+      callback();
+    };
+    const canaries = document.body.getElementsByClassName(canaryClassName);
+    if (canaries.length > 0) {
+      continueCall();
+      return;
+    }
+    const observer = new MutationObserver((mutations) => {
+      debug("Mutations observed on body", mutations);
+      for (const mutation of mutations) {
+        for (const newNode of mutation.addedNodes) {
+          if (newNode instanceof HTMLElement && newNode.classList.contains(canaryClassName)) {
+            observer.disconnect();
+            continueCall();
+            return;
+          }
+        }
+      }
+    });
+    debug("Waiting for React to be mounted");
+    observer.observe(document.body, { childList: true });
   };
   class Tag {
     constructor(name, value) {
@@ -216,7 +248,7 @@
     }
   }
   const pattern$1 = /^\/user\/\d*?\/routes$/;
-  const handler$1 = async () => {
+  const init$1 = async () => {
     const tagManager = new TagManager();
     const savedRoutesAnchor = assertDefined(
       document.querySelector(
@@ -371,10 +403,12 @@
       filterLi(li, tags);
     };
     const filterLi = (li, tags) => {
-      const visible = tagManager.matchesFilters(tags);
-      const msgPrefix = visible ? "Showing" : "Hiding";
-      debug(`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`);
-      showElement(li, visible);
+      const doesMatchFilter = tagManager.matchesFilters(tags);
+      const wasVisibilityChanged = showElement(li, doesMatchFilter);
+      if (wasVisibilityChanged) {
+        const msgPrefix = doesMatchFilter ? "Showing" : "Hiding";
+        debug(`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`);
+      }
     };
     const applyFilters = () => {
       debug("Applying filters");
@@ -384,24 +418,24 @@
         filterLi(li, tags);
       }
     };
-    const init2 = async () => {
-      debug("Setting up route list page");
-      const observer = new MutationObserver((mutations) => {
-        for (const mutation of mutations) {
-          for (const newNode of mutation.addedNodes) {
-            if (newNode.nodeName === "LI") {
-              updateLi(newNode);
-            }
+    debug("Setting up route list page");
+    const observer = new MutationObserver((mutations) => {
+      debug("Mutations observed on ul", mutations);
+      for (const mutation of mutations) {
+        for (const newNode of mutation.addedNodes) {
+          if (newNode.nodeName === "LI") {
+            updateLi(newNode);
           }
         }
-      });
-      observer.observe(ul, { childList: true });
-      getLis().forEach(updateLi);
-      addLoadAllRoutesButton();
-      updateTagFilterControls();
-    };
-    init2();
+      }
+    });
+    debug("Waiting for li elements to be added to the list");
+    observer.observe(ul, { childList: true });
+    getLis().forEach(updateLi);
+    addLoadAllRoutesButton();
+    updateTagFilterControls();
   };
+  const handler$1 = () => onReactMounted(init$1);
   const routeListRoute = {
     pattern: pattern$1,
     handler: handler$1
