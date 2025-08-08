@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import monkey from 'vite-plugin-monkey';
+import { PROJECT } from './src/constants';
 
 const iconPath = resolve(__dirname, 'src/logo_static.png');
 const iconBuffer = readFileSync(iconPath);
@@ -13,7 +14,7 @@ export default defineConfig({
 		monkey({
 			entry: 'src/main.ts',
 			userscript: {
-				name: 'Enhancements for Komoot',
+				name: `${PROJECT.NAME} - ${PROJECT.TAGLINE}`,
 				icon: iconBase64,
 				namespace: 'https://github.com/jerboa88',
 				match: [

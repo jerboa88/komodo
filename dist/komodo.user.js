@@ -1,26 +1,47 @@
 // ==UserScript==
-// @name         Enhancements for Komoot
+// @name         Komodo - Mods for Komoot
 // @namespace    https://github.com/jerboa88
 // @version      0.1.1
 // @author       John Goodliff
 // @description  A userscript that adds additional features for route planning on Komoot.com.
 // @license      MIT
 // @icon         data:image/png;base64,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
-// @homepage     https://johng.io/p/enhancements-for-komoot
-// @homepageURL  https://johng.io/p/enhancements-for-komoot
-// @source       https://github.com/jerboa88/enhancements-for-komoot.git
-// @supportURL   https://github.com/jerboa88/enhancements-for-komoot/issues
+// @homepage     https://johng.io/p/komodo
+// @homepageURL  https://johng.io/p/komodo
+// @source       https://github.com/jerboa88/komodo.git
+// @supportURL   https://github.com/jerboa88/komodo/issues
 // @match        https://www.komoot.com/user/*/routes
 // @match        https://www.komoot.com/tour/*
 // @grant        none
 // ==/UserScript==
 
-(e=>{if(typeof GM_addStyle=="function"){GM_addStyle(e);return}const o=document.createElement("style");o.textContent=e,document.head.append(o)})(' :root{--efk-spacing: .375rem;--efk-pill-bg-color: var(--theme-ui-colors-primary);--efk-pill-text-color: var(--theme-ui-colors-textOnDark);--efk-button-bg-color: var(--theme-ui-colors-white);--efk-button-border-color: var(--efk-button-bg-color);--efk-button-text-color: var(--theme-ui-colors-secondary);--efk-button-hover-bg-color: rgba(0, 119, 217, .1);--efk-button-hover-border-color: #0065b8;--efk-button-hover-text-color: #0065b8;--efk-button-disabled-bg-color: var(--theme-ui-colors-muted);--efk-button-disabled-border-color: var(--efk-button-disabled-bg-color);--efk-button-disabled-text-color: var(--theme-ui-colors-disabled)}.efk-filter-container{flex-wrap:wrap;gap:var(--efk-spacing)}.efk-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}.efk-hide{display:none}.efk-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--efk-spacing)}.efk-tag-filter{border-width:1px;font-weight:700;border-radius:8px;padding:.5rem 1rem;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.efk-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.efk-tag-filter>label{font-weight:700}.efk-tag-filter>select{display:block;width:100%;margin-top:var(--efk-spacing)}.efk-tag-pill-container{display:flex;flex-wrap:wrap;margin-top:var(--efk-spacing);gap:var(--efk-spacing)}.efk-pill{align-items:center;background-color:var(--efk-pill-bg-color);border-radius:4px;color:var(--efk-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.efk-button{align-items:center;appearance:none;background-color:var(--efk-button-bg-color);border-color:var(--efk-button-border-color);border-radius:8px;border-style:solid;color:var(--efk-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.efk-button:hover{background-color:var(--efk-button-hover-bg-color);border-color:var(--efk-button-hover-border-color);color:var(--efk-button-hover-text-color)}.efk-button:disabled{cursor:default;background-color:var(--efk-button-disabled-bg-color);border-color:var(--efk-button-disabled-border-color);color:var(--efk-button-disabled-text-color)}.efk-button>svg{color:inherit}.efk-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.efk-new{position:relative}.efk-new:after{content:"\u{1F98E}";position:absolute;top:0;right:calc(var(--efk-spacing) * -1);z-index:1;font-size:small;line-height:0} ');
+(o=>{if(typeof GM_addStyle=="function"){GM_addStyle(o);return}const r=document.createElement("style");r.textContent=o,document.head.append(r)})(' :root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}.komodo-hide{display:none}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;padding:.5rem 1rem;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>label{font-weight:700}.komodo-tag-filter>select{display:block;width:100%;margin-top:var(--komodo-spacing)}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;margin-top:var(--komodo-spacing);gap:var(--komodo-spacing)}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"\u{1F98E}";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0} ');
 
 (function () {
   'use strict';
 
-  const SCRIPT_NAME = "🦎 EfK";
+  const PROJECT = {
+    EMOJI: "🦎",
+    NAME: "Komodo"
+  };
+  const prefix = PROJECT.NAME.toLowerCase();
+  const CLASS = {
+    NEW: `${prefix}-new`,
+    HIDE: `${prefix}-hide`,
+    FILTER_CONTAINER: `${prefix}-filter-container`,
+    TAG_FILTER_CONTAINER: `${prefix}-tag-filter-container`,
+    TAG_FILTER: `${prefix}-tag-filter`,
+    TAG_PILL_CONTAINER: `${prefix}-tag-pill-container`,
+    PILL: `${prefix}-pill`,
+    BUTTON: `${prefix}-button`
+  };
+  const DATA_ATTRIBUTE = {
+    // Built-in
+    TOUR_ID: "tourId",
+    TAG_NAME: `${prefix}TagName`,
+    TAG_VALUE: `${prefix}TagValue`
+  };
+  const SCRIPT_NAME = `${PROJECT.EMOJI} ${PROJECT.NAME}`;
   const buildLogPrefix = (() => {
     const htmlNode = window.getComputedStyle(document.documentElement);
     const colorMap = {
@@ -43,23 +64,6 @@
   };
   const debug = buildLogFn("debug");
   const warn = buildLogFn("warn");
-  const prefix = "efk";
-  const CLASS = {
-    NEW: `${prefix}-new`,
-    HIDE: `${prefix}-hide`,
-    FILTER_CONTAINER: `${prefix}-filter-container`,
-    TAG_FILTER_CONTAINER: `${prefix}-tag-filter-container`,
-    TAG_FILTER: `${prefix}-tag-filter`,
-    TAG_PILL_CONTAINER: `${prefix}-tag-pill-container`,
-    PILL: `${prefix}-pill`,
-    BUTTON: `${prefix}-button`
-  };
-  const DATA_ATTRIBUTE = {
-    // Built-in
-    TOUR_ID: "tourId",
-    TAG_NAME: `${prefix}TagName`,
-    TAG_VALUE: `${prefix}TagValue`
-  };
   const assertDefined = (value, message = "Value is not defined") => {
     if (value == null) throw new Error(message);
     return value;

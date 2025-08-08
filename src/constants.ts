@@ -1,4 +1,13 @@
-const prefix = 'efk';
+/**
+ * Project metadata.
+ */
+export const PROJECT = {
+	EMOJI: '🦎',
+	NAME: 'Komodo',
+	TAGLINE: 'Mods for Komoot',
+};
+
+const prefix = PROJECT.NAME.toLowerCase();
 
 /**
  * CSS classes used by the script.
