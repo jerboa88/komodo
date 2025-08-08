@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Enhancements for Komoot
 // @namespace    https://github.com/jerboa88
-// @version      0.1.0
+// @version      0.1.1
 // @author       John Goodliff
 // @description  A userscript that adds additional features for route planning on Komoot.com.
 // @license      MIT
