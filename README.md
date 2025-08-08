@@ -2,9 +2,9 @@
 <div align="center">
   <img class="projectLogo" src="src/logo.png" alt="Project logo" title="Project logo" width="256">
 
-<h1 class="projectName">Enhancements for Komoot</h1>
+  <h1 class="projectName">Enhancements for Komoot</h1>
 
-<p class="projectBadges">
+  <p class="projectBadges">
     <img src="https://img.shields.io/badge/Experimental-%E2%9A%A0%EF%B8%8E-ca8a04.svg" alt="Experimental" title="Experimental"/>
     <img src="https://johng.io/badges/category/Script.svg" alt="Project category" title="Project category">
     <img src="https://img.shields.io/github/languages/top/jerboa88/enhancements-for-komoot.svg" alt="Language" title="Language">
@@ -14,69 +14,52 @@
     </a>
   </p>
 
-<p class="projectDesc">
+  <p class="projectDesc">
     A userscript that adds additional features for route planning on Komoot.com.
   </p>
 
-<br/>
+  <br/>
 </div>
 
 > [!WARNING]
-> This is an experimental project or proof-of-concept. It may contain bugs or
-> incomplete features, and is not intended for production use. Breaking changes
-> may be made at any time. Consider more stable alternatives for critical
-> applications.
+> This is an experimental project or proof-of-concept. It may contain bugs or incomplete features, and is not intended for production use. Breaking changes may be made at any time. Consider more stable alternatives for critical applications.
 
 ## 👋 About
 
-Using [Komoot] for route planning? This script may help. It runs in your browser
-and adds additional features to the site to help you plan your next adventure.
+Using [Komoot] for route planning? This script may help. It runs in your browser and adds additional features to the site to help you plan your next adventure.
 
 ### Features
 
 - **🏷️ Custom tags**:
-  - **Add**: Add custom tags like location, activity type, directionality, or
-    difficulty to your routes
+  - **Add**: Add custom tags like location, activity type, directionality, or difficulty to your routes
   - **Filter**: Filter your saved routes by tags to find the perfect route
   - **Customize**: Customize the appearance of tags using CSS
 
 ### Screenshots
 
 | ![Screenshot of Komoot's route list page with Enhancements for Komoot](screenshots/route-list-page.png) |
-| ------------------------------------------------------------------------------------------------------- |
-| _Komoot's route list page with Enhancements for Komoot - v0.1.0_                                        |
+| ---------------------------------------------------------------------------------- |
+| _Komoot's route list page with Enhancements for Komoot - v0.1.0_           |
 
 ## 📦 Installation
-
+>
 > [!CAUTION]
-> For security reasons, I do not recommend running scripts from the internet
-> unless you understand what they are doing. If you are not a developer, I
-> recommend reading the comments in the code and/or asking a LLM like [ChatGPT]
-> or [Claude] to explain it to you.
+> For security reasons, I do not recommend running scripts from the internet unless you understand what they are doing. If you are not a developer, I recommend reading the comments in the code and/or asking a LLM like [ChatGPT] or [Claude] to explain it to you.
 
-I recommend using this script with a userscript manager because it will keep the
-script up-to-date and run it automatically when you visit the appropriate page.
-If you don't want to do that, you can also run it manually.
+I recommend using this script with a userscript manager because it will keep the script up-to-date and run it automatically when you visit the appropriate page. If you don't want to do that, you can also run it manually.
 
 ### Using a userscript manager
 
-A userscript manager is a browser extension that allows you to organize and run
-scripts on websites. If you don't already have one, I would recommend
-[Violentmonkey], [Tampermonkey], or [Greasemonkey]. Once installed, you can
-click the button below to install the script.
+A userscript manager is a browser extension that allows you to organize and run scripts on websites. If you don't already have one, I would recommend [Violentmonkey], [Tampermonkey], or [Greasemonkey]. Once installed, you can click the button below to install the script.
 
 [![Install](https://img.shields.io/badge/%F0%9F%A7%A9_Install-enhancements--for--komoot.user.js-blue)](https://github.com/jerboa88/enhancements-for-komoot/raw/refs/heads/main/dist/enhancements-for-komoot.user.js)
 
 ### Manually
-
+>
 > [!NOTE]
-> This only works once. If the page gets reloaded or you navigate away and come
-> back, you will have to run the script again. If you want to run the script
-> automatically, I suggest using a userscript manager.
+> This only works once. If the page gets reloaded or you navigate away and come back, you will have to run the script again. If you want to run the script automatically, I suggest using a userscript manager.
 
-Alternatively, you can run the script by going to a supported page, copying the
-code in [dist/enhancements-for-komoot.user.js], and pasting it into your
-browser's devtools console. The following pages are supported:
+Alternatively, you can run the script by going to a supported page, copying the code in [dist/enhancements-for-komoot.user.js], and pasting it into your browser's devtools console. The following pages are supported:
 
 - Route list page (ex. <https://www.komoot.com/user/YOUR_USER_ID/routes>)
 - Route page (ex. <https://www.komoot.com/tour/YOUR_ROUTE_ID>)
@@ -93,175 +76,132 @@ browser's devtools console. The following pages are supported:
 
 ## 🕹️ Usage
 
-All UI elements added to the Komoot website have a lizard icon (🦎) in the top
-right corner so they can be easily identified.
+All UI elements added to the Komoot website have a lizard icon (🦎) in the top right corner so they can be easily identified.
 
 ### Adding tags to routes
 
-Tags can be added to a route by including a specially formatted label in the
-route name using the Komoot website or app as usual. There is currently no
-visual editor for tags.
+Tags can be added to a route by including a specially formatted label in the route name using the Komoot website or app as usual. There is currently no visual editor for tags.
 
-Each tag must be in the format `[tagName:tagValue]` and adhere to the following
-formatting rules:
+Each tag must be in the format `[tagName:tagValue]` and adhere to the following formatting rules:
 
-- Multiple tags can be added to a route, and they can be added anywhere in the
-  route name (ex. `[status:WIP] My Route [direction:north]`)
-  - Note that tags will be stripped from the route name, so if you add them
-    inbetween words, the resulting title may have weird spacing
+- Multiple tags can be added to a route, and they can be added anywhere in the route name (ex. `[status:WIP] My Route [direction:north]`)
+  - Note that tags will be stripped from the route name, so if you add them inbetween words, the resulting title may have weird spacing
   - If you want cleaner route names on mobile, consider adding them at the end
-- Tag names and values are case-sensitive (ex. `[status:WIP]` is different from
-  `[status:wip]`)
-- You can include whitespace around names and values—it will be stripped out
-  when the tag is displayed (ex. `[a:b]`, `[a: b]`, and `[ a : b ]` are all
-  equivalent)
-- Spaces in the middle of tag names and values will be preserved, so you can
-  have multi-word names and values (ex. `[Start Point:Home]`)
-- The special characters `[`, `]`, and `:` are not allowed in tag names and
-  values because they are used to delimit tags. Emojis, spaces, and all other
-  characters are allowed (ex. `[🚗:💨]` is valid)
+- Tag names and values are case-sensitive (ex. `[status:WIP]` is different from `[status:wip]`)
+- You can include whitespace around names and values—it will be stripped out when the tag is displayed (ex. `[a:b]`, `[a: b]`, and `[ a : b ]` are all equivalent)
+- Spaces in the middle of tag names and values will be preserved, so you can have multi-word names and values (ex. `[Start Point:Home]`)
+- The special characters `[`, `]`, and `:` are not allowed in tag names and values because they are used to delimit tags. Emojis, spaces, and all other characters are allowed (ex. `[🚗:💨]` is valid)
 
-For example, setting a route name to
-`[status:WIP] My Route [Start_Point:Home] [direction:north]` will add the
-following tags to the route:
+For example, setting a route name to `[status:WIP] My Route [Start_Point:Home] [direction:north]` will add the following tags to the route:
 
 ![direction: north](https://img.shields.io/badge/direction:%20north-yellowgreen)
 ![Start Point: Home](https://img.shields.io/badge/Start%20Point:%20Home-yellowgreen)
 ![status:WIP](https://img.shields.io/badge/status:%20WIP-yellowgreen)
 
 ### Filtering by tags
-
-> [!NOTE]
-> This script uses the tags found in the route list to populate the filter
-> controls.
 >
-> By default, Komoot only loads a handful of routes at a time, so if you notice
-> that some tag names/values are missing from the filter controls, click the
-> `Load All Routes` button to force load the entire list of routes. This may
-> take a few seconds to complete.
+> [!NOTE]
+> This script uses the tags found in the route list to populate the filter controls.
+>
+> By default, Komoot only loads a handful of routes at a time, so if you notice that some tag names/values are missing from the filter controls, click the `Load All Routes` button to force load the entire list of routes. This may take a few seconds to complete.
 
 On the route list page, you can filter routes by tag.
 
 Details:
 
-- A select box will be added to the `Filter by` section for each tag name. You
-  can filter by multiple tag names at once.
-- Selecting a value will filter the route list to only show routes with that
-  value.
-- Use <kbd>Ctrl</kbd>+<kbd>Click</kbd> to select multiple values or to unselect
-  a previously selected value.
+- A select box will be added to the `Filter by` section for each tag name. You can filter by multiple tag names at once.
+- Selecting a value will filter the route list to only show routes with that value.
+- Use <kbd>Ctrl</kbd>+<kbd>Click</kbd> to select multiple values or to unselect a previously selected value.
 
 ## 🤖 Advanced Usage
 
 ### Customizing the appearance of the UI
 
-This script adds various classes, data attributes, and CSS variables to the
-elements it creates or modifies. You can use these to further customize the
-appearance of the UI.
+This script adds various classes, data attributes, and CSS variables to the elements it creates or modifies. You can use these to further customize the appearance of the UI.
 
-See [src/constants.ts] for a list of all the classes and data attributes that
-are added.
+See [src/constants.ts] for a list of all the classes and data attributes that are added.
 
 See [src/styles.css] for a list of all the CSS variables that are added.
 
 To add custom CSS to pages, you can use a user style manager like [Stylus].
 
-For example, you could use the following CSS to change the background color and
-add an emoji to all pills with the name `status` and the value `wip`:
+For example, you could use the following CSS to change the background color and add an emoji to all pills with the name `status` and the value `wip`:
 
 ```css
-.efk-pill[data-efk-tag-name="status"][data-efk-tag-value="wip"] {
-  background: orange;
+.efk-pill[data-efk-tag-name='status'][data-efk-tag-value='wip'] {
+ background: orange;
 
-  &::before {
-    content: "🚧";
-    font-size: x-small;
-  }
+ &::before {
+  content: '🚧';
+  font-size: x-small;
+ }
 }
 ```
 
 | ![Screenshot of custom pills on the route list page](screenshots/route-list-page-custom-pills.png) |
-| -------------------------------------------------------------------------------------------------- |
-| _Custom pills on the route list page - v0.1.0_                                                     |
+| ---------------------------------------------------------------------------------- |
+| _Custom pills on the route list page - v0.1.0_           |
 
 ## ❓ FAQ
 
 ### Nothing shows up when I paste in the console / I get a warning when I try to paste in the console
 
-Some browsers prevent you from pasting code in the console because it could be
-malicious. This is called Paste Protection and you can read more about it on the
-[Chrome for Developers Blog].
+Some browsers prevent you from pasting code in the console because it could be malicious. This is called Paste Protection and you can read more about it on the [Chrome for Developers Blog].
 
-If this happens, follow the instructions in the console to re-enable pasting,
-and then try again. For Chrome, the following steps should work:
+If this happens, follow the instructions in the console to re-enable pasting, and then try again. For Chrome, the following steps should work:
 
-1. Try to paste something in the console. You should get a warning message about
-   pasting
-2. Type "allow pasting" in the console and press enter
+ 1. Try to paste something in the console. You should get a warning message about pasting
+ 2. Type "allow pasting" in the console and press enter
 
-See [this video] for a visual walkthrough.
+ See [this video] for a visual walkthrough.
 
 ### I get an `Uncaught SyntaxError: Unexpected identifier` error when running the script
 
-Make sure that you select the entire file with <kbd>Ctrl</kbd> + <kbd>A</kbd>
-when copying it. If part of the script is cut off, it won't work.
+Make sure that you select the entire file with <kbd>Ctrl</kbd> + <kbd>A</kbd> when copying it. If part of the script is cut off, it won't work.
 
 ## 🤝 Contributing
 
 If you encounter any problems with the script, feel free to [create an issue].
 
-Pull requests, bug reports, translations, and other kinds of contributions are
-greatly appreciated. By contributing code, you agree to license your
-contributions under the terms of the [LICENSE].
+Pull requests, bug reports, translations, and other kinds of contributions are greatly appreciated. By contributing code, you agree to license your contributions under the terms of the [LICENSE].
 
 ### Background
 
-This project is written in [TypeScript] and uses [Vite] and [vite-plugin-monkey]
-to bundle the code into a single file that can be installed as a userscript.
+This project is written in [TypeScript] and uses [Vite] and [vite-plugin-monkey] to bundle the code into a single file that can be installed as a userscript.
 
-We use [Bun] for package management. You can use another package manager if you
-want, but you'll have to replace refererences to `bun` or `bunx` in the
-following places:
+We use [Bun] for package management. You can use another package manager if you want, but you'll have to replace refererences to `bun` or `bunx` in the following places:
 
 - Script commands in `package.json`
 - Husky hooks in `.husky/*`
 - Workflows in `.github/workflows/*`
 
-We use the [Conventional Commits] specification for commit messages. These
-conventions are enforced using [Commitlint] via [Husky] pre-commit hooks.
+We use the [Conventional Commits] specification for commit messages. These conventions are enforced using [Commitlint] via [Husky] pre-commit hooks.
 
-We also use [Commitizen], so you can use `bun commit` to commit changes using an
-interactive prompt instead of `git commit`.
+We also use [Commitizen], so you can use `bun commit` to commit changes using an interactive prompt instead of `git commit`.
 
 [Biome] is used for linting and formatting.
 
 [Semantic Release] is used to automate the release process.
 
-### Getting Started
+### Get
 
-To work on the project locally, first clone the repository and run `bun install`
-to install the dependencies.
+To work on the project locally, first clone the repository and run `bun install` to install the dependencies.
 
-To build the script, run `npm run build`. This will create a `dist` folder with
-the compiled script.
+To build the script, run `npm run build`. This will create a `dist` folder with the compiled script.
 
-To run the script in development mode, run `npm run dev`. This will start a
-development server that will watch for changes and rebuild the script
-automatically.
+To run the script in development mode, run `npm run dev`. This will start a development server that will watch for changes and rebuild the script automatically.
 
 ## 🧾 License
 
 This project is licensed under the MIT License. See [LICENSE] for details.
 
-The project logo is from the [Fluent Emoji] collection, licensed under the
-[MIT License].
+The project logo is from the [Fluent Emoji] collection, licensed under the [MIT License].
 
 This project is not affiliated with or endorsed by Komoot in any way.
 
 ## 🖇️ Related
 
-- **[Better Segments for Strava]** - A userscript for Strava that adds
-  additional stats and features to the starred segments page.
+- **[Better Segments for Strava]** - A userscript for Strava that adds additional stats and features to the starred segments page.
 
 [Better Segments for Strava]: https://github.com/jerboa88/better-segments-for-strava
 [Biome]: https://biomejs.dev/
