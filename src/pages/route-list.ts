@@ -4,6 +4,7 @@ import {
 	createElementTemplate,
 	createMultiSelect,
 	createPill,
+	onReactMounted,
 	showElement,
 } from '../dom.ts';
 import { debug, warn } from '../logger.ts';
@@ -15,18 +16,16 @@ import { assertDefined } from '../utils.ts';
 const pattern = /^\/user\/\d*?\/routes$/;
 
 /**
- * Handler for the route list page.
+ * Initialize the route list page.
  */
-const handler = async () => {
+const init = async () => {
 	const tagManager = new TagManager();
-
 	const savedRoutesAnchor = assertDefined(
 		document.querySelector(
 			'a[href^="/user/"][href$="/routes"]',
 		) as HTMLAnchorElement | null,
 		'No saved routes link found',
 	);
-
 	const ul = assertDefined(
 		document.querySelector(
 			'ul[data-test-id="tours-list"]',
@@ -316,31 +315,32 @@ const handler = async () => {
 		}
 	};
 
-	/**
-	 * Initialize the route list page.
-	 */
-	const init = async () => {
-		debug('Setting up route list page');
+	debug('Setting up route list page');
 
-		const observer = new MutationObserver((mutations) => {
-			for (const mutation of mutations) {
-				for (const newNode of mutation.addedNodes) {
-					if (newNode.nodeName === 'LI') {
-						updateLi(newNode as HTMLLIElement);
-					}
+	const observer = new MutationObserver((mutations) => {
+		debug('Mutations observed on ul', mutations);
+
+		for (const mutation of mutations) {
+			for (const newNode of mutation.addedNodes) {
+				if (newNode.nodeName === 'LI') {
+					updateLi(newNode as HTMLLIElement);
 				}
 			}
-		});
+		}
+	});
 
-		observer.observe(ul, { childList: true });
+	debug('Waiting for li elements to be added to the list');
 
-		getLis().forEach(updateLi);
-		addLoadAllRoutesButton();
-		updateTagFilterControls();
-	};
-
-	init();
+	observer.observe(ul, { childList: true });
+	getLis().forEach(updateLi);
+	addLoadAllRoutesButton();
+	updateTagFilterControls();
 };
+
+/**
+ * Handler for the route list page.
+ */
+const handler = () => onReactMounted(init);
 
 export const routeListRoute: Route = {
 	pattern,
