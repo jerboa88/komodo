@@ -1,6 +1,7 @@
 {
 	"$schema": "https://johng.io/schema/project-metadata.json",
-	"name": "Enhancements for Komoot",
+	"name": "Komodo",
+	"tagline": "Mods for Komoot",
 	"logoPath": "src/logo.png",
 	"category": "Script",
 	"subcategory": "User",

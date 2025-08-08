@@ -1,31 +1,31 @@
 /* Variables */
 /* ---------- */
 :root {
-	--efk-spacing: 0.375rem;
+	--komodo-spacing: 0.375rem;
 
-	--efk-pill-bg-color: var(--theme-ui-colors-primary);
-	--efk-pill-text-color: var(--theme-ui-colors-textOnDark);
+	--komodo-pill-bg-color: var(--theme-ui-colors-primary);
+	--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);
 
-	--efk-button-bg-color: var(--theme-ui-colors-white);
-	--efk-button-border-color: var(--efk-button-bg-color);
-	--efk-button-text-color: var(--theme-ui-colors-secondary);
+	--komodo-button-bg-color: var(--theme-ui-colors-white);
+	--komodo-button-border-color: var(--komodo-button-bg-color);
+	--komodo-button-text-color: var(--theme-ui-colors-secondary);
 
-	--efk-button-hover-bg-color: rgba(0, 119, 217, 0.1);
-	--efk-button-hover-border-color: #0065b8;
-	--efk-button-hover-text-color: #0065b8;
+	--komodo-button-hover-bg-color: rgba(0, 119, 217, 0.1);
+	--komodo-button-hover-border-color: #0065b8;
+	--komodo-button-hover-text-color: #0065b8;
 
-	--efk-button-disabled-bg-color: var(--theme-ui-colors-muted);
-	--efk-button-disabled-border-color: var(--efk-button-disabled-bg-color);
-	--efk-button-disabled-text-color: var(--theme-ui-colors-disabled);
+	--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);
+	--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);
+	--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled);
 }
 
 /* Overrides */
 /* --------- */
 
 /* Enable flex gap and wrapping on filter container */
-.efk-filter-container {
+.komodo-filter-container {
 	flex-wrap: wrap;
-	gap: var(--efk-spacing);
+	gap: var(--komodo-spacing);
 
 	/* Remove margin from filter buttons because we use flex gap instead */
 	> button {
@@ -40,21 +40,21 @@ div:has(> a[href='/upload']) {
 
 /* Utilities */
 /* --------- */
-.efk-hide {
+.komodo-hide {
 	display: none;
 }
 
 /* Custom elements */
 /* --------------- */
 
-.efk-tag-filter-container {
+.komodo-tag-filter-container {
 	flex: 1 1 auto;
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--efk-spacing);
+	gap: var(--komodo-spacing);
 }
 
-.efk-tag-filter {
+.komodo-tag-filter {
 	border-width: 1px;
 	font-weight: 700;
 	border-radius: 8px;
@@ -77,22 +77,22 @@ div:has(> a[href='/upload']) {
 	> select {
 		display: block;
 		width: 100%;
-		margin-top: var(--efk-spacing);
+		margin-top: var(--komodo-spacing);
 	}
 }
 
-.efk-tag-pill-container {
+.komodo-tag-pill-container {
 	display: flex;
 	flex-wrap: wrap;
-	margin-top: var(--efk-spacing);
-	gap: var(--efk-spacing);
+	margin-top: var(--komodo-spacing);
+	gap: var(--komodo-spacing);
 }
 
-.efk-pill {
+.komodo-pill {
 	align-items: center;
-	background-color: var(--efk-pill-bg-color);
+	background-color: var(--komodo-pill-bg-color);
 	border-radius: 4px;
-	color: var(--efk-pill-text-color);
+	color: var(--komodo-pill-text-color);
 	display: inline-flex;
 	justify-content: center;
 	min-width: 2em;
@@ -107,14 +107,14 @@ div:has(> a[href='/upload']) {
 	flex-shrink: 0;
 }
 
-.efk-button {
+.komodo-button {
 	align-items: center;
 	appearance: none;
-	background-color: var(--efk-button-bg-color);
-	border-color: var(--efk-button-border-color);
+	background-color: var(--komodo-button-bg-color);
+	border-color: var(--komodo-button-border-color);
 	border-radius: 8px;
 	border-style: solid;
-	color: var(--efk-button-text-color);
+	color: var(--komodo-button-text-color);
 	cursor: pointer;
 	display: inline-flex;
 	justify-content: center;
@@ -133,16 +133,16 @@ div:has(> a[href='/upload']) {
 	padding-bottom: 0.4375rem;
 
 	&:hover {
-		background-color: var(--efk-button-hover-bg-color);
-		border-color: var(--efk-button-hover-border-color);
-		color: var(--efk-button-hover-text-color);
+		background-color: var(--komodo-button-hover-bg-color);
+		border-color: var(--komodo-button-hover-border-color);
+		color: var(--komodo-button-hover-text-color);
 	}
 
 	&:disabled {
 		cursor: default;
-		background-color: var(--efk-button-disabled-bg-color);
-		border-color: var(--efk-button-disabled-border-color);
-		color: var(--efk-button-disabled-text-color);
+		background-color: var(--komodo-button-disabled-bg-color);
+		border-color: var(--komodo-button-disabled-border-color);
+		color: var(--komodo-button-disabled-text-color);
 	}
 
 	> svg {
@@ -159,16 +159,16 @@ div:has(> a[href='/upload']) {
 }
 
 /* Originating elements needs to be positioned relatively */
-.efk-new {
+.komodo-new {
 	position: relative;
 }
 
 /* Add an icon to newly added elements */
-.efk-new::after {
+.komodo-new::after {
 	content: '🦎';
 	position: absolute;
 	top: 0;
-	right: calc(var(--efk-spacing) * -1);
+	right: calc(var(--komodo-spacing) * -1);
 	z-index: 1;
 	font-size: small;
 	line-height: 0;

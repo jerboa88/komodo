@@ -2,15 +2,21 @@
 <div align="center">
   <img class="projectLogo" src="src/logo.png" alt="Project logo" title="Project logo" width="256">
 
-  <h1 class="projectName">Enhancements for Komoot</h1>
+  <h1 class="projectName">Komodo - Mods for Komoot</h1>
 
   <p class="projectBadges">
     <img src="https://img.shields.io/badge/Experimental-%E2%9A%A0%EF%B8%8E-ca8a04.svg" alt="Experimental" title="Experimental"/>
     <img src="https://johng.io/badges/category/Script.svg" alt="Project category" title="Project category">
-    <img src="https://img.shields.io/github/languages/top/jerboa88/enhancements-for-komoot.svg" alt="Language" title="Language">
-    <img src="https://img.shields.io/github/repo-size/jerboa88/enhancements-for-komoot.svg" alt="Repository size" title="Repository size">
+    <img src="https://img.shields.io/github/languages/top/jerboa88/komodo.svg" alt="Language" title="Language">
+    <img src="https://img.shields.io/github/repo-size/jerboa88/komodo.svg" alt="Repository size" title="Repository size">
     <a href="LICENSE">
-      <img src="https://img.shields.io/github/license/jerboa88/enhancements-for-komoot.svg" alt="Project license" title="Project license"/>
+      <img src="https://img.shields.io/github/license/jerboa88/komodo.svg" alt="Project license" title="Project license"/>
+    </a>
+    <a href="https://conventionalcommits.org">
+      <img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white" alt="Conventional Commits" title="Conventional Commits"/>
+    </a>
+    <a href="https://github.com/jerboa88/enhancements-for-komoot/releases/latest">
+      <img src="https://img.shields.io/github/v/release/jerboa88/enhancements-for-komoot.svg" alt="Latest release" title="Latest release"/>
     </a>
   </p>
 
@@ -37,9 +43,9 @@ Using [Komoot] for route planning? This script may help. It runs in your browser
 
 ### Screenshots
 
-| ![Screenshot of Komoot's route list page with Enhancements for Komoot](screenshots/route-list-page.png) |
+| ![Screenshot of Komoot's route list page with Komodo ](screenshots/route-list-page.png) |
 | ---------------------------------------------------------------------------------- |
-| _Komoot's route list page with Enhancements for Komoot - v0.1.0_           |
+| _Komoot's route list page with Komodo  - v0.1.0_           |
 
 ## 📦 Installation
 >
@@ -52,14 +58,14 @@ I recommend using this script with a userscript manager because it will keep the
 
 A userscript manager is a browser extension that allows you to organize and run scripts on websites. If you don't already have one, I would recommend [Violentmonkey], [Tampermonkey], or [Greasemonkey]. Once installed, you can click the button below to install the script.
 
-[![Install](https://img.shields.io/badge/%F0%9F%A7%A9_Install-enhancements--for--komoot.user.js-blue)](https://github.com/jerboa88/enhancements-for-komoot/raw/refs/heads/main/dist/enhancements-for-komoot.user.js)
+[![Install](https://img.shields.io/badge/%F0%9F%A7%A9_Install-komodo.user.js-blue)](https://github.com/jerboa88/komodo/raw/refs/heads/main/dist/komodo.user.js)
 
 ### Manually
 >
 > [!NOTE]
 > This only works once. If the page gets reloaded or you navigate away and come back, you will have to run the script again. If you want to run the script automatically, I suggest using a userscript manager.
 
-Alternatively, you can run the script by going to a supported page, copying the code in [dist/enhancements-for-komoot.user.js], and pasting it into your browser's devtools console. The following pages are supported:
+Alternatively, you can run the script by going to a supported page, copying the code in [dist/komodo.user.js], and pasting it into your browser's devtools console. The following pages are supported:
 
 - Route list page (ex. <https://www.komoot.com/user/YOUR_USER_ID/routes>)
 - Route page (ex. <https://www.komoot.com/tour/YOUR_ROUTE_ID>)
@@ -69,7 +75,7 @@ Alternatively, you can run the script by going to a supported page, copying the 
   <ol>
     <li>Open <a href="https://www.komoot.com/user/YOUR_USER_ID/routes">komoot.com/user/YOUR_USER_ID/routes</a> or <a href="https://www.komoot.com/tour/YOUR_ROUTE_ID">komoot.com/tour/YOUR_ROUTE_ID</a> in your browser</li>
     <li>Open your browser's devtools console (<a href="https://balsamiq.com/support/faqs/browserconsole/">how?</a>)</li>
-    <li>Copy the code in <a href="dist/enhancements-for-komoot.user.js">dist/enhancements-for-komoot.user.js</a> and paste it into the console. If this doesn't work or you see a warning message about pasting, see the <a href="#FAQ">FAQ</a>.</li>
+    <li>Copy the code in <a href="dist/komodo.user.js">dist/komodo.user.js</a> and paste it into the console. If this doesn't work or you see a warning message about pasting, see the <a href="#FAQ">FAQ</a>.</li>
     <li>Press enter to run the script. You should see the page update. If this doesn't happen, see the <a href="#FAQ">FAQ</a>.</li>
   </ol>
 </details>
@@ -128,7 +134,7 @@ To add custom CSS to pages, you can use a user style manager like [Stylus].
 For example, you could use the following CSS to change the background color and add an emoji to all pills with the name `status` and the value `wip`:
 
 ```css
-.efk-pill[data-efk-tag-name='status'][data-efk-tag-value='wip'] {
+.komodo-pill[data-komodo-tag-name='status'][data-komodo-tag-value='wip'] {
  background: orange;
 
  &::before {
@@ -226,8 +232,8 @@ I appreciate the support!
 [Commitizen]: https://commitizen-tools.github.io/commitizen/
 [Commitlint]: https://commitlint.js.org/
 [Conventional Commits]: https://www.conventionalcommits.org/
-[create an issue]: https://github.com/jerboa88/enhancements-for-komoot/issues
-[dist/enhancements-for-komoot.user.js]: dist/enhancements-for-komoot.user.js
+[create an issue]: https://github.com/jerboa88/komodo/issues
+[dist/komodo.user.js]: dist/komodo.user.js
 [Fluent Emoji]: https://github.com/microsoft/fluentui-emoji
 [Greasemonkey]: https://github.com/greasemonkey/greasemonkey
 [Husky]: https://typicode.github.io/husky/

@@ -1,5 +1,5 @@
 {
-  "name": "enhancements-for-komoot",
+  "name": "komodo",
   "version": "0.1.1",
   "description": "A userscript that adds additional features for route planning on Komoot.com.",
   "keywords": [
@@ -15,8 +15,8 @@
     "user-script",
     "komoot"
   ],
-  "homepage": "https://johng.io/p/enhancements-for-komoot",
-  "bugs": "https://github.com/jerboa88/enhancements-for-komoot/issues",
+  "homepage": "https://johng.io/p/komodo",
+  "bugs": "https://github.com/jerboa88/komodo/issues",
   "license": "MIT",
   "author": {
     "name": "John Goodliff",
@@ -40,14 +40,14 @@
       "url": "https://publishers.basicattentiontoken.org/en/c/johng"
     }
   ],
-  "main": "./dist/enhancements-for-komoot.user.js",
+  "main": "./dist/komodo.user.js",
   "exports": {
-    ".": "./dist/enhancements-for-komoot.user.js"
+    ".": "./dist/komodo.user.js"
   },
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jerboa88/enhancements-for-komoot.git"
+    "url": "git+https://github.com/jerboa88/komodo.git"
   },
   "scripts": {
     "dev": "vite",

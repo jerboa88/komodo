@@ -1,6 +1,8 @@
+import { PROJECT } from './constants.ts';
+
 type Severity = 'debug' | 'info' | 'warn' | 'error';
 
-const SCRIPT_NAME = '🦎 EfK';
+const SCRIPT_NAME = `${PROJECT.EMOJI} ${PROJECT.NAME}`;
 const IS_DEBUG = true;
 
 const buildLogPrefix = (() => {
