@@ -291,12 +291,14 @@ const handler = async () => {
 	 * @param tags - An array of tags to filter by
 	 */
 	const filterLi = (li: HTMLLIElement, tags: Tag[]) => {
-		const visible = tagManager.matchesFilters(tags);
-		const msgPrefix = visible ? 'Showing' : 'Hiding';
+		const doesMatchFilter = tagManager.matchesFilters(tags);
+		const wasVisibilityChanged = showElement(li, doesMatchFilter);
 
-		debug(`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`);
+		if (wasVisibilityChanged) {
+			const msgPrefix = doesMatchFilter ? 'Showing' : 'Hiding';
 
-		showElement(li, visible);
+			debug(`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`);
+		}
 	};
 
 	/**

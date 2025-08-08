@@ -116,10 +116,20 @@ export const createMultiSelect = (
  *
  * @param element - The element to show or hide
  * @param visible - Whether to show or hide the element
+ * @returns true if the class list was changed, false otherwise
  */
 export const showElement = <T extends HTMLElement>(
 	element: T,
 	visible: boolean,
-) => {
-	element.classList.toggle(CLASS.HIDE, !visible);
+): boolean => {
+	const shouldHide = !visible;
+	const isHidden = element.classList.contains(CLASS.HIDE);
+
+	if (isHidden === shouldHide) {
+		return false;
+	}
+
+	element.classList.toggle(CLASS.HIDE, shouldHide);
+
+	return true;
 };
