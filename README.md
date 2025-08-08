@@ -154,12 +154,24 @@ If you encounter any problems with the script, feel free to [create an issue].
 
 Pull requests, bug reports, translations, and other kinds of contributions are greatly appreciated. By contributing code, you agree to license your contributions under the terms of the [LICENSE].
 
-### Development
-This project is written in [TypeScript] and uses [Vite] and [vite-plugin-monkey] to bundle the code into a single file that can be installed as a userscript. We use [Bun] as the package manager but you can use any package manager you like.
+### Background
+This project is written in [TypeScript] and uses [Vite] and [vite-plugin-monkey] to bundle the code into a single file that can be installed as a userscript.
 
-To work on the project locally, first clone the repository and run `npm install` to install the dependencies.
+We use [Bun] for package management. You can use another package manager if you want, but you'll have to replace refererences to `bun` or `bunx` in the following places:
+- Script commands in `package.json`
+- Husky hooks in `.husky/*`
+- Workflows in `.github/workflows/*`
 
-To get started, clone the repository and run `npm install` to install the dependencies.
+We use the [Conventional Commits] specification for commit messages. These conventions are enforced using [Commitlint] via [Husky] pre-commit hooks.
+
+We also use [Commitizen], so you can use `bun commit` to commit changes using an interactive prompt instead of `git commit`.
+
+[Biome] is used for linting and formatting.
+
+[Semantic Release] is used to automate the release process.
+
+### Getting Started
+To work on the project locally, first clone the repository and run `bun install` to install the dependencies.
 
 To build the script, run `npm run build`. This will create a `dist` folder with the compiled script.
 
@@ -175,21 +187,26 @@ This project is not affiliated with or endorsed by Komoot in any way.
 
 
 ## 🖇️ Related
-
 - **[Better Segments for Strava]** - A userscript for Strava that adds additional stats and features to the starred segments page.
 
 [Better Segments for Strava]: https://github.com/jerboa88/better-segments-for-strava
+[Biome]: https://biomejs.dev/
 [Bun]: https://bun.sh/
-[dist/enhancements-for-komoot.user.js]: dist/enhancements-for-komoot.user.js
 [ChatGPT]: https://chatgpt.com/
 [Chrome for Developers Blog]: https://developer.chrome.com/blog/self-xss
 [Claude]: https://claude.ai
+[Commitizen]: https://commitizen-tools.github.io/commitizen/
+[Commitlint]: https://commitlint.js.org/
+[Conventional Commits]: https://www.conventionalcommits.org/
 [create an issue]: https://github.com/jerboa88/enhancements-for-komoot/issues
+[dist/enhancements-for-komoot.user.js]: dist/enhancements-for-komoot.user.js
 [Fluent Emoji]: https://github.com/microsoft/fluentui-emoji
 [Greasemonkey]: https://github.com/greasemonkey/greasemonkey
+[Husky]: https://typicode.github.io/husky/
 [Komoot]: https://www.komoot.com/
 [LICENSE]: LICENSE
 [MIT License]: https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE
+[Semantic Release]: https://semantic-release.gitbook.io/semantic-release/
 [src/constants.ts]: src/constants.ts
 [src/styles.css]: src/styles.css
 [Stylus]: https://github.com/openstyles/stylus
@@ -197,5 +214,5 @@ This project is not affiliated with or endorsed by Komoot in any way.
 [this video]: https://youtu.be/X5uyCtVD1-o?si=AOrzgez90KiDlA-z&t=11
 [TypeScript]: https://www.typescriptlang.org/
 [Violentmonkey]: https://violentmonkey.github.io/
-[Vite]: https://vite.dev/
 [vite-plugin-monkey]: https://github.com/lisonge/vite-plugin-monkey
+[Vite]: https://vite.dev/
