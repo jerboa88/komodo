@@ -48,7 +48,7 @@ Using [Komoot] for route planning? This script may help. It runs in your browser
 
 ### Screenshots
 
-| ![Screenshot of Komoot's route list page with Komodo](screenshots/route-list-page.png) |
+| ![Screenshot of Komoot's route list page with Komodo](examples/route-list-page.png) |
 | ---------------------------------------------------------------------------------- |
 | _Komoot's route list page with Komodo - v0.1.0_           |
 
@@ -113,16 +113,17 @@ For example, setting a route name to `[status:WIP] My Route [Start_Point:Home] [
 ![Start Point: Home](https://img.shields.io/badge/Start%20Point:%20Home-yellowgreen)
 ![status:WIP](https://img.shields.io/badge/status:%20WIP-yellowgreen)
 
+### Loading all routes
+
+This script uses the tags found in the route list to populate the filter controls.
+
+By default, Komoot only loads a handful of routes at a time, so if you notice that some tag names/values are missing from the filter controls, click the `Load All Routes` button to force load the entire list of routes. This may take a few seconds to complete.
+
 ### Filtering by tags
->
-> [!NOTE]
-> This script uses the tags found in the route list to populate the filter controls.
->
-> By default, Komoot only loads a handful of routes at a time, so if you notice that some tag names/values are missing from the filter controls, click the `Load All Routes` button to force load the entire list of routes. This may take a few seconds to complete.
 
 On the route list page, you can filter routes by tag.
 
-Details:
+**Details:**
 
 - A select box will be added to the `Filter by` section for each tag name. You can filter by multiple tag names at once.
 - Selecting a value will filter the route list to only show routes with that value.
@@ -132,30 +133,39 @@ Details:
 
 ### Customizing the appearance of the UI
 
-This script adds various classes, data attributes, and CSS variables to the elements it creates or modifies. You can use these to further customize the appearance of the UI.
-
-See [src/constants.ts] for a list of all the classes and data attributes that are added.
-
-See [src/styles.css] for a list of all the CSS variables that are added.
-
-To add custom CSS to pages, you can use a user style manager like [Stylus].
+This script adds various classes, ids, data attributes, and CSS variables to the elements it creates or modifies. You can use these to further customize the appearance of the UI. To add custom CSS to pages, you can use a user style manager like [Stylus].
 
 For example, you could use the following CSS to change the background color and add an emoji to all pills with the name `status` and the value `wip`:
 
 ```css
-.komodo-pill[data-komodo-tag-name='status'][data-komodo-tag-value='wip'] {
- background: orange;
+.komodo-pill[data-komodo-tag-name='status'][data-komodo-tag-value='WIP'] {
+  background: orange;
 
- &::before {
-  content: '🚧';
-  font-size: x-small;
- }
+  & > div::before {
+    content: '🚧 ';
+    font-size: x-small;
+  }
 }
 ```
 
-| ![Screenshot of custom pills on the route list page](screenshots/route-list-page-custom-pills.png) |
+| ![Screenshot of custom pills on the route list page](examples/route-list-page-custom-pills.png) |
 | ---------------------------------------------------------------------------------- |
 | _Custom pills on the route list page - v0.1.0_           |
+
+Refer to the following files for details on the attributes added:
+
+- Classes and data attributes: [src/constants.ts]
+- CSS variables: [src/styles.css]
+
+HTML `select` elements have their id set to an escaped version of the tag name which can be used for styling. For simple tag names like `status`, the id will also be `status`. For tag names with spaces or special characters like `start point`, the id will be something like `start_u0020_point`. It's probably easiest to inspect the element in your browser's dev tools to see what the id is if you want to use these values.
+
+Tags pills have multiple children so that you can style the name, value, and separator separately. This is handy because you can use an easy to type tag name like `loc`, but use CSS to replace the original value with something more readable like `Location` or even an emoji like `📍`. You can even hide parts of the tag completely to save space if you wish.
+
+For a more complete example, see [examples/custom-styles-for-komodo.user.css]. These are similar to the styles I am actually using:
+
+| ![Screenshot of a kitchen sink style for the route list page](examples/route-list-page-kitchen-sink.png) |
+| ---------------------------------------------------------------------------------- |
+| _Kitchen sink styles ([examples/custom-styles-for-komodo.user.css]) on the route list page - v0.2.0_           |
 
 ## ❓ FAQ
 
@@ -243,6 +253,7 @@ I appreciate the support!
 [Conventional Commits]: https://www.conventionalcommits.org/
 [create an issue]: https://github.com/jerboa88/komodo/issues
 [dist/komodo.user.js]: dist/komodo.user.js
+[examples/custom-styles-for-komodo.user.css]: examples/custom-styles-for-komodo.user.css
 [Fluent Emoji]: https://github.com/microsoft/fluentui-emoji
 [Greasemonkey]: https://github.com/greasemonkey/greasemonkey
 [Husky]: https://typicode.github.io/husky/

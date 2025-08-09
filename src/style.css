@@ -22,6 +22,12 @@
 /* Overrides */
 /* --------- */
 
+/* Increase width of route rename dialog */
+dialog[data-test-id='rename-tour-dialog'] > div {
+	width: 100%;
+	max-width: 64rem;
+}
+
 /* Enable flex gap and wrapping on filter container */
 .komodo-filter-container {
 	flex-wrap: wrap;
@@ -76,16 +82,9 @@ div:has(> a[href='/upload']) {
 
 	> select {
 		display: block;
-		width: 100%;
+		width: fit-content;
 		margin-top: var(--komodo-spacing);
 	}
-}
-
-.komodo-tag-pill-container {
-	display: flex;
-	flex-wrap: wrap;
-	margin-top: var(--komodo-spacing);
-	gap: var(--komodo-spacing);
 }
 
 .komodo-pill {
@@ -105,6 +104,17 @@ div:has(> a[href='/upload']) {
 	padding-bottom: 0.25em;
 	text-transform: inherit;
 	flex-shrink: 0;
+}
+
+.komodo-tag-pill-container {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: var(--komodo-spacing);
+	gap: var(--komodo-spacing);
+
+	> .komodo-pill > div > span:nth-child(2) {
+		white-space: pre;
+	}
 }
 
 .komodo-button {

@@ -235,10 +235,24 @@ const init = async () => {
 	 * @returns The pill element
 	 */
 	const createTagPill = (tag: Tag) => {
-		const pill = createPill(tag.toString());
+		const pill = createPill();
+		const container = document.createElement('div');
+		const nameSpan = document.createElement('span');
+		const separatorSpan = document.createElement('span');
+		const valueSpan = document.createElement('span');
+
+		nameSpan.textContent = tag.name;
+		separatorSpan.textContent = ': ';
+		valueSpan.textContent = tag.value;
 
 		pill.dataset[DATA_ATTRIBUTE.TAG_NAME] = tag.name;
 		pill.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tag.value;
+
+		container.appendChild(nameSpan);
+		container.appendChild(separatorSpan);
+		container.appendChild(valueSpan);
+
+		pill.appendChild(container);
 
 		return pill;
 	};
