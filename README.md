@@ -26,7 +26,7 @@
   </p>
 
   <p class="projectDesc">
-    A userscript that adds additional features for route planning on Komoot.com.
+    A userscript for Komoot.com that adds additional features for route planning.
   </p>
 
   <br/>
@@ -37,7 +37,7 @@
 
 ## 👋 About
 
-Using [Komoot] for route planning? This script may help. It runs in your browser and adds additional features to the site to help you plan your next adventure.
+Using [Komoot](https://www.komoot.com/) for route planning? This script may help. It runs in your browser and adds additional features to the site to help you plan your next adventure.
 
 ### Features
 
@@ -55,13 +55,13 @@ Using [Komoot] for route planning? This script may help. It runs in your browser
 ## 📦 Installation
 >
 > [!CAUTION]
-> For security reasons, I do not recommend running scripts from the internet unless you understand what they are doing. If you are not a developer, I recommend reading the comments in the code and/or asking a LLM like [ChatGPT] or [Claude] to explain it to you.
+> For security reasons, I do not recommend running scripts from the internet unless you understand what they are doing. If you are not a developer, I recommend reading the comments in the code and/or asking a LLM like [ChatGPT](https://chatgpt.com/) or [Claude](https://claude.ai) to explain it to you.
 
 I recommend using this script with a userscript manager because it will keep the script up-to-date and run it automatically when you visit the appropriate page. If you don't want to do that, you can also run it manually.
 
 ### Using a userscript manager
 
-A userscript manager is a browser extension that allows you to organize and run scripts on websites. If you don't already have one, I would recommend [Violentmonkey], [Tampermonkey], [ScriptCat], or [Greasemonkey]. For more choices, see [this comparison table](https://github.com/awesome-scripts/awesome-userscripts?tab=readme-ov-file#compatibility).
+A userscript manager is a browser extension that allows you to organize and run scripts on websites. If you don't already have one, I would recommend [Violentmonkey](https://violentmonkey.github.io/), [Tampermonkey](https://www.tampermonkey.net/index.php), [ScriptCat](https://docs.scriptcat.org/), or [Greasemonkey](https://github.com/greasemonkey/greasemonkey). For more choices, see [this comparison table](https://github.com/awesome-scripts/awesome-userscripts?tab=readme-ov-file#compatibility).
 
 Once installed, you can click the button below to install the latest version of the script:
 
@@ -74,7 +74,7 @@ You can also install a specific version of the script on the [releases page](htt
 > [!NOTE]
 > This only works once. If the page gets reloaded or you navigate away and come back, you will have to run the script again. If you want to run the script automatically, I suggest using a userscript manager.
 
-Alternatively, you can run the script by going to a supported page, copying the code in [dist/komodo.user.js], and pasting it into your browser's devtools console. The following pages are supported:
+Alternatively, you can run the script by going to a supported page, copying the code in [dist/komodo.user.js](dist/komodo.user.js), and pasting it into your browser's devtools console. The following pages are supported:
 
 - Route list page (ex. <https://www.komoot.com/user/YOUR_USER_ID/routes>)
 - Route page (ex. <https://www.komoot.com/tour/YOUR_ROUTE_ID>)
@@ -133,7 +133,7 @@ On the route list page, you can filter routes by tag.
 
 ### Customizing the appearance of the UI
 
-This script adds various classes, ids, data attributes, and CSS variables to the elements it creates or modifies. You can use these to further customize the appearance of the UI. To add custom CSS to pages, you can use a user style manager like [Stylus].
+This script adds various classes, ids, data attributes, and CSS variables to the elements it creates or modifies. You can use these to further customize the appearance of the UI. To add custom CSS to pages, you can use a user style manager like [Stylus](https://github.com/openstyles/stylus).
 
 For example, you could use the following CSS to change the background color and add an emoji to all pills with the name `status` and the value `wip`:
 
@@ -154,8 +154,8 @@ For example, you could use the following CSS to change the background color and 
 
 Refer to the following files for details on the attributes added:
 
-- Classes and data attributes: [src/constants.ts]
-- CSS variables: [src/styles.css]
+- Classes and data attributes: [src/constants.ts](src/constants.ts)
+- CSS variables: [src/style.css](src/style.css)
 
 HTML `select` elements have their id set to an escaped version of the tag name which can be used for styling. For simple tag names like `status`, the id will also be `status`. For tag names with spaces or special characters like `start point`, the id will be something like `start_u0020_point`. It's probably easiest to inspect the element in your browser's dev tools to see what the id is if you want to use these values.
 
@@ -171,14 +171,14 @@ For a more complete example, see [examples/custom-styles-for-komodo.user.css]. T
 
 ### Nothing shows up when I paste in the console / I get a warning when I try to paste in the console
 
-Some browsers prevent you from pasting code in the console because it could be malicious. This is called Paste Protection and you can read more about it on the [Chrome for Developers Blog].
+Some browsers prevent you from pasting code in the console because it could be malicious. This is called Paste Protection and you can read more about it on the [Chrome for Developers Blog](https://developer.chrome.com/blog/self-xss).
 
 If this happens, follow the instructions in the console to re-enable pasting, and then try again. For Chrome, the following steps should work:
 
  1. Try to paste something in the console. You should get a warning message about pasting
  2. Type "allow pasting" in the console and press enter
 
- See [this video] for a visual walkthrough.
+ See [this video](https://youtu.be/X5uyCtVD1-o?si=AOrzgez90KiDlA-z&t=11) for a visual walkthrough.
 
 ### I get an `Uncaught SyntaxError: Unexpected identifier` error when running the script
 
@@ -186,51 +186,51 @@ Make sure that you select the entire file with <kbd>Ctrl</kbd> + <kbd>A</kbd> wh
 
 ## 🤝 Contributing
 
-If you encounter any problems with the script, feel free to [create an issue].
+If you encounter any problems with the script, feel free to [create an issue](https://github.com/jerboa88/komodo/issues).
 
 Pull requests, bug reports, translations, and other kinds of contributions are greatly appreciated. By contributing code, you agree to license your contributions under the terms of the [LICENSE].
 
 ### Background
 
-This project is written in [TypeScript] and uses [Vite] and [vite-plugin-monkey] to bundle the code into a single file that can be installed as a userscript.
+This project is written in [TypeScript](https://www.typescriptlang.org/) and uses [Vite](https://vite.dev/) and [vite-plugin-monkey](https://github.com/lisonge/vite-plugin-monkey) to bundle the code into a single file that can be installed as a userscript.
 
-We use [Bun] for package management. You can use another package manager if you want, but you'll have to replace refererences to `bun` or `bunx` in the following places:
+We use [Bun](https://bun.sh/) for package management. You can use another package manager if you want, but you'll have to replace refererences to `bun` or `bunx` in the following places:
 
 - Script commands in `package.json`
 - Husky hooks in `.husky/*`
 - Workflows in `.github/workflows/*`
 
-We use the [Conventional Commits] specification for commit messages. These conventions are enforced using [Commitlint] via [Husky] pre-commit hooks.
+The [Conventional Commits](https://www.conventionalcommits.org/) specification is used for commit messages. These conventions are enforced using [Commitlint](https://commitlint.js.org/) via [Husky](https://typicode.github.io/husky/) pre-commit hooks.
 
-We also use [Commitizen], so you can use `bun commit` to commit changes using an interactive prompt instead of `git commit`.
+[Commitizen](https://commitizen-tools.github.io/commitizen/) is set up as well, so you can use `bun commit` to commit changes using an interactive prompt instead of `git commit`.
 
-[Biome] is used for linting and formatting.
+[Biome](https://biomejs.dev/) is used for linting and formatting.
 
-[Semantic Release] is used to automate the release process.
+[Semantic Release](https://semantic-release.gitbook.io/semantic-release/) is used to automate the release process.
 
 ### Getting Started
 
 To work on the project locally, first clone the repository and run `bun install` to install the dependencies.
 
-To build the script, run `npm run build`. This will create a `dist` folder with the compiled script.
+To build the script, run `bun run build`. This will create a `dist` folder with the compiled script.
 
-To run the script in development mode, run `npm run dev`. This will start a development server that will watch for changes and rebuild the script automatically.
+To run the script in development mode, run `bun run dev`. This will start a development server that will watch for changes and rebuild the script automatically.
 
 ## 🧾 License
 
 This project is licensed under the MIT License. See [LICENSE] for details.
 
-The project logo is from the [Fluent Emoji] collection, licensed under the [MIT License].
+The project logo is from the [Fluent Emoji](https://github.com/microsoft/fluentui-emoji) collection, licensed under the [MIT License](https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE).
 
 This project is not affiliated with or endorsed by Komoot in any way.
 
 ## 🖇️ Related
 
-- **[Better Segments for Strava]** - A userscript for Strava that adds additional stats and features to the starred segments page.
+- **[Better Segments for Strava](https://github.com/jerboa88/better-segments-for-strava)** - A userscript for Strava that adds additional stats and features to the starred segments page.
 
 ## 💕 Funding
 
-Find this project useful? [Sponsoring me] will help me cover costs and **_commit_** more time to open-source.
+Find this project useful? [Sponsoring me](https://johng.io/funding) will help me cover costs and **_commit_** more time to open-source.
 
 If you can't donate but still want to contribute, don't worry. There are many other ways to help out, like:
 
@@ -242,33 +242,5 @@ If you can't donate but still want to contribute, don't worry. There are many ot
 
 I appreciate the support!
 
-[Better Segments for Strava]: https://github.com/jerboa88/better-segments-for-strava
-[Biome]: https://biomejs.dev/
-[Bun]: https://bun.sh/
-[ChatGPT]: https://chatgpt.com/
-[Chrome for Developers Blog]: https://developer.chrome.com/blog/self-xss
-[Claude]: https://claude.ai
-[Commitizen]: https://commitizen-tools.github.io/commitizen/
-[Commitlint]: https://commitlint.js.org/
-[Conventional Commits]: https://www.conventionalcommits.org/
-[create an issue]: https://github.com/jerboa88/komodo/issues
-[dist/komodo.user.js]: dist/komodo.user.js
 [examples/custom-styles-for-komodo.user.css]: examples/custom-styles-for-komodo.user.css
-[Fluent Emoji]: https://github.com/microsoft/fluentui-emoji
-[Greasemonkey]: https://github.com/greasemonkey/greasemonkey
-[Husky]: https://typicode.github.io/husky/
-[Komoot]: https://www.komoot.com/
 [LICENSE]: LICENSE
-[MIT License]: https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE
-[ScriptCat]: https://docs.scriptcat.org/
-[Semantic Release]: https://semantic-release.gitbook.io/semantic-release/
-[Sponsoring me]: https://johng.io/funding
-[src/constants.ts]: src/constants.ts
-[src/styles.css]: src/styles.css
-[Stylus]: https://github.com/openstyles/stylus
-[Tampermonkey]: https://www.tampermonkey.net/index.php
-[this video]: https://youtu.be/X5uyCtVD1-o?si=AOrzgez90KiDlA-z&t=11
-[TypeScript]: https://www.typescriptlang.org/
-[Violentmonkey]: https://violentmonkey.github.io/
-[vite-plugin-monkey]: https://github.com/lisonge/vite-plugin-monkey
-[Vite]: https://vite.dev/
