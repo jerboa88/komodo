@@ -48,7 +48,7 @@ Using [Komoot] for route planning? This script may help. It runs in your browser
 
 ### Screenshots
 
-| ![Screenshot of Komoot's route list page with Komodo](screenshots/route-list-page.png) |
+| ![Screenshot of Komoot's route list page with Komodo](examples/route-list-page.png) |
 | ---------------------------------------------------------------------------------- |
 | _Komoot's route list page with Komodo - v0.1.0_           |
 
@@ -139,16 +139,16 @@ For example, you could use the following CSS to change the background color and 
 
 ```css
 .komodo-pill[data-komodo-tag-name='status'][data-komodo-tag-value='WIP'] {
- background: orange;
+  background: orange;
 
- & > div::before {
-  content: '🚧 ';
-  font-size: x-small;
- }
+  & > div::before {
+    content: '🚧 ';
+    font-size: x-small;
+  }
 }
 ```
 
-| ![Screenshot of custom pills on the route list page](screenshots/route-list-page-custom-pills.png) |
+| ![Screenshot of custom pills on the route list page](examples/route-list-page-custom-pills.png) |
 | ---------------------------------------------------------------------------------- |
 | _Custom pills on the route list page - v0.1.0_           |
 
@@ -157,7 +157,15 @@ Refer to the following files for details on the attributes added:
 - Classes and data attributes: [src/constants.ts]
 - CSS variables: [src/styles.css]
 
-HTML `select` elements have their id set to an escaped version of the tag name which can be used for styling. For simple tag names like `status`, the id will also be `status`. For tag names with spaces or special characters like `start point`, the id will be something like `space_u0020_test`. It's probably easiest to inspect the element in your browser's dev tools to see what the id is if you want to use these values.
+HTML `select` elements have their id set to an escaped version of the tag name which can be used for styling. For simple tag names like `status`, the id will also be `status`. For tag names with spaces or special characters like `start point`, the id will be something like `start_u0020_point`. It's probably easiest to inspect the element in your browser's dev tools to see what the id is if you want to use these values.
+
+Tags pills have multiple children so that you can style the name, value, and separator separately. This is handy because you can use an easy to type tag name like `loc`, but use CSS to replace the original value with something more readable like `Location` or even an emoji like `📍`. You can even hide parts of the tag completely to save space if you wish.
+
+For a more complete example, see [examples/custom-styles-for-komodo.user.css]. These are similar to the styles I am actually using:
+
+| ![Screenshot of a kitchen sink style for the route list page](examples/route-list-page-kitchen-sink.png) |
+| ---------------------------------------------------------------------------------- |
+| _Kitchen sink styles ([examples/custom-styles-for-komodo.user.css]) on the route list page - v0.2.0_           |
 
 ## ❓ FAQ
 
@@ -245,6 +253,7 @@ I appreciate the support!
 [Conventional Commits]: https://www.conventionalcommits.org/
 [create an issue]: https://github.com/jerboa88/komodo/issues
 [dist/komodo.user.js]: dist/komodo.user.js
+[examples/custom-styles-for-komodo.user.css]: examples/custom-styles-for-komodo.user.css
 [Fluent Emoji]: https://github.com/microsoft/fluentui-emoji
 [Greasemonkey]: https://github.com/greasemonkey/greasemonkey
 [Husky]: https://typicode.github.io/husky/
