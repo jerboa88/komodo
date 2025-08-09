@@ -61,9 +61,13 @@ I recommend using this script with a userscript manager because it will keep the
 
 ### Using a userscript manager
 
-A userscript manager is a browser extension that allows you to organize and run scripts on websites. If you don't already have one, I would recommend [Violentmonkey], [Tampermonkey], or [Greasemonkey]. Once installed, you can click the button below to install the script.
+A userscript manager is a browser extension that allows you to organize and run scripts on websites. If you don't already have one, I would recommend [Violentmonkey], [Tampermonkey], [ScriptCat], or [Greasemonkey]. For more choices, see [this comparison table](https://github.com/awesome-scripts/awesome-userscripts?tab=readme-ov-file#compatibility).
+
+Once installed, you can click the button below to install the latest version of the script:
 
 [![Install](https://img.shields.io/badge/%F0%9F%A7%A9_Install-komodo.user.js-blue)](https://github.com/jerboa88/komodo/raw/refs/heads/main/dist/komodo.user.js)
+
+You can also install a specific version of the script on the [releases page](https://github.com/jerboa88/komodo/releases).
 
 ### Manually
 >
@@ -245,6 +249,7 @@ I appreciate the support!
 [Komoot]: https://www.komoot.com/
 [LICENSE]: LICENSE
 [MIT License]: https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE
+[ScriptCat]: https://docs.scriptcat.org/
 [Semantic Release]: https://semantic-release.gitbook.io/semantic-release/
 [Sponsoring me]: https://johng.io/funding
 [src/constants.ts]: src/constants.ts
