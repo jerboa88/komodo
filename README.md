@@ -4,19 +4,24 @@
 
   <h1 class="projectName">Komodo - Mods for Komoot</h1>
 
-  <p class="projectBadges">
-    <img src="https://img.shields.io/badge/Experimental-%E2%9A%A0%EF%B8%8E-ca8a04.svg" alt="Experimental" title="Experimental"/>
+  <p class="projectBadges info">
     <img src="https://johng.io/badges/category/Script.svg" alt="Project category" title="Project category">
     <img src="https://img.shields.io/github/languages/top/jerboa88/komodo.svg" alt="Language" title="Language">
     <img src="https://img.shields.io/github/repo-size/jerboa88/komodo.svg" alt="Repository size" title="Repository size">
     <a href="LICENSE">
       <img src="https://img.shields.io/github/license/jerboa88/komodo.svg" alt="Project license" title="Project license"/>
     </a>
-    <a href="https://conventionalcommits.org">
-      <img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white" alt="Conventional Commits" title="Conventional Commits"/>
+    <a href="https://github.com/semantic-release/semantic-release">
+      <img src="https://img.shields.io/badge/semantic--release-conventionalcommits-e10079?logo=semantic-release" alt="Semantic Release" title="Semantic Release"/>
     </a>
+  </p>
+  <p class="projectBadges status">
+    <img src="https://img.shields.io/badge/Experimental-%E2%9A%A0%EF%B8%8E-ca8a04.svg" alt="Experimental" title="Experimental"/>
     <a href="https://github.com/jerboa88/enhancements-for-komoot/releases/latest">
       <img src="https://img.shields.io/github/v/release/jerboa88/enhancements-for-komoot.svg" alt="Latest release" title="Latest release"/>
+    </a>
+    <a href="https://github.com/jerboa88/komodo/raw/refs/heads/main/dist/komodo.user.js">
+      <img src="https://img.shields.io/badge/%F0%9F%A7%A9_Install-komodo.user.js-blue" alt="Install" title="Install"/>
     </a>
   </p>
 
@@ -28,7 +33,7 @@
 </div>
 
 > [!WARNING]
-> This is an experimental project or proof-of-concept. It may contain bugs or incomplete features, and is not intended for production use. Breaking changes may be made at any time. Consider more stable alternatives for critical applications.
+> This is currently an experimental project or proof-of-concept. It may contain bugs or incomplete features, and is not intended for production use. Breaking changes may be made at any time. Consider more stable alternatives for critical applications.
 
 ## 👋 About
 
@@ -189,7 +194,7 @@ We also use [Commitizen], so you can use `bun commit` to commit changes using an
 
 [Semantic Release] is used to automate the release process.
 
-### Get
+### Getting Started
 
 To work on the project locally, first clone the repository and run `bun install` to install the dependencies.
 
