@@ -28,10 +28,12 @@ export const createElementTemplate = <T extends HTMLElement | SVGElement>(
  * @param text - The text to display in the pill
  * @returns An HTML span element containing the pill
  */
-export const createPill = (text: string) => {
+export const createPill = (text?: string) => {
 	const div = document.createElement('div');
 
-	div.textContent = text;
+	if (text) {
+		div.textContent = text;
+	}
 
 	div.classList.add(CLASS.NEW, CLASS.PILL);
 
