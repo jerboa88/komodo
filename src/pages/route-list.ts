@@ -11,7 +11,7 @@ import { debug, warn } from '../logger.ts';
 import { Tag } from '../tag.ts';
 import { TagManager } from '../tag-manager.ts';
 import type { Route } from '../types.ts';
-import { assertDefined } from '../utils.ts';
+import { assertDefined, toElementId } from '../utils.ts';
 
 const pattern = /^\/user\/\d*?\/routes$/;
 
@@ -105,14 +105,15 @@ const init = async () => {
 	 *
 	 * @param name - The name of the tag
 	 * @param values - The set of values for the tag
+	 * @param id - The id of the select element
 	 * @returns An HTML select element
 	 */
-	const createTagSelect = (name: string, values: Set<string>) => {
+	const createTagSelect = (name: string, values: Set<string>, id: string) => {
 		const optionObjs = [...values].map((value) => ({
 			value,
 			selected: tagManager.getFilteredValuesSet(name).has(value) ?? false,
 		}));
-		const select = createMultiSelect(name, optionObjs, (event) => {
+		const select = createMultiSelect(id, optionObjs, (event) => {
 			const target = event.currentTarget as HTMLSelectElement;
 			const selectedValuesSet = new Set(
 				[...target.selectedOptions].map((o) => o.value),
@@ -144,13 +145,14 @@ const init = async () => {
 			tagFilter.classList.add(CLASS.NEW, CLASS.TAG_FILTER);
 
 			const label = document.createElement('label');
+			const id = toElementId(name);
 
 			label.textContent = name;
-			label.htmlFor = name;
+			label.htmlFor = id;
 
 			tagFilter.appendChild(label);
 
-			const select = createTagSelect(name, values);
+			const select = createTagSelect(name, values, id);
 
 			tagFilter.appendChild(select);
 			tagFilterContainer.appendChild(tagFilter);

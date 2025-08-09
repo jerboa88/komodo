@@ -82,15 +82,16 @@ export const createButton = (
  * @returns An HTML select element
  */
 export const createMultiSelect = (
-	name: string,
+	id: string,
 	optionObjs: { value: string; selected: boolean }[],
 	handleChange: (event: Event) => void,
 ) => {
 	const select = document.createElement('select');
 
-	select.id = name;
+	select.id = id;
+
 	select.multiple = true;
-	select.size = Math.min(5, optionObjs.length);
+	select.size = Math.min(8, optionObjs.length);
 
 	const sortedValues = [...optionObjs].sort((a, b) =>
 		a.value.localeCompare(b.value),
