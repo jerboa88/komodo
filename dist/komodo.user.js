@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Komodo - Mods for Komoot
 // @namespace    https://github.com/jerboa88
-// @version      0.1.1
+// @version      0.1.2
 // @author       John Goodliff
 // @description  A userscript that adds additional features for route planning on Komoot.com.
 // @license      MIT
@@ -68,6 +68,25 @@
     if (value == null) throw new Error(message);
     return value;
   };
+  const toElementId = (value) => {
+    if (!value) {
+      return "id_empty";
+    }
+    const validChar = /^[a-zA-Z0-9\-_:.]+$/;
+    let result = "";
+    for (const ch of value) {
+      if (validChar.test(ch)) {
+        result += ch;
+      } else {
+        const code = ch.codePointAt(0)?.toString(16).padStart(4, "0");
+        result += `_u${code}_`;
+      }
+    }
+    if (!/^[a-zA-Z]/.test(result)) {
+      result = `id_${result}`;
+    }
+    return result;
+  };
   const createElementTemplate = (nullableReferenceElement) => {
     const referenceElement = assertDefined(
       nullableReferenceElement,
@@ -96,11 +115,11 @@
     button.appendChild(span);
     return button;
   };
-  const createMultiSelect = (name, optionObjs, handleChange) => {
+  const createMultiSelect = (id, optionObjs, handleChange) => {
     const select = document.createElement("select");
-    select.id = name;
+    select.id = id;
     select.multiple = true;
-    select.size = Math.min(5, optionObjs.length);
+    select.size = Math.min(8, optionObjs.length);
     const sortedValues = [...optionObjs].sort(
       (a, b) => a.value.localeCompare(b.value)
     );
@@ -308,12 +327,12 @@
       );
       container.insertBefore(loadAllRoutesbutton, importLinkAnchor);
     };
-    const createTagSelect = (name, values) => {
+    const createTagSelect = (name, values, id) => {
       const optionObjs = [...values].map((value) => ({
         value,
         selected: tagManager.getFilteredValuesSet(name).has(value) ?? false
       }));
-      const select = createMultiSelect(name, optionObjs, (event) => {
+      const select = createMultiSelect(id, optionObjs, (event) => {
         const target = event.currentTarget;
         const selectedValuesSet = new Set(
           [...target.selectedOptions].map((o) => o.value)
@@ -331,10 +350,11 @@
         const tagFilter = document.createElement("div");
         tagFilter.classList.add(CLASS.NEW, CLASS.TAG_FILTER);
         const label = document.createElement("label");
+        const id = toElementId(name);
         label.textContent = name;
-        label.htmlFor = name;
+        label.htmlFor = id;
         tagFilter.appendChild(label);
-        const select = createTagSelect(name, values);
+        const select = createTagSelect(name, values, id);
         tagFilter.appendChild(select);
         tagFilterContainer.appendChild(tagFilter);
       }
