@@ -20,6 +20,9 @@
     <a href="https://github.com/jerboa88/enhancements-for-komoot/releases/latest">
       <img src="https://img.shields.io/github/v/release/jerboa88/enhancements-for-komoot.svg" alt="Latest release" title="Latest release"/>
     </a>
+    <a href="https://greasyfork.org/en/scripts/545361-komodo-mods-for-komoot">
+      <img src="https://img.shields.io/greasyfork/v/545361-komodo-mods-for-komoot?color=%23990000" alt="Greasy Fork Version" title="Greasy Fork Version"/>
+    </a>
     <a href="https://github.com/jerboa88/komodo/raw/refs/heads/main/dist/komodo.user.js">
       <img src="https://img.shields.io/badge/%F0%9F%A7%A9_Install-komodo.user.js-blue" alt="Install" title="Install"/>
     </a>
