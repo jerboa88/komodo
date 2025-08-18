@@ -122,6 +122,24 @@ div:has(> a[href='/upload']) {
 			&:hover {
 				border-color: var(--theme-ui-colors-whisper);
 			}
+
+			&:has(input[type='checkbox'][value='true']) {
+				color: var(--theme-ui-colors-primary);
+			}
+
+			&:has(input[type='checkbox'][value='false']) {
+				color: var(--theme-ui-colors-error);
+			}
+
+			> input[type='checkbox'] {
+				&[value='true'] {
+					accent-color: var(--komodo-pill-bg-color);
+				}
+
+				&[value='false'] {
+					accent-color: var(--theme-ui-colors-error);
+				}
+			}
 		}
 	}
 
