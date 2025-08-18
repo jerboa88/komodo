@@ -132,7 +132,9 @@ On the route list page, you can filter routes by tag. A group of checkboxes will
 
 By default, nothing will be filtered out of the list. Click a checkbox once to only show routes with that value. Click the checkbox a second time to **exclude** any routes with that value. You can click once more to reset the checkbox.
 
-You can filter by multiple tag names/values at the same time.
+You can filter by multiple tag names/values at the same time. By include/exclude checking all checkboxes in a tag name group, you can effectively filter routes by the presence of that tag name. For example, exclude checking all checkboxes for the `status` tag name will show you routes that you haven't assigned a status.
+
+It is also possible to search through tags using the search box, because the built-in Komoot search feature still uses the original route titles. This means keyword order is important while searching, and because keywords you enter may unexpectedly match tags, you may want to name them accordingly to avoid this. For example, you could search for `[status:` to get all routes with tag name `status`.
 
 ## 🤖 Advanced Usage
 
