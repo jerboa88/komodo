@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Custom Styles for Komodo
 @namespace      https://github.com/jerboa88
-@version        0.2.0
+@version        1.0.0
 @author         John Goodliff
 @description    A userstyle that adds custom styling for additional features on Komoot.com route planning.
 @license        MIT
@@ -10,82 +10,113 @@
 ==/UserStyle== */
 
 @-moz-document domain('www.komoot.com') {
-	/* For tag filter selectors */
-	.komodo-tag-filter > select {
-		/* Use a monospace font for options so that emojis line up */
-		> option {
-			font-family: monospace;
-		}
-
-		/* Add symbols before direction options */
-		&#direction,
-		&#dir {
-			> option {
-				&[value='C']::before {
-					content: '○ ';
+	/* For tag filters */
+	.komodo-tag-filter {
+		/* Add symbols before direction labels */
+		&[data-komodo-tag-name='dir'],
+		&[data-komodo-tag-name='direction'] {
+			label {
+				&[data-komodo-tag-value='C']::before {
+					content: '○';
 				}
 
-				&[value='N']::before {
-					content: '↑ ';
+				&[data-komodo-tag-value='N']::before {
+					content: '↑';
 				}
 
-				&[value='NE']::before {
-					content: '↗ ';
+				&[data-komodo-tag-value='NE']::before {
+					content: '↗';
 				}
 
-				&[value='E']::before {
-					content: '→ ';
+				&[data-komodo-tag-value='E']::before {
+					content: '→';
 				}
 
-				&[value='SE']::before {
-					content: '↘ ';
+				&[data-komodo-tag-value='SE']::before {
+					content: '↘';
 				}
 
-				&[value='S']::before {
-					content: '↓ ';
+				&[data-komodo-tag-value='S']::before {
+					content: '↓';
 				}
 
-				&[value='SW']::before {
-					content: '↙ ';
+				&[data-komodo-tag-value='SW']::before {
+					content: '↙';
 				}
 
-				&[value='W']::before {
-					content: '← ';
+				&[data-komodo-tag-value='W']::before {
+					content: '←';
 				}
 
-				&[value='NW']::before {
-					content: '↖ ';
+				&[data-komodo-tag-value='NW']::before {
+					content: '↖';
 				}
 			}
 		}
 
-		/* Add symbols before from and to options */
-		&#from,
-		&#to {
-			> option[value='home']::before {
-				content: '🏠 ';
+		/* Add symbols before from and to labels */
+		&[data-komodo-tag-name='to'],
+		&[data-komodo-tag-name='from'] {
+			label[data-komodo-tag-value='home']::before {
+				content: '🏠';
 			}
 		}
 
-		/* Add 🚧 emoji before 'WIP' status option */
-		&#status,
-		&#stat {
-			> option[value='WIP'] {
-				&::before,
-				&::before {
-					content: '🚧 ';
+		/* Add 🚧 emoji before 'WIP' status label */
+		&[data-komodo-tag-name='stat'],
+		&[data-komodo-tag-name='status'] {
+			label {
+				&[data-komodo-tag-value='ready'] {
+					&::before {
+						content: '✅';
+					}
+				}
+
+				&[data-komodo-tag-value='wip'],
+				&[data-komodo-tag-value='WIP'] {
+					&::before {
+						content: '🚧';
+					}
 				}
 			}
 		}
 
 		/* Add symbols before type options */
-		&#type > option {
-			&[value='segment']::before {
-				content: '⛔ ';
-			}
+		&[data-komodo-tag-name='type'] {
+			label {
+				&[data-komodo-tag-value='segment']::before {
+					content: '⛔';
+				}
 
-			&[value='loop']::before {
-				content: '♾️ ';
+				&[data-komodo-tag-value='loop']::before {
+					content: '♾️';
+				}
+			}
+		}
+
+		&[data-komodo-tag-name='weather'] {
+			label {
+				&[data-komodo-tag-value='segment']::before {
+					content: '⛔';
+				}
+
+				&[data-komodo-tag-value='loop']::before {
+					content: '♾️';
+				}
+			}
+		}
+
+		/* For tags with name 'weather', 'when', or 'is' */
+		&[data-komodo-tag-name='weather'],
+		&[data-komodo-tag-name='when'],
+		&[data-komodo-tag-name='is'] {
+			label {
+				&[data-komodo-tag-value='dry'],
+				&[data-komodo-tag-value='sunny'] {
+					&::before {
+						content: '☀️';
+					}
+				}
 			}
 		}
 	}
@@ -290,7 +321,6 @@
 
 			/* Replace 'dry' values with a ☀️ emoji */
 			&[data-komodo-tag-value='dry'] {
-				/* 				background-color: skyblue; */
 				background-color: transparent;
 
 				> div {

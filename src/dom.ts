@@ -1,5 +1,6 @@
 import { CLASS } from './constants.ts';
 import { debug } from './logger.ts';
+import type { Trilean } from './tag-manager.ts';
 import { assertDefined } from './utils.ts';
 
 /**
@@ -76,43 +77,76 @@ export const createButton = (
 };
 
 /**
- * Create a select element that allows for multiple selections.
+ * Factory function that creates a tri-state checkbox element.
  *
- * @param name - The name of the select element
- * @param optionObjs - An array of objects containing the value and selected state of each option
- * @param handleChange - The function to call when the select element is changed
- * @returns An HTML select element
+ * The checkbox cycles through three states on click:
+ * - `true`   → checked
+ * - `false`  → indeterminate
+ * - `null`   → unchecked
+ *
+ * @param id - The DOM id to assign to the checkbox element.
+ * @param tagValue - The label text displayed alongside the checkbox.
+ * @param initialCheckedState - The starting state of the checkbox (`true`, `false`, or `null`).
+ * @param onClick - Callback invoked whenever the checkbox cycles to a new state.
+ * @returns The created `<input type="checkbox">` element.
+ *
+ * @example
+ * ```ts
+ * const checkbox = createTriStateCheckbox(
+ *   "myBox",
+ *   "Enable feature",
+ *   null,
+ *   (state) => console.log("New state:", state)
+ * );
+ * document.body.appendChild(checkbox);
+ * ```
  */
-export const createMultiSelect = (
-	id: string,
-	optionObjs: { value: string; selected: boolean }[],
-	handleChange: (event: Event) => void,
-) => {
-	const select = document.createElement('select');
+export const createTriStateCheckbox = (() => {
+	const stateMap = {
+		null: null,
+		true: true,
+		false: false,
+	};
+	const states = Object.values(stateMap);
 
-	select.id = id;
+	const updateCheckboxState = (
+		checkbox: HTMLInputElement,
+		checkedState: Trilean,
+	) => {
+		checkbox.checked = checkedState === true;
+		checkbox.indeterminate = checkedState === false;
+		checkbox.value = String(checkedState);
+	};
 
-	select.multiple = true;
-	select.size = Math.min(8, optionObjs.length);
+	return (
+		id: string,
+		initialCheckedState: Trilean,
+		onClick: (checkedState: Trilean) => void,
+	) => {
+		const checkbox = document.createElement('input');
 
-	const sortedValues = [...optionObjs].sort((a, b) =>
-		a.value.localeCompare(b.value),
-	);
+		checkbox.type = 'checkbox';
+		checkbox.id = id;
 
-	for (const { value, selected } of sortedValues) {
-		const option = document.createElement('option');
+		checkbox.addEventListener('click', () => {
+			let checkedState =
+				stateMap[checkbox.value as keyof typeof stateMap] ?? null;
 
-		option.value = value;
-		option.textContent = value;
-		option.selected = selected;
+			const newCheckedStateIndex =
+				(states.indexOf(checkedState) + 1) % states.length;
 
-		select.appendChild(option);
-	}
+			checkedState = states[newCheckedStateIndex];
 
-	select.onchange = handleChange;
+			updateCheckboxState(checkbox, checkedState);
 
-	return select;
-};
+			onClick(checkedState);
+		});
+
+		updateCheckboxState(checkbox, initialCheckedState);
+
+		return checkbox;
+	};
+})();
 
 /**
  * Show or hide an element using a class.
