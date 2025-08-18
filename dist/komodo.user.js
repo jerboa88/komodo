@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Komodo - Mods for Komoot
 // @namespace    https://github.com/jerboa88
-// @version      0.2.0
+// @version      1.0.0
 // @author       John Goodliff
 // @description  A userscript that adds additional features for route planning on Komoot.com.
 // @license      MIT
@@ -15,7 +15,7 @@
 // @grant        none
 // ==/UserScript==
 
-(o=>{if(typeof GM_addStyle=="function"){GM_addStyle(o);return}const t=document.createElement("style");t.textContent=o,document.head.append(t)})(' :root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}dialog[data-test-id=rename-tour-dialog]>div{width:100%;max-width:64rem}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}.komodo-hide{display:none}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;padding:.5rem 1rem;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>label{font-weight:700}.komodo-tag-filter>select{display:block;width:fit-content;margin-top:var(--komodo-spacing)}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;margin-top:var(--komodo-spacing);gap:var(--komodo-spacing)}.komodo-tag-pill-container>.komodo-pill>div>span:nth-child(2){white-space:pre}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"\u{1F98E}";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0} ');
+(o=>{if(typeof GM_addStyle=="function"){GM_addStyle(o);return}const e=document.createElement("style");e.textContent=o,document.head.append(e)})(' :root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}dialog[data-test-id=rename-tour-dialog]>div{width:100%;max-width:64rem}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}.komodo-hide{display:none}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>p{align-items:center;display:flex;flex-direction:row;gap:1.5rem;justify-content:space-between;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter>div{border-bottom-width:1px;border-color:var(--theme-ui-colors-border);border-style:solid;width:100%;justify-self:stretch}.komodo-tag-filter>fieldset{align-items:stretch;display:flex;flex-direction:column;gap:.75rem;justify-content:end;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter>fieldset>label{align-items:center;border-color:var(--theme-ui-colors-border);border-radius:8px;border-style:solid;color:var(--theme-ui-colors-text);cursor:pointer;display:flex;flex-direction:row;gap:1.5rem;grid-area:grid-item-0;justify-content:space-between;padding:.5rem;width:initial;align-self:stretch;border-width:1px}.komodo-tag-filter>fieldset>label:hover{border-color:var(--theme-ui-colors-whisper)}.komodo-tag-filter>fieldset>label:has(input[type=checkbox][value=true]){color:var(--theme-ui-colors-primary)}.komodo-tag-filter>fieldset>label:has(input[type=checkbox][value=false]){color:var(--theme-ui-colors-error)}.komodo-tag-filter>fieldset>label>input[type=checkbox][value=true]{accent-color:var(--komodo-pill-bg-color)}.komodo-tag-filter>fieldset>label>input[type=checkbox][value=false]{accent-color:var(--theme-ui-colors-error)}.komodo-tag-filter>select{display:block;width:fit-content;margin-top:var(--komodo-spacing)}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;margin-top:var(--komodo-spacing);gap:var(--komodo-spacing)}.komodo-tag-pill-container>.komodo-pill>div>span:nth-child(2){white-space:pre}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"\u{1F98E}";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0} ');
 
 (function () {
   'use strict';
@@ -114,24 +114,33 @@
     button.appendChild(span);
     return button;
   };
-  const createMultiSelect = (id, optionObjs, handleChange) => {
-    const select = document.createElement("select");
-    select.id = id;
-    select.multiple = true;
-    select.size = Math.min(8, optionObjs.length);
-    const sortedValues = [...optionObjs].sort(
-      (a, b) => a.value.localeCompare(b.value)
-    );
-    for (const { value, selected } of sortedValues) {
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = value;
-      option.selected = selected;
-      select.appendChild(option);
-    }
-    select.onchange = handleChange;
-    return select;
-  };
+  const createTriStateCheckbox = (() => {
+    const stateMap = {
+      null: null,
+      true: true,
+      false: false
+    };
+    const states = Object.values(stateMap);
+    const updateCheckboxState = (checkbox, checkedState) => {
+      checkbox.checked = checkedState === true;
+      checkbox.indeterminate = checkedState === false;
+      checkbox.value = String(checkedState);
+    };
+    return (id, initialCheckedState, onClick) => {
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = id;
+      checkbox.addEventListener("click", () => {
+        let checkedState = stateMap[checkbox.value] ?? null;
+        const newCheckedStateIndex = (states.indexOf(checkedState) + 1) % states.length;
+        checkedState = states[newCheckedStateIndex];
+        updateCheckboxState(checkbox, checkedState);
+        onClick(checkedState);
+      });
+      updateCheckboxState(checkbox, initialCheckedState);
+      return checkbox;
+    };
+  })();
   const showElement = (element, visible) => {
     const shouldHide = !visible;
     const isHidden = element.classList.contains(CLASS.HIDE);
@@ -178,8 +187,7 @@
   }
   const TAG_REGEX = /\[\s*([^:[\]]+?)\s*:\s*([^:[\]]+?)\s*\]/g;
   class TagManager {
-    tagValuesMap = /* @__PURE__ */ new Map();
-    filteredTagValuesMap = /* @__PURE__ */ new Map();
+    tagNameToValueMap = /* @__PURE__ */ new Map();
     /**
      * Parses a string for tags and returns the remaining text and the extracted tags.
      *
@@ -198,6 +206,25 @@
       };
     }
     /**
+     * Convert a list of tags to a map of tag names to sets of tag values.
+     *
+     * @param tags - An array of tags
+     * @returns A map of tag names to sets of tag values
+     */
+    static tagsToTagValueSetMap(tags) {
+      const tagNameToValueSetMap = /* @__PURE__ */ new Map();
+      for (const { name, value } of tags) {
+        const existingValuesSet = tagNameToValueSetMap.get(name);
+        if (!existingValuesSet) {
+          const newValuesSet = /* @__PURE__ */ new Set([value]);
+          tagNameToValueSetMap.set(name, newValuesSet);
+        } else if (!existingValuesSet.has(value)) {
+          existingValuesSet.add(value);
+        }
+      }
+      return tagNameToValueSetMap;
+    }
+    /**
      * Adds a single tag to the tag manager.
      *
      * @param tag - The tag to add.
@@ -205,14 +232,15 @@
      */
     add(tag) {
       let updated = false;
-      if (this.tagValuesMap.has(tag.name)) {
-        const values = this.tagValuesMap.get(tag.name);
+      if (this.tagNameToValueMap.has(tag.name)) {
+        const values = this.tagNameToValueMap.get(tag.name);
         if (!values.has(tag.value)) {
-          values.add(tag.value);
+          values.set(tag.value, null);
           updated = true;
         }
       } else {
-        this.tagValuesMap.set(tag.name, /* @__PURE__ */ new Set([tag.value]));
+        const tagValueToInclusionMap = /* @__PURE__ */ new Map([[tag.value, null]]);
+        this.tagNameToValueMap.set(tag.name, tagValueToInclusionMap);
         updated = true;
       }
       return updated;
@@ -229,29 +257,26 @@
     /**
      * Gets all tags and their values.
      *
-     * @returns An array of all tags and their values.
+     * @returns An iterable of all tags and their values.
      */
     getAll() {
-      return [...this.tagValuesMap.entries()];
+      return this.tagNameToValueMap.entries();
     }
     /**
-     * Sets a list of values to filter by for a given tag name.
+     * Sets the inclusion value for a given tag name and tag value.
      *
-     * @param tagName - The name of the tag to filter by.
-     * @param values - The values to filter by.
-     * @returns The new Map of filtered values.
+     * @param tagName - The name of the tag to update.
+     * @param tagValue - The value of the tag to update.
+     * @param isIncluded - The new inclusion value (`true`, `false`, or `null`).
+     * @returns `true` if the value was set, `false` if the tag/value does not exist.
      */
-    setFilteredValuesSet(tagName, values) {
-      this.filteredTagValuesMap.set(tagName, values);
-    }
-    /**
-     * Gets the list of values to filter by for a given tag name.
-     *
-     * @param tagName - The name of the tag to filter by.
-     * @returns The list of values to filter by.
-     */
-    getFilteredValuesSet(tagName) {
-      return this.filteredTagValuesMap.get(tagName) ?? /* @__PURE__ */ new Set();
+    setTagValueInclusion(tagName, tagValue, isIncluded) {
+      const tagValueToInclusionMap = this.tagNameToValueMap.get(tagName);
+      if (!tagValueToInclusionMap || !tagValueToInclusionMap.has(tagValue)) {
+        return false;
+      }
+      tagValueToInclusionMap.set(tagValue, isIncluded);
+      return true;
     }
     /**
      * Checks if a list of tags matches the current filters.
@@ -260,10 +285,28 @@
      * @returns `true` if the tags match the filters, `false` otherwise.
      */
     matchesFilters(tags) {
-      for (const [tagName, values] of this.filteredTagValuesMap.entries()) {
-        if (values.size === 0) continue;
-        if (!tags.some((tag) => tag.name === tagName && values.has(tag.value))) {
-          return false;
+      const routeTagMap = TagManager.tagsToTagValueSetMap(tags);
+      for (const [
+        tagName,
+        tagValueToInclusionMap
+      ] of this.tagNameToValueMap.entries()) {
+        const routeTagValuesSet = routeTagMap.get(tagName);
+        for (const [
+          tagValue,
+          tagIsIncluded
+        ] of tagValueToInclusionMap.entries()) {
+          if (tagIsIncluded === false && routeTagValuesSet?.has(tagValue)) {
+            debug(
+              `Excluding for reason: '${tagName}: ${tagValue}' prohibited by filter`
+            );
+            return false;
+          }
+          if (tagIsIncluded === true && !routeTagValuesSet?.has(tagValue)) {
+            debug(
+              `Excluding for reason: '${tagName}: ${tagValue}' required by filter`
+            );
+            return false;
+          }
         }
       }
       return true;
@@ -326,38 +369,50 @@
       );
       container.insertBefore(loadAllRoutesbutton, importLinkAnchor);
     };
-    const createTagSelect = (name, values, id) => {
-      const optionObjs = [...values].map((value) => ({
-        value,
-        selected: tagManager.getFilteredValuesSet(name).has(value) ?? false
-      }));
-      const select = createMultiSelect(id, optionObjs, (event) => {
-        const target = event.currentTarget;
-        const selectedValuesSet = new Set(
-          [...target.selectedOptions].map((o) => o.value)
+    const createTagFilterSet = (tagName, tagValueToInclusionMap) => {
+      const container = document.createElement("fieldset");
+      const sortedTagValueEntries = [...tagValueToInclusionMap.entries()].sort(
+        ([tagValueA], [tagValueB]) => tagValueA.localeCompare(tagValueB)
+      );
+      for (const [tagValue, isIncluded] of sortedTagValueEntries) {
+        const handleClick = (checkedState) => {
+          tagManager.setTagValueInclusion(tagName, tagValue, checkedState);
+          applyFilters();
+        };
+        const checkboxId = `${toElementId(tagName)}-${toElementId(tagValue)}`;
+        const checkbox = createTriStateCheckbox(
+          checkboxId,
+          isIncluded,
+          handleClick
         );
-        tagManager.setFilteredValuesSet(name, selectedValuesSet);
-        applyFilters();
-      });
-      return select;
+        const label = document.createElement("label");
+        const span = document.createElement("span");
+        span.textContent = tagValue;
+        label.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tagValue;
+        label.appendChild(span);
+        label.appendChild(checkbox);
+        container.appendChild(label);
+      }
+      return container;
     };
-    const createTagSelectContainer = () => {
-      debug("Creating tag select container");
-      const tagFilterContainer = document.createElement("div");
-      tagFilterContainer.classList.add(CLASS.TAG_FILTER_CONTAINER);
-      for (const [name, values] of tagManager.getAll()) {
+    const createTagFiltersContainer = () => {
+      debug("Creating tag filters container");
+      const tagFiltersContainer = document.createElement("form");
+      tagFiltersContainer.classList.add(CLASS.TAG_FILTER_CONTAINER);
+      for (const [tagName, tagValueToInclusionMap] of tagManager.getAll()) {
         const tagFilter = document.createElement("div");
         tagFilter.classList.add(CLASS.NEW, CLASS.TAG_FILTER);
-        const label = document.createElement("label");
-        const id = toElementId(name);
-        label.textContent = name;
-        label.htmlFor = id;
-        tagFilter.appendChild(label);
-        const select = createTagSelect(name, values, id);
-        tagFilter.appendChild(select);
-        tagFilterContainer.appendChild(tagFilter);
+        tagFilter.dataset[DATA_ATTRIBUTE.TAG_NAME] = tagName;
+        const filterSetTitle = document.createElement("p");
+        const divider = document.createElement("div");
+        filterSetTitle.textContent = tagName;
+        tagFilter.appendChild(filterSetTitle);
+        tagFilter.appendChild(divider);
+        const container = createTagFilterSet(tagName, tagValueToInclusionMap);
+        tagFilter.appendChild(container);
+        tagFiltersContainer.appendChild(tagFilter);
       }
-      return tagFilterContainer;
+      return tagFiltersContainer;
     };
     const updateTagFilterControls = () => {
       debug("Updating tag filter controls on page");
@@ -367,7 +422,7 @@
       const existingTagFilterContainer = filterContainer?.getElementsByClassName(
         CLASS.TAG_FILTER_CONTAINER
       )?.[0];
-      const tagFilterControls = createTagSelectContainer();
+      const tagFilterControls = createTagFiltersContainer();
       existingTagFilterContainer ? existingTagFilterContainer.replaceWith(tagFilterControls) : filterContainer?.appendChild(tagFilterControls);
       filterContainer?.classList.add(CLASS.FILTER_CONTAINER);
     };
@@ -376,8 +431,10 @@
         warn("No a element found in li element", a);
         return [];
       }
-      const { text, tags } = TagManager.extractTags(a.textContent);
+      const originalTitle = a.textContent;
+      const { text, tags } = TagManager.extractTags(originalTitle);
       a.textContent = text;
+      a.title = originalTitle;
       return tags;
     };
     const parseLiTagPills = (li) => {
