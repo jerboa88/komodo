@@ -1,4 +1,9 @@
+import { debug } from './logger.ts';
 import { Tag } from './tag.ts';
+
+export type Trilean = boolean | null;
+
+export type TagValueToInclusionMap = Map<string, Trilean>;
 
 const TAG_REGEX = /\[\s*([^:[\]]+?)\s*:\s*([^:[\]]+?)\s*\]/g;
 
@@ -6,8 +11,7 @@ const TAG_REGEX = /\[\s*([^:[\]]+?)\s*:\s*([^:[\]]+?)\s*\]/g;
  * Manages tags and tag filters.
  */
 export class TagManager {
-	private tagValuesMap = new Map<string, Set<string>>();
-	private filteredTagValuesMap = new Map<string, Set<string>>();
+	private tagNameToValueMap = new Map<string, TagValueToInclusionMap>();
 
 	/**
 	 * Parses a string for tags and returns the remaining text and the extracted tags.
@@ -30,6 +34,30 @@ export class TagManager {
 	}
 
 	/**
+	 * Convert a list of tags to a map of tag names to sets of tag values.
+	 *
+	 * @param tags - An array of tags
+	 * @returns A map of tag names to sets of tag values
+	 */
+	static tagsToTagValueSetMap(tags: Tag[]) {
+		const tagNameToValueSetMap = new Map<string, Set<string>>();
+
+		for (const { name, value } of tags) {
+			const existingValuesSet = tagNameToValueSetMap.get(name);
+
+			if (!existingValuesSet) {
+				const newValuesSet = new Set([value]);
+
+				tagNameToValueSetMap.set(name, newValuesSet);
+			} else if (!existingValuesSet.has(value)) {
+				existingValuesSet.add(value);
+			}
+		}
+
+		return tagNameToValueSetMap;
+	}
+
+	/**
 	 * Adds a single tag to the tag manager.
 	 *
 	 * @param tag - The tag to add.
@@ -38,17 +66,19 @@ export class TagManager {
 	add(tag: Tag): boolean {
 		let updated = false;
 
-		if (this.tagValuesMap.has(tag.name)) {
+		if (this.tagNameToValueMap.has(tag.name)) {
 			// biome-ignore lint/style/noNonNullAssertion: We just checked that the key exists
-			const values = this.tagValuesMap.get(tag.name)!;
+			const values = this.tagNameToValueMap.get(tag.name)!;
 
 			if (!values.has(tag.value)) {
-				values.add(tag.value);
+				values.set(tag.value, null);
 
 				updated = true;
 			}
 		} else {
-			this.tagValuesMap.set(tag.name, new Set([tag.value]));
+			const tagValueToInclusionMap = new Map([[tag.value, null]]);
+
+			this.tagNameToValueMap.set(tag.name, tagValueToInclusionMap);
 
 			updated = true;
 		}
@@ -69,31 +99,34 @@ export class TagManager {
 	/**
 	 * Gets all tags and their values.
 	 *
-	 * @returns An array of all tags and their values.
+	 * @returns An iterable of all tags and their values.
 	 */
 	getAll() {
-		return [...this.tagValuesMap.entries()];
+		return this.tagNameToValueMap.entries();
 	}
 
 	/**
-	 * Sets a list of values to filter by for a given tag name.
+	 * Sets the inclusion value for a given tag name and tag value.
 	 *
-	 * @param tagName - The name of the tag to filter by.
-	 * @param values - The values to filter by.
-	 * @returns The new Map of filtered values.
+	 * @param tagName - The name of the tag to update.
+	 * @param tagValue - The value of the tag to update.
+	 * @param isIncluded - The new inclusion value (`true`, `false`, or `null`).
+	 * @returns `true` if the value was set, `false` if the tag/value does not exist.
 	 */
-	setFilteredValuesSet(tagName: string, values: Set<string>) {
-		this.filteredTagValuesMap.set(tagName, values);
-	}
+	setTagValueInclusion(
+		tagName: string,
+		tagValue: string,
+		isIncluded: Trilean,
+	): boolean {
+		const tagValueToInclusionMap = this.tagNameToValueMap.get(tagName);
 
-	/**
-	 * Gets the list of values to filter by for a given tag name.
-	 *
-	 * @param tagName - The name of the tag to filter by.
-	 * @returns The list of values to filter by.
-	 */
-	getFilteredValuesSet(tagName: string): Set<string> {
-		return this.filteredTagValuesMap.get(tagName) ?? new Set();
+		if (!tagValueToInclusionMap || !tagValueToInclusionMap.has(tagValue)) {
+			return false;
+		}
+
+		tagValueToInclusionMap.set(tagValue, isIncluded);
+
+		return true;
 	}
 
 	/**
@@ -103,13 +136,39 @@ export class TagManager {
 	 * @returns `true` if the tags match the filters, `false` otherwise.
 	 */
 	matchesFilters(tags: Tag[]): boolean {
-		for (const [tagName, values] of this.filteredTagValuesMap.entries()) {
-			if (values.size === 0) continue;
-			if (!tags.some((tag) => tag.name === tagName && values.has(tag.value))) {
-				return false;
+		// Create a Map with tag names as keys and a Set of tag values
+		const routeTagMap = TagManager.tagsToTagValueSetMap(tags);
+
+		for (const [
+			tagName,
+			tagValueToInclusionMap,
+		] of this.tagNameToValueMap.entries()) {
+			const routeTagValuesSet = routeTagMap.get(tagName);
+
+			for (const [
+				tagValue,
+				tagIsIncluded,
+			] of tagValueToInclusionMap.entries()) {
+				// If any of the tags break the rules, return immediately
+				if (tagIsIncluded === false && routeTagValuesSet?.has(tagValue)) {
+					debug(
+						`Excluding for reason: '${tagName}: ${tagValue}' prohibited by filter`,
+					);
+
+					return false;
+				}
+
+				if (tagIsIncluded === true && !routeTagValuesSet?.has(tagValue)) {
+					debug(
+						`Excluding for reason: '${tagName}: ${tagValue}' required by filter`,
+					);
+
+					return false;
+				}
 			}
 		}
 
+		// Include by default
 		return true;
 	}
 }

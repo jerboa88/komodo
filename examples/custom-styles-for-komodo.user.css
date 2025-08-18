@@ -1,92 +1,130 @@
 /* ==UserStyle==
 @name           Custom Styles for Komodo
 @namespace      https://github.com/jerboa88
-@version        0.1.2
+@version        1.0.0
 @author         John Goodliff
 @description    A userstyle that adds custom styling for additional features on Komoot.com route planning.
 @license        MIT
-@icon           data:image/png;base64,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
-@homepage      https://johng.io/p/komodo
-@homepageURL   https://johng.io/p/komodo
-@source        https://github.com/jerboa88/komodo.git
-@supportURL    https://github.com/jerboa88/komodo/issues
+@homepageURL    https://johng.io/p/komodo
+@supportURL     https://github.com/jerboa88/komodo/issues
 ==/UserStyle== */
 
 @-moz-document domain('www.komoot.com') {
-	/* For tag filter selectors */
-	.komodo-tag-filter > select {
-		/* Use a monospace font for options so that emojis line up */
-		> option {
-			font-family: monospace;
-		}
+	/* For tag filters */
+	.komodo-tag-filter {
+		/* Add symbols before direction labels */
+		&[data-komodo-tag-name='dir'],
+		&[data-komodo-tag-name='direction'] {
+			label {
+				&[data-komodo-tag-value='C']::before {
+					content: '○';
+				}
 
-		/* Add symbols before direction options */
-		&#direction > option {
-			&[value='C']::before {
-				content: '○ ';
-			}
+				&[data-komodo-tag-value='N']::before {
+					content: '↑';
+				}
 
-			&[value='N']::before {
-				content: '↑ ';
-			}
+				&[data-komodo-tag-value='NE']::before {
+					content: '↗';
+				}
 
-			&[value='NE']::before {
-				content: '↗ ';
-			}
+				&[data-komodo-tag-value='E']::before {
+					content: '→';
+				}
 
-			&[value='E']::before {
-				content: '→ ';
-			}
+				&[data-komodo-tag-value='SE']::before {
+					content: '↘';
+				}
 
-			&[value='SE']::before {
-				content: '↘ ';
-			}
+				&[data-komodo-tag-value='S']::before {
+					content: '↓';
+				}
 
-			&[value='S']::before {
-				content: '↓ ';
-			}
+				&[data-komodo-tag-value='SW']::before {
+					content: '↙';
+				}
 
-			&[value='SW']::before {
-				content: '↙ ';
-			}
+				&[data-komodo-tag-value='W']::before {
+					content: '←';
+				}
 
-			&[value='W']::before {
-				content: '← ';
-			}
-
-			&[value='NW']::before {
-				content: '↖ ';
+				&[data-komodo-tag-value='NW']::before {
+					content: '↖';
+				}
 			}
 		}
 
-		/* Add symbols before from and to options */
-		&#from,
-		&#to {
-			> option[value='home']::before {
-				content: '🏠 ';
+		/* Add symbols before from and to labels */
+		&[data-komodo-tag-name='to'],
+		&[data-komodo-tag-name='from'] {
+			label[data-komodo-tag-value='home']::before {
+				content: '🏠';
 			}
 		}
 
-		/* Add 🚧 emoji before 'WIP' status option */
-		&#status > option[value='WIP']::before {
-			content: '🚧 ';
+		/* Add 🚧 emoji before 'WIP' status label */
+		&[data-komodo-tag-name='stat'],
+		&[data-komodo-tag-name='status'] {
+			label {
+				&[data-komodo-tag-value='ready'] {
+					&::before {
+						content: '✅';
+					}
+				}
+
+				&[data-komodo-tag-value='wip'],
+				&[data-komodo-tag-value='WIP'] {
+					&::before {
+						content: '🚧';
+					}
+				}
+			}
 		}
 
 		/* Add symbols before type options */
-		&#type > option {
-			&[value='segment']::before {
-				content: '⛔ ';
-			}
+		&[data-komodo-tag-name='type'] {
+			label {
+				&[data-komodo-tag-value='segment']::before {
+					content: '⛔';
+				}
 
-			&[value='loop']::before {
-				content: '♾️ ';
+				&[data-komodo-tag-value='loop']::before {
+					content: '♾️';
+				}
+			}
+		}
+
+		&[data-komodo-tag-name='weather'] {
+			label {
+				&[data-komodo-tag-value='segment']::before {
+					content: '⛔';
+				}
+
+				&[data-komodo-tag-value='loop']::before {
+					content: '♾️';
+				}
+			}
+		}
+
+		/* For tags with name 'weather', 'when', or 'is' */
+		&[data-komodo-tag-name='weather'],
+		&[data-komodo-tag-name='when'],
+		&[data-komodo-tag-name='is'] {
+			label {
+				&[data-komodo-tag-value='dry'],
+				&[data-komodo-tag-value='sunny'] {
+					&::before {
+						content: '☀️';
+					}
+				}
 			}
 		}
 	}
 
 	.komodo-tag-pill-container > .komodo-pill {
 		/* For tags with name 'direction' */
-		&[data-komodo-tag-name='direction'] {
+		&[data-komodo-tag-name='direction'],
+		&[data-komodo-tag-name='dir'] {
 			background: darkgreen;
 
 			/* Don't show the tag name or separator */
@@ -170,8 +208,10 @@
 			background-color: darkslateblue;
 		}
 
-		/* For tags with name 'location' */
-		&[data-komodo-tag-name='location'] {
+		/* For tags with name 'location' or 'in' */
+		&[data-komodo-tag-name='location'],
+		&[data-komodo-tag-name='loc'],
+		&[data-komodo-tag-name='in'] {
 			background-color: dimgray;
 
 			> div {
@@ -188,8 +228,9 @@
 			}
 		}
 
-		/* For tags with name 'status' */
-		&[data-komodo-tag-name='status'] {
+		/* For tags with name 'status' or 'stat' */
+		&[data-komodo-tag-name='status'],
+		&[data-komodo-tag-name='stat'] {
 			/* Don't show the tag name or separator */
 			> div {
 				> span:nth-child(1),
@@ -256,6 +297,36 @@
 					/* Show the emoji after the container div */
 					&::after {
 						content: '♾️';
+					}
+
+					/* Hide the text value */
+					& span:nth-child(3) {
+						display: none;
+					}
+				}
+			}
+		}
+
+		/* For tags with name 'weather', 'when', or 'is' */
+		&[data-komodo-tag-name='weather'],
+		&[data-komodo-tag-name='when'],
+		&[data-komodo-tag-name='is'] {
+			/* Don't show the tag name or separator */
+			> div {
+				> span:nth-child(1),
+				> span:nth-child(2) {
+					display: none;
+				}
+			}
+
+			/* Replace 'dry' values with a ☀️ emoji */
+			&[data-komodo-tag-value='dry'] {
+				background-color: transparent;
+
+				> div {
+					/* Show the emoji after the container div */
+					&::after {
+						content: '☀️';
 					}
 
 					/* Hide the text value */

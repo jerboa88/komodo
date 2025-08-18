@@ -2,14 +2,18 @@ import { CLASS, DATA_ATTRIBUTE } from '../constants.ts';
 import {
 	createButton,
 	createElementTemplate,
-	createMultiSelect,
 	createPill,
+	createTriStateCheckbox,
 	onReactMounted,
 	showElement,
 } from '../dom.ts';
 import { debug, warn } from '../logger.ts';
 import { Tag } from '../tag.ts';
-import { TagManager } from '../tag-manager.ts';
+import {
+	TagManager,
+	type TagValueToInclusionMap,
+	type Trilean,
+} from '../tag-manager.ts';
 import type { Route } from '../types.ts';
 import { assertDefined, toElementId } from '../utils.ts';
 
@@ -101,64 +105,83 @@ const init = async () => {
 	};
 
 	/**
-	 * Create a select element for a given tag name and set of values.
+	 * Create a checkbox set for a given tag name and set of values.
 	 *
-	 * @param name - The name of the tag
-	 * @param values - The set of values for the tag
-	 * @param id - The id of the select element
-	 * @returns An HTML select element
+	 * @param tagName - The name of the tag
+	 * @param tagValueToInclusionMap - The map of tag values to their inclusion state
+	 * @returns An HTML fieldset element with checkboxes
 	 */
-	const createTagSelect = (name: string, values: Set<string>, id: string) => {
-		const optionObjs = [...values].map((value) => ({
-			value,
-			selected: tagManager.getFilteredValuesSet(name).has(value) ?? false,
-		}));
-		const select = createMultiSelect(id, optionObjs, (event) => {
-			const target = event.currentTarget as HTMLSelectElement;
-			const selectedValuesSet = new Set(
-				[...target.selectedOptions].map((o) => o.value),
+	const createTagFilterSet = (
+		tagName: string,
+		tagValueToInclusionMap: TagValueToInclusionMap,
+	) => {
+		const container = document.createElement('fieldset');
+		const sortedTagValueEntries = [...tagValueToInclusionMap.entries()].sort(
+			([tagValueA], [tagValueB]) => tagValueA.localeCompare(tagValueB),
+		);
+
+		for (const [tagValue, isIncluded] of sortedTagValueEntries) {
+			const handleClick = (checkedState: Trilean) => {
+				tagManager.setTagValueInclusion(tagName, tagValue, checkedState);
+
+				applyFilters();
+			};
+
+			const checkboxId = `${toElementId(tagName)}-${toElementId(tagValue)}`;
+			const checkbox = createTriStateCheckbox(
+				checkboxId,
+				isIncluded,
+				handleClick,
 			);
+			const label = document.createElement('label');
+			const span = document.createElement('span');
 
-			tagManager.setFilteredValuesSet(name, selectedValuesSet);
+			span.textContent = tagValue;
 
-			applyFilters();
-		});
+			label.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tagValue;
 
-		return select;
+			label.appendChild(span);
+			label.appendChild(checkbox);
+			container.appendChild(label);
+		}
+
+		return container;
 	};
 
 	/**
-	 * Create a container for the tag select elements.
+	 * Create a container for the tag checkbox elements.
 	 *
 	 * @returns An HTML div element
 	 */
-	const createTagSelectContainer = () => {
-		debug('Creating tag select container');
+	const createTagFiltersContainer = () => {
+		debug('Creating tag filters container');
 
-		const tagFilterContainer = document.createElement('div');
+		const tagFiltersContainer = document.createElement('form');
 
-		tagFilterContainer.classList.add(CLASS.TAG_FILTER_CONTAINER);
+		tagFiltersContainer.classList.add(CLASS.TAG_FILTER_CONTAINER);
 
-		for (const [name, values] of tagManager.getAll()) {
+		for (const [tagName, tagValueToInclusionMap] of tagManager.getAll()) {
 			const tagFilter = document.createElement('div');
 
 			tagFilter.classList.add(CLASS.NEW, CLASS.TAG_FILTER);
 
-			const label = document.createElement('label');
-			const id = toElementId(name);
+			tagFilter.dataset[DATA_ATTRIBUTE.TAG_NAME] = tagName;
 
-			label.textContent = name;
-			label.htmlFor = id;
+			const filterSetTitle = document.createElement('p');
+			const divider = document.createElement('div');
 
-			tagFilter.appendChild(label);
+			filterSetTitle.textContent = tagName;
 
-			const select = createTagSelect(name, values, id);
+			tagFilter.appendChild(filterSetTitle);
+			tagFilter.appendChild(divider);
 
-			tagFilter.appendChild(select);
-			tagFilterContainer.appendChild(tagFilter);
+			const container = createTagFilterSet(tagName, tagValueToInclusionMap);
+
+			tagFilter.appendChild(container);
+			tagFiltersContainer.appendChild(tagFilter);
 		}
 
-		return tagFilterContainer;
+		return tagFiltersContainer;
 	};
 
 	/**
@@ -173,11 +196,12 @@ const init = async () => {
 		const existingTagFilterContainer = filterContainer?.getElementsByClassName(
 			CLASS.TAG_FILTER_CONTAINER,
 		)?.[0];
-		const tagFilterControls = createTagSelectContainer();
+		const tagFilterControls = createTagFiltersContainer();
 
 		existingTagFilterContainer
 			? existingTagFilterContainer.replaceWith(tagFilterControls)
 			: filterContainer?.appendChild(tagFilterControls);
+
 		filterContainer?.classList.add(CLASS.FILTER_CONTAINER);
 	};
 

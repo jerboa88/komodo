@@ -17,7 +17,18 @@
 			"test": "recommended"
 		},
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"correctness": {
+				"noUnusedVariables": {
+					"fix": "none"
+				},
+				"noUnusedFunctionParameters": {
+					"fix": "none"
+				},
+				"noUnusedPrivateClassMembers": {
+					"fix": "none"
+				}
+			}
 		}
 	},
 	"css": {
