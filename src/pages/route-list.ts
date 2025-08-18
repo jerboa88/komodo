@@ -218,9 +218,11 @@ const init = async () => {
 			return [];
 		}
 
-		const { text, tags } = TagManager.extractTags(a.textContent);
+		const originalTitle = a.textContent;
+		const { text, tags } = TagManager.extractTags(originalTitle);
 
 		a.textContent = text;
+		a.title = originalTitle;
 
 		return tags;
 	};
