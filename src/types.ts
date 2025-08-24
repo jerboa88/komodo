@@ -7,3 +7,8 @@ export type Route = {
 	pattern: RegExp;
 	handler: () => void;
 };
+
+/**
+ * A trilean value, which can be true, false, or undefined.
+ */
+export type Trilean = boolean | undefined;

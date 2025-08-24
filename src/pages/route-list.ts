@@ -1,4 +1,4 @@
-import { CLASS, DATA_ATTRIBUTE } from '../constants.ts';
+import { CLASS, DATA_ATTRIBUTE, TAG_DELIMITER } from '../constants.ts';
 import {
 	createButton,
 	createElementTemplate,
@@ -8,13 +8,8 @@ import {
 	showElement,
 } from '../dom.ts';
 import { debug, warn } from '../logger.ts';
-import { Tag } from '../tag.ts';
-import {
-	TagManager,
-	type TagValueToInclusionMap,
-	type Trilean,
-} from '../tag-manager.ts';
-import type { Route } from '../types.ts';
+import { type Tag, TagMap, type TagValueToInclusionMap } from '../tag-map.ts';
+import type { Route, Trilean } from '../types.ts';
 import { assertDefined, toElementId } from '../utils.ts';
 
 const pattern = /^\/user\/\d*?\/routes$/;
@@ -23,7 +18,12 @@ const pattern = /^\/user\/\d*?\/routes$/;
  * Initialize the route list page.
  */
 const init = async () => {
-	const tagManager = new TagManager();
+	const tagMap = new TagMap(
+		TAG_DELIMITER.START,
+		TAG_DELIMITER.END,
+		TAG_DELIMITER.KEY_VALUE,
+		TAG_DELIMITER.VALUE,
+	);
 	const savedRoutesAnchor = assertDefined(
 		document.querySelector(
 			'a[href^="/user/"][href$="/routes"]',
@@ -112,7 +112,7 @@ const init = async () => {
 	 * @returns An HTML fieldset element with checkboxes
 	 */
 	const createTagFilterSet = (
-		tagName: string,
+		tagName: Tag['name'],
 		tagValueToInclusionMap: TagValueToInclusionMap,
 	) => {
 		const container = document.createElement('fieldset');
@@ -122,7 +122,7 @@ const init = async () => {
 
 		for (const [tagValue, isIncluded] of sortedTagValueEntries) {
 			const handleClick = (checkedState: Trilean) => {
-				tagManager.setTagValueInclusion(tagName, tagValue, checkedState);
+				tagMap.setInclusion(tagName, tagValue, checkedState);
 
 				applyFilters();
 			};
@@ -160,7 +160,7 @@ const init = async () => {
 
 		tagFiltersContainer.classList.add(CLASS.TAG_FILTER_CONTAINER);
 
-		for (const [tagName, tagValueToInclusionMap] of tagManager.getAll()) {
+		for (const [tagName, tagValueToInclusionMap] of tagMap.getAsMap()) {
 			const tagFilter = document.createElement('div');
 
 			tagFilter.classList.add(CLASS.NEW, CLASS.TAG_FILTER);
@@ -170,7 +170,7 @@ const init = async () => {
 			const filterSetTitle = document.createElement('p');
 			const divider = document.createElement('div');
 
-			filterSetTitle.textContent = tagName;
+			filterSetTitle.textContent = tagName ?? '';
 
 			tagFilter.appendChild(filterSetTitle);
 			tagFilter.appendChild(divider);
@@ -211,20 +211,31 @@ const init = async () => {
 	 * @param a - The anchor element containing the title
 	 * @returns An array of tags extracted from the title
 	 */
-	const parseLiTitle = (a: HTMLAnchorElement): Tag[] => {
+	const updateLiTitle = (a: HTMLAnchorElement) => {
 		if (!a) {
 			warn('No a element found in li element', a);
 
-			return [];
+			return {
+				routeTagMap: new TagMap(),
+				updated: false,
+			};
 		}
 
-		const originalTitle = a.textContent;
-		const { text, tags } = TagManager.extractTags(originalTitle);
+		const originalTitle = assertDefined(
+			a.textContent,
+			'Expected a.textContent to be defined, but it was not',
+		);
+
+		const {
+			text,
+			parsedTagMap: routeTagMap,
+			wasUpdated,
+		} = tagMap.parseAndAdd(originalTitle);
 
 		a.textContent = text;
 		a.title = originalTitle;
 
-		return tags;
+		return { routeTagMap, wasUpdated };
 	};
 
 	/**
@@ -233,14 +244,13 @@ const init = async () => {
 	 * @param li - The list item element containing the pills
 	 * @returns An array of tags extracted from the pills
 	 */
-	const parseLiTagPills = (li: HTMLLIElement): Tag[] => {
+	const parseLiTagPills = (li: HTMLLIElement): TagMap => {
 		const pills = li.getElementsByClassName(
 			CLASS.PILL,
 		) as HTMLCollectionOf<HTMLDivElement>;
+		const routeTagMap = new TagMap();
 
-		if (!pills.length) return [];
-
-		return [...pills].map((pill) => {
+		for (const pill of pills) {
 			const name = assertDefined(
 				pill.dataset[DATA_ATTRIBUTE.TAG_NAME],
 				`No tag name found in pill: ${pill.textContent}`,
@@ -250,8 +260,10 @@ const init = async () => {
 				`No tag value found in pill: ${pill.textContent}`,
 			);
 
-			return new Tag(name, value);
-		});
+			routeTagMap.add(name, value);
+		}
+
+		return routeTagMap;
 	};
 
 	/**
@@ -263,19 +275,25 @@ const init = async () => {
 	const createTagPill = (tag: Tag) => {
 		const pill = createPill();
 		const container = document.createElement('div');
-		const nameSpan = document.createElement('span');
-		const separatorSpan = document.createElement('span');
 		const valueSpan = document.createElement('span');
 
-		nameSpan.textContent = tag.name;
-		separatorSpan.textContent = ': ';
 		valueSpan.textContent = tag.value;
 
-		pill.dataset[DATA_ATTRIBUTE.TAG_NAME] = tag.name;
 		pill.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tag.value;
 
-		container.appendChild(nameSpan);
-		container.appendChild(separatorSpan);
+		if (tag.name) {
+			const nameSpan = document.createElement('span');
+			const separatorSpan = document.createElement('span');
+
+			nameSpan.textContent = tag.name;
+			separatorSpan.textContent = ': ';
+
+			pill.dataset[DATA_ATTRIBUTE.TAG_NAME] = tag.name;
+
+			container.appendChild(nameSpan);
+			container.appendChild(separatorSpan);
+		}
+
 		container.appendChild(valueSpan);
 
 		pill.appendChild(container);
@@ -286,13 +304,15 @@ const init = async () => {
 	/**
 	 * Create a container for tag pills.
 	 *
-	 * @param tags - The tags to create pills for
+	 * @param routeTagMap - The tags to create pills for
 	 * @returns The container element
 	 */
-	const createTagPillContainer = (tags: Tag[]) => {
+	const createTagPillContainer = (routeTagMap: TagMap) => {
 		const div = document.createElement('div');
 
-		tags.forEach((tag) => div.appendChild(createTagPill(tag)));
+		for (const tag of routeTagMap) {
+			div.appendChild(createTagPill(tag));
+		}
 
 		div.classList.add(CLASS.TAG_PILL_CONTAINER);
 
@@ -313,26 +333,25 @@ const init = async () => {
 			) as HTMLAnchorElement | null,
 			'No a element found in li element',
 		);
-		const tags = parseLiTitle(a);
-		const wasTagMapUpdated = tagManager.addMultiple(tags);
+		const { routeTagMap, wasUpdated } = updateLiTitle(a);
 
-		a.parentElement?.appendChild(createTagPillContainer(tags));
+		a.parentElement?.appendChild(createTagPillContainer(routeTagMap));
 
-		if (wasTagMapUpdated) {
+		if (wasUpdated) {
 			updateTagFilterControls();
 		}
 
-		filterLi(li, tags);
+		filterLi(li, routeTagMap);
 	};
 
 	/**
 	 * Filter a li element based on the current filters.
 	 *
 	 * @param li - The li element to filter
-	 * @param tags - An array of tags to filter by
+	 * @param routeTagMap - A map of tags belonging to the current route
 	 */
-	const filterLi = (li: HTMLLIElement, tags: Tag[]) => {
-		const doesMatchFilter = tagManager.matchesFilters(tags);
+	const filterLi = (li: HTMLLIElement, routeTagMap: TagMap) => {
+		const doesMatchFilter = tagMap.matches(routeTagMap);
 		const wasVisibilityChanged = showElement(li, doesMatchFilter);
 
 		if (wasVisibilityChanged) {
@@ -351,9 +370,9 @@ const init = async () => {
 		const lis = getLis();
 
 		for (const li of lis) {
-			const tags = parseLiTagPills(li);
+			const routeTagMap = parseLiTagPills(li);
 
-			filterLi(li, tags);
+			filterLi(li, routeTagMap);
 		}
 	};
 
