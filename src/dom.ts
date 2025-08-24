@@ -1,6 +1,6 @@
 import { CLASS } from './constants.ts';
 import { debug } from './logger.ts';
-import type { Trilean } from './tag-manager.ts';
+import type { Trilean } from './types.ts';
 import { assertDefined } from './utils.ts';
 
 /**
@@ -103,7 +103,7 @@ export const createButton = (
  */
 export const createTriStateCheckbox = (() => {
 	const stateMap = {
-		null: null,
+		undefined: undefined,
 		true: true,
 		false: false,
 	};
@@ -129,8 +129,7 @@ export const createTriStateCheckbox = (() => {
 		checkbox.id = id;
 
 		checkbox.addEventListener('click', () => {
-			let checkedState =
-				stateMap[checkbox.value as keyof typeof stateMap] ?? null;
+			let checkedState = stateMap[checkbox.value as keyof typeof stateMap];
 
 			const newCheckedStateIndex =
 				(states.indexOf(checkedState) + 1) % states.length;

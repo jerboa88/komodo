@@ -21,7 +21,7 @@ export const assertDefined = <T>(
  * @param value - The string to convert
  * @returns The converted string
  */
-export const toElementId = (value: string) => {
+export const toElementId = (value: string | undefined) => {
 	if (!value) {
 		return 'id_empty';
 	}

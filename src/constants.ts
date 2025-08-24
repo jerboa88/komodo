@@ -5,7 +5,7 @@ export const PROJECT = {
 	EMOJI: '🦎',
 	NAME: 'Komodo',
 	TAGLINE: 'Mods for Komoot',
-};
+} as const;
 
 const prefix = PROJECT.NAME.toLowerCase();
 
@@ -21,7 +21,7 @@ export const CLASS = {
 	TAG_PILL_CONTAINER: `${prefix}-tag-pill-container`,
 	PILL: `${prefix}-pill`,
 	BUTTON: `${prefix}-button`,
-};
+} as const;
 
 /**
  * Data attributes used by the script.
@@ -33,4 +33,14 @@ export const DATA_ATTRIBUTE = {
 	TAGS: `${prefix}Tags`,
 	TAG_NAME: `${prefix}TagName`,
 	TAG_VALUE: `${prefix}TagValue`,
-};
+} as const;
+
+/**
+ * Tokens used to delimit tags in string form.
+ */
+export const TAG_DELIMITER = {
+	START: '[',
+	END: ']',
+	KEY_VALUE: ':',
+	VALUE: ',',
+} as const;
