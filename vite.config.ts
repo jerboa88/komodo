@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 import monkey from 'vite-plugin-monkey';
 import { PROJECT } from './src/constants';
 
-const iconPath = resolve(__dirname, 'src/logo_static.png');
+const iconPath = resolve(__dirname, 'docs/public/logo_static.png');
 const iconBuffer = readFileSync(iconPath);
 const iconBase64 = `data:image/png;base64,${iconBuffer.toString('base64')}`;
 

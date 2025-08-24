@@ -1,12 +1,11 @@
-name: 🚀 Release
+name: 🚀 Build & Release Script
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
-
 permissions:
   contents: read # for checkout
-
 jobs:
   release:
     name: 🚀 Release
@@ -23,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: 🥖 Setup Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
 
       - name: 📥 Install dependencies
         run: bun install
