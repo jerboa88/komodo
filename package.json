@@ -1,82 +1,89 @@
 {
-  "name": "komodo",
-  "version": "1.0.0",
-  "description": "A userscript that adds additional features for route planning on Komoot.com.",
-  "keywords": [
-    "typescript",
-    "javascript",
-    "userscript",
-    "fitness",
-    "greasemonkey",
-    "userscripts",
-    "tampermonkey",
-    "route-planning",
-    "violentmonkey",
-    "user-script",
-    "komoot"
-  ],
-  "homepage": "https://johng.io/p/komodo",
-  "bugs": "https://github.com/jerboa88/komodo/issues",
-  "license": "MIT",
-  "author": {
-    "name": "John Goodliff",
-    "url": "https://johng.io"
-  },
-  "funding": [
-    {
-      "type": "individual",
-      "url": "https://johng.io/funding"
-    },
-    {
-      "type": "GitHub Sponsors",
-      "url": "https://github.com/sponsors/jerboa88"
-    },
-    {
-      "type": "Patreon",
-      "url": "https://patreon.com/jerboa88"
-    },
-    {
-      "type": "Brave Creators",
-      "url": "https://publishers.basicattentiontoken.org/en/c/johng"
-    }
-  ],
-  "main": "./dist/komodo.user.js",
-  "exports": {
-    ".": "./dist/komodo.user.js"
-  },
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jerboa88/komodo.git"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "format": "biome format --write .",
-    "lint": "biome lint .",
-    "commit": "cz",
-    "prepare": "husky",
-    "postversion": "tsc && vite build"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git"
-    }
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.0.6",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@semantic-release/git": "^10.0.1",
-    "@types/bun": "latest",
-    "commitizen": "^4.3.1",
-    "conventional-changelog-conventionalcommits": "^9.1.0",
-    "cz-git": "^1.12.0",
-    "husky": "^9.1.7",
-    "semantic-release": "^24.2.7",
-    "typescript": "^5.8.3",
-    "vite-plugin-monkey": "^6.0.0",
-    "vite": "^7.0.5"
-  }
+	"name": "komodo",
+	"version": "1.0.0",
+	"description": "A userscript that adds additional features for route planning on Komoot.com.",
+	"keywords": [
+		"typescript",
+		"javascript",
+		"userscript",
+		"fitness",
+		"greasemonkey",
+		"userscripts",
+		"tampermonkey",
+		"route-planning",
+		"violentmonkey",
+		"user-script",
+		"komoot"
+	],
+	"homepage": "https://johng.io/p/komodo",
+	"bugs": "https://github.com/jerboa88/komodo/issues",
+	"license": "MIT",
+	"author": {
+		"name": "John Goodliff",
+		"url": "https://johng.io"
+	},
+	"funding": [
+		{
+			"type": "individual",
+			"url": "https://johng.io/funding"
+		},
+		{
+			"type": "GitHub Sponsors",
+			"url": "https://github.com/sponsors/jerboa88"
+		},
+		{
+			"type": "Patreon",
+			"url": "https://patreon.com/jerboa88"
+		},
+		{
+			"type": "Brave Creators",
+			"url": "https://publishers.basicattentiontoken.org/en/c/johng"
+		}
+	],
+	"main": "./dist/komodo.user.js",
+	"exports": {
+		".": "./dist/komodo.user.js"
+	},
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jerboa88/komodo.git"
+	},
+	"scripts": {
+		"dev": "vite",
+		"develop": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"format": "biome format --write .",
+		"lint": "biome lint .",
+		"commit": "cz",
+		"prepare": "husky",
+		"postversion": "tsc && vite build",
+		"docs:dev": "vitepress dev docs --port 5174",
+		"docs:develop": "vitepress dev docs --port 5174",
+		"docs:build": "vitepress build docs",
+		"docs:preview": "vitepress preview docs --port 4174"
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-git"
+		}
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.0.6",
+		"@commitlint/cli": "^19.8.1",
+		"@commitlint/config-conventional": "^19.8.1",
+		"@semantic-release/git": "^10.0.1",
+		"@types/bun": "latest",
+		"commitizen": "^4.3.1",
+		"conventional-changelog-conventionalcommits": "^9.1.0",
+		"cz-git": "^1.12.0",
+		"husky": "^9.1.7",
+		"semantic-release": "^24.2.7",
+		"typescript": "^5.8.3",
+		"vite": "^7.0.5",
+		"vite-plugin-monkey": "^6.0.0",
+		"vitepress": "^2.0.0-alpha.12",
+		"vitepress-sidebar": "^1.33.0"
+	}
 }

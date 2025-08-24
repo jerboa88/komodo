@@ -1,0 +1,8 @@
+.komodo-pill[data-komodo-tag-name='status'][data-komodo-tag-value='WIP'] {
+	background: orange;
+
+	& > div::before {
+		content: '🚧 ';
+		font-size: x-small;
+	}
+}
