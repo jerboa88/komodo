@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Komodo - Mods for Komoot
 // @namespace    https://github.com/jerboa88
-// @version      1.0.0
+// @version      2.0.0
 // @author       John Goodliff
 // @description  A userscript that adds additional features for route planning on Komoot.com.
 // @license      MIT
@@ -15,11 +15,13 @@
 // @grant        none
 // ==/UserScript==
 
-(o=>{if(typeof GM_addStyle=="function"){GM_addStyle(o);return}const e=document.createElement("style");e.textContent=o,document.head.append(e)})(' :root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}dialog[data-test-id=rename-tour-dialog]>div{width:100%;max-width:64rem}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}.komodo-hide{display:none}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>p{align-items:center;display:flex;flex-direction:row;gap:1.5rem;justify-content:space-between;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter>div{border-bottom-width:1px;border-color:var(--theme-ui-colors-border);border-style:solid;width:100%;justify-self:stretch}.komodo-tag-filter>fieldset{align-items:stretch;display:flex;flex-direction:column;gap:.75rem;justify-content:end;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter>fieldset>label{align-items:center;border-color:var(--theme-ui-colors-border);border-radius:8px;border-style:solid;color:var(--theme-ui-colors-text);cursor:pointer;display:flex;flex-direction:row;gap:1.5rem;grid-area:grid-item-0;justify-content:space-between;padding:.5rem;width:initial;align-self:stretch;border-width:1px}.komodo-tag-filter>fieldset>label:hover{border-color:var(--theme-ui-colors-whisper)}.komodo-tag-filter>fieldset>label:has(input[type=checkbox][value=true]){color:var(--theme-ui-colors-primary)}.komodo-tag-filter>fieldset>label:has(input[type=checkbox][value=false]){color:var(--theme-ui-colors-error)}.komodo-tag-filter>fieldset>label>input[type=checkbox][value=true]{accent-color:var(--komodo-pill-bg-color)}.komodo-tag-filter>fieldset>label>input[type=checkbox][value=false]{accent-color:var(--theme-ui-colors-error)}.komodo-tag-filter>select{display:block;width:fit-content;margin-top:var(--komodo-spacing)}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;margin-top:var(--komodo-spacing);gap:var(--komodo-spacing)}.komodo-tag-pill-container>.komodo-pill>div>span:nth-child(2){white-space:pre}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"\u{1F98E}";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0} ');
-
 (function () {
   'use strict';
 
+  const d=new Set;const importCSS = async e=>{d.has(e)||(d.add(e),(t=>{typeof GM_addStyle=="function"?GM_addStyle(t):document.head.appendChild(document.createElement("style")).append(t);})(e));};
+
+  const styleCss = ':root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}dialog[data-test-id=rename-tour-dialog]>div{width:100%;max-width:64rem}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}.komodo-hide{display:none}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>p{align-items:center;display:flex;flex-direction:row;gap:1.5rem;justify-content:space-between;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter>div{border-bottom-width:1px;border-color:var(--theme-ui-colors-border);border-style:solid;width:100%;justify-self:stretch}.komodo-tag-filter>fieldset{align-items:stretch;display:flex;flex-direction:column;gap:.75rem;justify-content:end;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter>fieldset>label{align-items:center;border-color:var(--theme-ui-colors-border);border-radius:8px;border-style:solid;color:var(--theme-ui-colors-text);cursor:pointer;display:flex;flex-direction:row;gap:1.5rem;grid-area:grid-item-0;justify-content:space-between;padding:.5rem;width:initial;align-self:stretch;border-width:1px}.komodo-tag-filter>fieldset>label:hover{border-color:var(--theme-ui-colors-whisper)}.komodo-tag-filter>fieldset>label:has(input[type=checkbox][value=true]){color:var(--theme-ui-colors-primary)}.komodo-tag-filter>fieldset>label:has(input[type=checkbox][value=false]){color:var(--theme-ui-colors-error)}.komodo-tag-filter>fieldset>label>input[type=checkbox][value=true]{accent-color:var(--komodo-pill-bg-color)}.komodo-tag-filter>fieldset>label>input[type=checkbox][value=false]{accent-color:var(--theme-ui-colors-error)}.komodo-tag-filter>select{display:block;width:fit-content;margin-top:var(--komodo-spacing)}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;margin-top:var(--komodo-spacing);gap:var(--komodo-spacing)}.komodo-tag-pill-container>.komodo-pill>div>span:nth-child(2){white-space:pre}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"🦎";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0}';
+  importCSS(styleCss);
   const PROJECT = {
     EMOJI: "🦎",
     NAME: "Komodo"
@@ -36,10 +38,15 @@
     BUTTON: `${prefix}-button`
   };
   const DATA_ATTRIBUTE = {
-    // Built-in
-    TOUR_ID: "tourId",
+TOUR_ID: "tourId",
     TAG_NAME: `${prefix}TagName`,
     TAG_VALUE: `${prefix}TagValue`
+  };
+  const TAG_DELIMITER = {
+    START: "[",
+    END: "]",
+    KEY_VALUE: ":",
+    VALUE: ","
   };
   const SCRIPT_NAME = `${PROJECT.EMOJI} ${PROJECT.NAME}`;
   const buildLogPrefix = (() => {
@@ -116,7 +123,7 @@
   };
   const createTriStateCheckbox = (() => {
     const stateMap = {
-      null: null,
+      undefined: void 0,
       true: true,
       false: false
     };
@@ -131,7 +138,7 @@
       checkbox.type = "checkbox";
       checkbox.id = id;
       checkbox.addEventListener("click", () => {
-        let checkedState = stateMap[checkbox.value] ?? null;
+        let checkedState = stateMap[checkbox.value];
         const newCheckedStateIndex = (states.indexOf(checkedState) + 1) % states.length;
         checkedState = states[newCheckedStateIndex];
         updateCheckboxState(checkbox, checkedState);
@@ -176,137 +183,119 @@
     debug("Waiting for React to be mounted");
     observer.observe(document.body, { childList: true });
   };
-  class Tag {
-    constructor(name, value) {
-      this.name = name;
-      this.value = value;
+  class TagMap {
+    tagMap = new Map();
+    startDelimiter;
+    endDelimiter;
+    keyValueDelimiter;
+    valueDelimiter;
+    constructor(startDelimiter = "[", endDelimiter = "]", keyValueDelimiter = ":", valueDelimiter = ",") {
+      this.startDelimiter = startDelimiter;
+      this.endDelimiter = endDelimiter;
+      this.keyValueDelimiter = keyValueDelimiter;
+      this.valueDelimiter = valueDelimiter;
     }
-    toString() {
-      return `${this.name}: ${this.value}`;
-    }
-  }
-  const TAG_REGEX = /\[\s*([^:[\]]+?)\s*:\s*([^:[\]]+?)\s*\]/g;
-  class TagManager {
-    tagNameToValueMap = /* @__PURE__ */ new Map();
-    /**
-     * Parses a string for tags and returns the remaining text and the extracted tags.
-     *
-     * @param text - The text to parse.
-     * @returns An object containing the remaining text and the extracted tags.
-     */
-    static extractTags(text) {
-      const tags = [];
-      const matches = text.matchAll(TAG_REGEX);
-      for (const match of matches) {
-        tags.push(new Tag(match[1], match[2]));
+    getValueToInclusionMap(name) {
+      const valueToInclusionMap = this.tagMap.get(name);
+      if (!valueToInclusionMap) {
+        throw new Error(
+          "TagMap: Expected valueToInclusionMap to be defined, but it was not"
+        );
       }
-      return {
-        text: text.replace(TAG_REGEX, "").trim(),
-        tags
-      };
+      return valueToInclusionMap;
     }
-    /**
-     * Convert a list of tags to a map of tag names to sets of tag values.
-     *
-     * @param tags - An array of tags
-     * @returns A map of tag names to sets of tag values
-     */
-    static tagsToTagValueSetMap(tags) {
-      const tagNameToValueSetMap = /* @__PURE__ */ new Map();
-      for (const { name, value } of tags) {
-        const existingValuesSet = tagNameToValueSetMap.get(name);
-        if (!existingValuesSet) {
-          const newValuesSet = /* @__PURE__ */ new Set([value]);
-          tagNameToValueSetMap.set(name, newValuesSet);
-        } else if (!existingValuesSet.has(value)) {
-          existingValuesSet.add(value);
-        }
+add(name, value) {
+      if (!this.tagMap.has(name)) {
+        this.tagMap.set(name, new Map());
       }
-      return tagNameToValueSetMap;
-    }
-    /**
-     * Adds a single tag to the tag manager.
-     *
-     * @param tag - The tag to add.
-     * @returns `true` if the tag was added, `false` if it already existed.
-     */
-    add(tag) {
-      let updated = false;
-      if (this.tagNameToValueMap.has(tag.name)) {
-        const values = this.tagNameToValueMap.get(tag.name);
-        if (!values.has(tag.value)) {
-          values.set(tag.value, null);
-          updated = true;
-        }
-      } else {
-        const tagValueToInclusionMap = /* @__PURE__ */ new Map([[tag.value, null]]);
-        this.tagNameToValueMap.set(tag.name, tagValueToInclusionMap);
-        updated = true;
-      }
-      return updated;
-    }
-    /**
-     * Adds multiple tags to the tag manager.
-     *
-     * @param tags - The tags to add.
-     * @returns `true` if any of the tags were added, `false` if all of them already existed.
-     */
-    addMultiple(tags) {
-      return tags.map((t) => this.add(t)).some(Boolean);
-    }
-    /**
-     * Gets all tags and their values.
-     *
-     * @returns An iterable of all tags and their values.
-     */
-    getAll() {
-      return this.tagNameToValueMap.entries();
-    }
-    /**
-     * Sets the inclusion value for a given tag name and tag value.
-     *
-     * @param tagName - The name of the tag to update.
-     * @param tagValue - The value of the tag to update.
-     * @param isIncluded - The new inclusion value (`true`, `false`, or `null`).
-     * @returns `true` if the value was set, `false` if the tag/value does not exist.
-     */
-    setTagValueInclusion(tagName, tagValue, isIncluded) {
-      const tagValueToInclusionMap = this.tagNameToValueMap.get(tagName);
-      if (!tagValueToInclusionMap || !tagValueToInclusionMap.has(tagValue)) {
+      const valueToInclusionMap = this.getValueToInclusionMap(name);
+      if (valueToInclusionMap.has(value)) {
         return false;
       }
-      tagValueToInclusionMap.set(tagValue, isIncluded);
+      valueToInclusionMap.set(value, void 0);
       return true;
     }
-    /**
-     * Checks if a list of tags matches the current filters.
-     *
-     * @param tags - The list of tags to check.
-     * @returns `true` if the tags match the filters, `false` otherwise.
-     */
-    matchesFilters(tags) {
-      const routeTagMap = TagManager.tagsToTagValueSetMap(tags);
-      for (const [
-        tagName,
-        tagValueToInclusionMap
-      ] of this.tagNameToValueMap.entries()) {
-        const routeTagValuesSet = routeTagMap.get(tagName);
-        for (const [
-          tagValue,
-          tagIsIncluded
-        ] of tagValueToInclusionMap.entries()) {
-          if (tagIsIncluded === false && routeTagValuesSet?.has(tagValue)) {
-            debug(
-              `Excluding for reason: '${tagName}: ${tagValue}' prohibited by filter`
-            );
-            return false;
+setInclusion(name, value, isIncluded) {
+      const valueToInclusionMap = this.tagMap.get(name);
+      if (!valueToInclusionMap || !valueToInclusionMap.has(value)) {
+        return false;
+      }
+      const current = valueToInclusionMap.get(value);
+      if (current === isIncluded) {
+        return false;
+      }
+      valueToInclusionMap.set(value, isIncluded);
+      return true;
+    }
+getAsMap = () => {
+      return this.tagMap;
+    };
+*[Symbol.iterator]() {
+      const sortedNames = Array.from(this.tagMap.keys()).sort();
+      for (const name of sortedNames) {
+        const valueToInclusionMap = this.getValueToInclusionMap(name);
+        const sortedValues = Array.from(valueToInclusionMap.keys()).sort();
+        for (const value of sortedValues) {
+          yield { name, value, isIncluded: valueToInclusionMap.get(value) };
+        }
+      }
+    }
+parseAndAdd(input) {
+      const parsedTagMap = new TagMap(
+        TAG_DELIMITER.START,
+        TAG_DELIMITER.END,
+        TAG_DELIMITER.KEY_VALUE,
+        TAG_DELIMITER.VALUE
+      );
+      let text = "";
+      let wasUpdated = false;
+      let i = 0;
+      while (i < input.length) {
+        if (input[i] === this.startDelimiter) {
+          i++;
+          let inside = "";
+          while (i < input.length && input[i] !== this.endDelimiter) {
+            inside += input[i++];
           }
-          if (tagIsIncluded === true && !routeTagValuesSet?.has(tagValue)) {
-            debug(
-              `Excluding for reason: '${tagName}: ${tagValue}' required by filter`
-            );
-            return false;
+          if (i < input.length && input[i] === this.endDelimiter) {
+            i++;
           }
+          const kvIndex = inside.indexOf(this.keyValueDelimiter);
+          let tagName;
+          let values = [];
+          if (kvIndex >= 0) {
+            tagName = inside.slice(0, kvIndex).trim();
+            values = inside.slice(kvIndex + 1).split(this.valueDelimiter).map((v) => v.trim()).filter((v) => v.length > 0);
+          } else {
+            values = inside.split(this.valueDelimiter).map((v) => v.trim()).filter((v) => v.length > 0);
+          }
+          for (const v of values) {
+            const wasAdded = this.add(tagName, v);
+            parsedTagMap.add(tagName, v);
+            if (wasAdded) wasUpdated = true;
+          }
+        } else {
+          text += input[i++];
+        }
+      }
+      return { text, parsedTagMap, wasUpdated };
+    }
+matches(candidate) {
+      for (const { name, value, isIncluded } of this) {
+        const key = name ?? "";
+        const candidateValueToInclusionMap = candidate.tagMap.get(key);
+        const existsInCandidate = candidateValueToInclusionMap?.has(value) ?? false;
+        if (isIncluded === true && !existsInCandidate) {
+          debug(
+            `TagMap.matches: ${name}:${value} is included in reference but not in candidate`
+          );
+          return false;
+        }
+        if (isIncluded === false && existsInCandidate) {
+          debug(
+            `TagMap.matches: ${name}:${value} is excluded in reference but exists in candidate`
+          );
+          return false;
         }
       }
       return true;
@@ -314,7 +303,12 @@
   }
   const pattern$1 = /^\/user\/\d*?\/routes$/;
   const init$1 = async () => {
-    const tagManager = new TagManager();
+    const tagMap = new TagMap(
+      TAG_DELIMITER.START,
+      TAG_DELIMITER.END,
+      TAG_DELIMITER.KEY_VALUE,
+      TAG_DELIMITER.VALUE
+    );
     const savedRoutesAnchor = assertDefined(
       document.querySelector(
         'a[href^="/user/"][href$="/routes"]'
@@ -376,7 +370,7 @@
       );
       for (const [tagValue, isIncluded] of sortedTagValueEntries) {
         const handleClick = (checkedState) => {
-          tagManager.setTagValueInclusion(tagName, tagValue, checkedState);
+          tagMap.setInclusion(tagName, tagValue, checkedState);
           applyFilters();
         };
         const checkboxId = `${toElementId(tagName)}-${toElementId(tagValue)}`;
@@ -399,13 +393,13 @@
       debug("Creating tag filters container");
       const tagFiltersContainer = document.createElement("form");
       tagFiltersContainer.classList.add(CLASS.TAG_FILTER_CONTAINER);
-      for (const [tagName, tagValueToInclusionMap] of tagManager.getAll()) {
+      for (const [tagName, tagValueToInclusionMap] of tagMap.getAsMap()) {
         const tagFilter = document.createElement("div");
         tagFilter.classList.add(CLASS.NEW, CLASS.TAG_FILTER);
         tagFilter.dataset[DATA_ATTRIBUTE.TAG_NAME] = tagName;
         const filterSetTitle = document.createElement("p");
         const divider = document.createElement("div");
-        filterSetTitle.textContent = tagName;
+        filterSetTitle.textContent = tagName ?? "";
         tagFilter.appendChild(filterSetTitle);
         tagFilter.appendChild(divider);
         const container = createTagFilterSet(tagName, tagValueToInclusionMap);
@@ -426,23 +420,33 @@
       existingTagFilterContainer ? existingTagFilterContainer.replaceWith(tagFilterControls) : filterContainer?.appendChild(tagFilterControls);
       filterContainer?.classList.add(CLASS.FILTER_CONTAINER);
     };
-    const parseLiTitle = (a) => {
+    const updateLiTitle = (a) => {
       if (!a) {
         warn("No a element found in li element", a);
-        return [];
+        return {
+          routeTagMap: new TagMap(),
+          updated: false
+        };
       }
-      const originalTitle = a.textContent;
-      const { text, tags } = TagManager.extractTags(originalTitle);
+      const originalTitle = assertDefined(
+        a.textContent,
+        "Expected a.textContent to be defined, but it was not"
+      );
+      const {
+        text,
+        parsedTagMap: routeTagMap,
+        wasUpdated
+      } = tagMap.parseAndAdd(originalTitle);
       a.textContent = text;
       a.title = originalTitle;
-      return tags;
+      return { routeTagMap, wasUpdated };
     };
     const parseLiTagPills = (li) => {
       const pills = li.getElementsByClassName(
         CLASS.PILL
       );
-      if (!pills.length) return [];
-      return [...pills].map((pill) => {
+      const routeTagMap = new TagMap();
+      for (const pill of pills) {
         const name = assertDefined(
           pill.dataset[DATA_ATTRIBUTE.TAG_NAME],
           `No tag name found in pill: ${pill.textContent}`
@@ -451,29 +455,34 @@
           pill.dataset[DATA_ATTRIBUTE.TAG_VALUE],
           `No tag value found in pill: ${pill.textContent}`
         );
-        return new Tag(name, value);
-      });
+        routeTagMap.add(name, value);
+      }
+      return routeTagMap;
     };
     const createTagPill = (tag) => {
       const pill = createPill();
       const container = document.createElement("div");
-      const nameSpan = document.createElement("span");
-      const separatorSpan = document.createElement("span");
       const valueSpan = document.createElement("span");
-      nameSpan.textContent = tag.name;
-      separatorSpan.textContent = ": ";
       valueSpan.textContent = tag.value;
-      pill.dataset[DATA_ATTRIBUTE.TAG_NAME] = tag.name;
       pill.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tag.value;
-      container.appendChild(nameSpan);
-      container.appendChild(separatorSpan);
+      if (tag.name) {
+        const nameSpan = document.createElement("span");
+        const separatorSpan = document.createElement("span");
+        nameSpan.textContent = tag.name;
+        separatorSpan.textContent = ": ";
+        pill.dataset[DATA_ATTRIBUTE.TAG_NAME] = tag.name;
+        container.appendChild(nameSpan);
+        container.appendChild(separatorSpan);
+      }
       container.appendChild(valueSpan);
       pill.appendChild(container);
       return pill;
     };
-    const createTagPillContainer = (tags) => {
+    const createTagPillContainer = (routeTagMap) => {
       const div = document.createElement("div");
-      tags.forEach((tag) => div.appendChild(createTagPill(tag)));
+      for (const tag of routeTagMap) {
+        div.appendChild(createTagPill(tag));
+      }
       div.classList.add(CLASS.TAG_PILL_CONTAINER);
       return div;
     };
@@ -485,16 +494,15 @@
         ),
         "No a element found in li element"
       );
-      const tags = parseLiTitle(a);
-      const wasTagMapUpdated = tagManager.addMultiple(tags);
-      a.parentElement?.appendChild(createTagPillContainer(tags));
-      if (wasTagMapUpdated) {
+      const { routeTagMap, wasUpdated } = updateLiTitle(a);
+      a.parentElement?.appendChild(createTagPillContainer(routeTagMap));
+      if (wasUpdated) {
         updateTagFilterControls();
       }
-      filterLi(li, tags);
+      filterLi(li, routeTagMap);
     };
-    const filterLi = (li, tags) => {
-      const doesMatchFilter = tagManager.matchesFilters(tags);
+    const filterLi = (li, routeTagMap) => {
+      const doesMatchFilter = tagMap.matches(routeTagMap);
       const wasVisibilityChanged = showElement(li, doesMatchFilter);
       if (wasVisibilityChanged) {
         const msgPrefix = doesMatchFilter ? "Showing" : "Hiding";
@@ -505,8 +513,8 @@
       debug("Applying filters");
       const lis = getLis();
       for (const li of lis) {
-        const tags = parseLiTagPills(li);
-        filterLi(li, tags);
+        const routeTagMap = parseLiTagPills(li);
+        filterLi(li, routeTagMap);
       }
     };
     debug("Setting up route list page");
