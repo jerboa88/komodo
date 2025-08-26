@@ -1,6 +1,7 @@
 import { CLASS, DATA_ATTRIBUTE, TAG_DELIMITER } from '../constants.ts';
 import {
 	createButton,
+	createElement,
 	createElementTemplate,
 	createPill,
 	createTriStateCheckbox,
@@ -119,8 +120,10 @@ const init = async () => {
 		tagName: Tag['name'],
 		tagValueToInclusionMap: TagValueToInclusionMap,
 	) => {
-		const div = document.createElement('div');
-		const fieldset = document.createElement('fieldset');
+		const div = createElement('div', {
+			classList: [CLASS.SCROLLABLE],
+		});
+		const fieldset = createElement('fieldset');
 		const sortedTagValueEntries = [...tagValueToInclusionMap.entries()].sort(
 			([tagValueA], [tagValueB]) => tagValueA.localeCompare(tagValueB),
 		);
@@ -138,14 +141,14 @@ const init = async () => {
 				isIncluded,
 				handleClick,
 			);
-			const label = document.createElement('label');
-			const span = document.createElement('span');
-
-			span.textContent = tagValue;
-
-			label.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tagValue;
-
-			div.classList.add(CLASS.SCROLLABLE);
+			const label = createElement('label', {
+				dataset: {
+					[DATA_ATTRIBUTE.TAG_VALUE]: tagValue,
+				},
+			});
+			const span = createElement('span', {
+				textContent: tagValue,
+			});
 
 			label.appendChild(span);
 			label.appendChild(checkbox);
@@ -164,23 +167,23 @@ const init = async () => {
 	const createTagFiltersContainer = () => {
 		debug('Creating tag filters container');
 
-		const tagFiltersContainer = document.createElement('form');
-
-		tagFiltersContainer.classList.add(CLASS.TAG_FILTER_CONTAINER);
+		const tagFiltersContainer = createElement('form', {
+			classList: [CLASS.TAG_FILTER_CONTAINER],
+		});
 
 		for (const [tagName, tagValueToInclusionMap] of tagMap.getAsMap()) {
-			const tagFilter = document.createElement('div');
-
-			tagFilter.classList.add(CLASS.NEW, CLASS.TAG_FILTER);
-
-			tagFilter.dataset[DATA_ATTRIBUTE.TAG_NAME] = tagName;
-
-			const filterSetTitle = document.createElement('p');
-			const divider = document.createElement('div');
-
-			divider.classList.add(CLASS.DIVIDER);
-
-			filterSetTitle.textContent = tagName ?? '...';
+			const tagFilter = createElement('div', {
+				classList: [CLASS.NEW, CLASS.TAG_FILTER],
+				dataset: {
+					[DATA_ATTRIBUTE.TAG_NAME]: tagName,
+				},
+			});
+			const filterSetTitle = createElement('p', {
+				textContent: tagName ?? '...',
+			});
+			const divider = createElement('div', {
+				classList: [CLASS.DIVIDER],
+			});
 
 			tagFilter.appendChild(filterSetTitle);
 			tagFilter.appendChild(divider);
@@ -281,19 +284,20 @@ const init = async () => {
 	 */
 	const createTagPill = (tag: Tag) => {
 		const pill = createPill();
-		const container = document.createElement('div');
-		const valueSpan = document.createElement('span');
-
-		valueSpan.textContent = tag.value;
+		const container = createElement('div');
+		const valueSpan = createElement('span', {
+			textContent: tag.value,
+		});
 
 		pill.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tag.value;
 
 		if (tag.name) {
-			const nameSpan = document.createElement('span');
-			const separatorSpan = document.createElement('span');
-
-			nameSpan.textContent = tag.name;
-			separatorSpan.textContent = ': ';
+			const nameSpan = createElement('span', {
+				textContent: tag.name,
+			});
+			const separatorSpan = createElement('span', {
+				textContent: ': ',
+			});
 
 			pill.dataset[DATA_ATTRIBUTE.TAG_NAME] = tag.name;
 
@@ -302,7 +306,6 @@ const init = async () => {
 		}
 
 		container.appendChild(valueSpan);
-
 		pill.appendChild(container);
 
 		return pill;
@@ -315,13 +318,13 @@ const init = async () => {
 	 * @returns The container element
 	 */
 	const createTagPillContainer = (routeTagMap: TagMap) => {
-		const div = document.createElement('div');
+		const div = createElement('div', {
+			classList: [CLASS.TAG_PILL_CONTAINER],
+		});
 
 		for (const tag of routeTagMap) {
 			div.appendChild(createTagPill(tag));
 		}
-
-		div.classList.add(CLASS.TAG_PILL_CONTAINER);
 
 		return div;
 	};
