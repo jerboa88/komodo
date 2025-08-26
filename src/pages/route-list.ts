@@ -119,7 +119,8 @@ const init = async () => {
 		tagName: Tag['name'],
 		tagValueToInclusionMap: TagValueToInclusionMap,
 	) => {
-		const container = document.createElement('fieldset');
+		const div = document.createElement('div');
+		const fieldset = document.createElement('fieldset');
 		const sortedTagValueEntries = [...tagValueToInclusionMap.entries()].sort(
 			([tagValueA], [tagValueB]) => tagValueA.localeCompare(tagValueB),
 		);
@@ -144,12 +145,15 @@ const init = async () => {
 
 			label.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tagValue;
 
+			div.classList.add(CLASS.SCROLLABLE);
+
 			label.appendChild(span);
 			label.appendChild(checkbox);
-			container.appendChild(label);
+			fieldset.appendChild(label);
+			div.appendChild(fieldset);
 		}
 
-		return container;
+		return div;
 	};
 
 	/**
@@ -173,6 +177,8 @@ const init = async () => {
 
 			const filterSetTitle = document.createElement('p');
 			const divider = document.createElement('div');
+
+			divider.classList.add(CLASS.DIVIDER);
 
 			filterSetTitle.textContent = tagName ?? '...';
 

@@ -46,12 +46,28 @@ div:has(> a[href='/upload']) {
 
 /* Utilities */
 /* --------- */
+
 .komodo-hide {
 	display: none;
 }
 
+.komodo-scrollable {
+	max-height: 350px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	scrollbar-width: thin;
+}
+
 /* Custom elements */
 /* --------------- */
+
+.komodo-divider {
+	border-bottom-width: 1px;
+	border-color: var(--theme-ui-colors-border);
+	border-style: solid;
+	width: 100%;
+	justify-self: stretch;
+}
 
 .komodo-tag-filter-container {
 	flex: 1 1 auto;
@@ -84,15 +100,7 @@ div:has(> a[href='/upload']) {
 		align-self: stretch;
 	}
 
-	> div {
-		border-bottom-width: 1px;
-		border-color: var(--theme-ui-colors-border);
-		border-style: solid;
-		width: 100%;
-		justify-self: stretch;
-	}
-
-	> fieldset {
+	fieldset {
 		align-items: stretch;
 		display: flex;
 		flex-direction: column;
