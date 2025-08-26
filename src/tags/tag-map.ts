@@ -1,6 +1,6 @@
-import { TAG_DELIMITER } from './constants.ts';
-import { debug } from './logger.ts';
-import type { Trilean } from './types.ts';
+import { TAG_DELIMITER } from '../constants.ts';
+import { debug } from '../logger.ts';
+import type { Trilean } from '../types.ts';
 
 type TagName = string | undefined;
 type TagValue = string;
@@ -194,8 +194,7 @@ export class TagMap implements Iterable<Tag> {
 	 */
 	matches(candidate: TagMap): boolean {
 		for (const { name, value, isIncluded } of this) {
-			const key = name ?? '';
-			const candidateValueToInclusionMap = candidate.tagMap.get(key);
+			const candidateValueToInclusionMap = candidate.tagMap.get(name);
 			const existsInCandidate =
 				candidateValueToInclusionMap?.has(value) ?? false;
 
@@ -215,6 +214,7 @@ export class TagMap implements Iterable<Tag> {
 				return false;
 			}
 		}
+
 		return true;
 	}
 }
