@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Komodo - Mods for Komoot
 // @namespace    https://github.com/jerboa88
-// @version      2.0.0
+// @version      2.0.1
 // @author       John Goodliff
 // @description  A userscript that adds additional features for route planning on Komoot.com.
 // @license      MIT
@@ -282,8 +282,7 @@ parseAndAdd(input) {
     }
 matches(candidate) {
       for (const { name, value, isIncluded } of this) {
-        const key = name ?? "";
-        const candidateValueToInclusionMap = candidate.tagMap.get(key);
+        const candidateValueToInclusionMap = candidate.tagMap.get(name);
         const existsInCandidate = candidateValueToInclusionMap?.has(value) ?? false;
         if (isIncluded === true && !existsInCandidate) {
           debug(
@@ -399,7 +398,7 @@ matches(candidate) {
         tagFilter.dataset[DATA_ATTRIBUTE.TAG_NAME] = tagName;
         const filterSetTitle = document.createElement("p");
         const divider = document.createElement("div");
-        filterSetTitle.textContent = tagName ?? "";
+        filterSetTitle.textContent = tagName ?? "...";
         tagFilter.appendChild(filterSetTitle);
         tagFilter.appendChild(divider);
         const container = createTagFilterSet(tagName, tagValueToInclusionMap);
@@ -447,10 +446,7 @@ matches(candidate) {
       );
       const routeTagMap = new TagMap();
       for (const pill of pills) {
-        const name = assertDefined(
-          pill.dataset[DATA_ATTRIBUTE.TAG_NAME],
-          `No tag name found in pill: ${pill.textContent}`
-        );
+        const name = pill.dataset[DATA_ATTRIBUTE.TAG_NAME];
         const value = assertDefined(
           pill.dataset[DATA_ATTRIBUTE.TAG_VALUE],
           `No tag value found in pill: ${pill.textContent}`
