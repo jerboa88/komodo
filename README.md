@@ -1,44 +1,26 @@
 <!-- Project Header -->
 <div align="center">
   <img class="projectLogo" src="./docs/public/logo.png" alt="Project logo" title="Project logo" width="256">
-
   <h1 class="projectName">Komodo - Mods for Komoot</h1>
-
   <p class="projectBadges info">
     <img src="https://johng.io/badges/category/Script.svg" alt="Project category" title="Project category">
     <img src="https://img.shields.io/github/languages/top/jerboa88/komodo.svg" alt="Language" title="Language">
     <img src="https://img.shields.io/github/repo-size/jerboa88/komodo.svg" alt="Repository size" title="Repository size">
-    <a href="LICENSE">
-      <img src="https://img.shields.io/github/license/jerboa88/komodo.svg" alt="Project license" title="Project license"/>
-    </a>
-    <a href="https://github.com/semantic-release/semantic-release">
-      <img src="https://img.shields.io/badge/semantic--release-conventionalcommits-e10079?logo=semantic-release" alt="Semantic Release" title="Semantic Release"/>
-    </a>
+    <a href="LICENSE"><img src="https://img.shields.io/github/license/jerboa88/komodo.svg" alt="Project license" title="Project license"/></a>
+    <a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/semantic--release-conventionalcommits-e10079?logo=semantic-release" alt="Semantic Release" title="Semantic Release"/></a>
   </p>
   <p class="projectBadges status">
-    <img src="https://img.shields.io/badge/Experimental-%E2%9A%A0%EF%B8%8E-ca8a04.svg" alt="Experimental" title="Experimental"/>
-    <a href="https://github.com/jerboa88/enhancements-for-komoot/releases/latest">
-      <img src="https://img.shields.io/github/v/release/jerboa88/enhancements-for-komoot.svg" alt="Latest release" title="Latest release"/>
-    </a>
-    <a href="https://greasyfork.org/en/scripts/545361-komodo-mods-for-komoot">
-      <img src="https://img.shields.io/greasyfork/v/545361-komodo-mods-for-komoot?color=%23990000" alt="Greasy Fork Version" title="Greasy Fork Version"/>
-    </a>
-    <a href="https://github.com/jerboa88/komodo/raw/refs/heads/main/dist/komodo.user.js">
-      <img src="https://img.shields.io/badge/%F0%9F%A7%A9_Install-komodo.user.js-blue" alt="Install" title="Install"/>
-    </a>
+    <a href="https://github.com/jerboa88/enhancements-for-komoot/releases/latest"><img src="https://img.shields.io/github/v/release/jerboa88/enhancements-for-komoot.svg" alt="Latest release" title="Latest release"/></a>
+    <a href="https://greasyfork.org/en/scripts/545361-komodo-mods-for-komoot"><img src="https://img.shields.io/greasyfork/v/545361-komodo-mods-for-komoot?color=%23990000" alt="Greasy Fork Version" title="Greasy Fork Version"/></a>
+    <a href="https://github.com/jerboa88/komodo/raw/refs/heads/main/dist/komodo.user.js"><img src="https://img.shields.io/badge/%F0%9F%A7%A9_Install-komodo.user.js-blue" alt="Install" title="Install"/></a>
   </p>
-
   <p class="projectDesc">
     A userscript for Komoot.com that adds additional features for route planning.
   </p>
-
   <br/>
 </div>
 
 <!-- #region main -->
-> [!WARNING]
-> This is currently an experimental project or proof-of-concept. It may contain bugs or incomplete features, and is not intended for production use. Breaking changes may be made at any time. Consider more stable alternatives for critical applications.
-
 ## 👋 About
 
 Using [Komoot](https://www.komoot.com/) for route planning? This script may help. It runs in your browser and adds additional features to the site to help you plan your next adventure.

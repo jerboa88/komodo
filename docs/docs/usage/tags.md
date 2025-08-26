@@ -33,6 +33,7 @@ Tags can be written in several ways. Here are some examples:
 | **Multiple tags w/ the same name** | You can even have multiple tags with the same name.                                                                             | `[if:sunny] [if:rainy]`    | <Badge type="tip" text="if: sunny" /><Badge type="tip" text="if: rainy" />         |
 | **Multiple inline values**         | To save space, you can add multiple values in a single tag, separated by commas. They will still be displayed as separate tags. | `[members:Jerry,Liu]`      | <Badge type="tip" text="members: Jerry" /><Badge type="tip" text="members: Liu" /> |
 | **Nameless tags**                  | Tags don't need to have a name. This is useful for tags that are either true or false.                                          | `[downhill] [low traffic]` | <Badge type="tip" text="downhill" /><Badge type="tip" text="low traffic" />        |
+| **Multiple inline nameless tags**                  | You can have multiple values in a nameless tag.                                          | `[downhill, low traffic]` | <Badge type="tip" text="downhill" /><Badge type="tip" text="low traffic" />        |
 
 > [!TIP]
 > Note that tags will be stripped from the route name when displayed, so if you add them between words, the resulting title may have weird spacing.
@@ -53,7 +54,7 @@ Tags can contain almost any value:
 | **Special characters**      | Most special characters are allowed. See below for details.                                                  | `[difficulty:!@#$%]`              | <Badge type="tip" text="difficulty:!@#$%" />                                |
 
 > [!TIP]
-> Although you can use emojis, it might be better to use easy easy to type names/values and replace them with emojis for display purposes using CSS. This is described in more detail in the [advanced usage] section.
+> Although you can use emojis, it might be better to use easy to type names/values and replace them with emojis for display purposes using CSS. This is described in more detail in the [advanced usage] section.
 >
 > If you use Komoot on mobile, it might be a good idea to name tags such that you can filter them using the built-in search function.
 
