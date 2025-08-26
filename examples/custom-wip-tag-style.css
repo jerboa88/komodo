@@ -1,4 +1,4 @@
-.komodo-pill[data-komodo-tag-name='status'][data-komodo-tag-value='WIP'] {
+.komodo-pill[data-komodo-tag-name='status'][data-komodo-tag-value='wip'] {
 	background: orange;
 
 	& > div::before {
