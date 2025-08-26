@@ -66,6 +66,9 @@ export default defineConfig({
 			provider: 'local',
 		},
 	},
+	sitemap: {
+		hostname: 'https://komodo.johng.io',
+	},
 	cleanUrls: true,
 	lastUpdated: true,
 	markdown: {
