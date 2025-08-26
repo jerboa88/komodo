@@ -8,7 +8,11 @@ import {
 	showElement,
 } from '../dom.ts';
 import { debug, warn } from '../logger.ts';
-import { type Tag, TagMap, type TagValueToInclusionMap } from '../tag-map.ts';
+import {
+	type Tag,
+	TagMap,
+	type TagValueToInclusionMap,
+} from '../tags/tag-map.ts';
 import type { Route, Trilean } from '../types.ts';
 import { assertDefined, toElementId } from '../utils.ts';
 
@@ -170,7 +174,7 @@ const init = async () => {
 			const filterSetTitle = document.createElement('p');
 			const divider = document.createElement('div');
 
-			filterSetTitle.textContent = tagName ?? '';
+			filterSetTitle.textContent = tagName ?? '...';
 
 			tagFilter.appendChild(filterSetTitle);
 			tagFilter.appendChild(divider);
@@ -251,10 +255,7 @@ const init = async () => {
 		const routeTagMap = new TagMap();
 
 		for (const pill of pills) {
-			const name = assertDefined(
-				pill.dataset[DATA_ATTRIBUTE.TAG_NAME],
-				`No tag name found in pill: ${pill.textContent}`,
-			);
+			const name = pill.dataset[DATA_ATTRIBUTE.TAG_NAME];
 			const value = assertDefined(
 				pill.dataset[DATA_ATTRIBUTE.TAG_VALUE],
 				`No tag value found in pill: ${pill.textContent}`,
