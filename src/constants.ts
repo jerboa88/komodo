@@ -15,6 +15,8 @@ const prefix = PROJECT.NAME.toLowerCase();
 export const CLASS = {
 	NEW: `${prefix}-new`,
 	HIDE: `${prefix}-hide`,
+	SCROLLABLE: `${prefix}-scrollable`,
+	DIVIDER: `${prefix}-divider`,
 	FILTER_CONTAINER: `${prefix}-filter-container`,
 	TAG_FILTER_CONTAINER: `${prefix}-tag-filter-container`,
 	TAG_FILTER: `${prefix}-tag-filter`,

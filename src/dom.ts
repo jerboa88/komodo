@@ -3,6 +3,56 @@ import { debug } from './logger.ts';
 import type { Trilean } from './types.ts';
 import { assertDefined } from './utils.ts';
 
+type AttributeMap<K extends keyof HTMLElementTagNameMap> = Partial<
+	Omit<HTMLElementTagNameMap[K], 'classList' | 'dataset'>
+> & {
+	classList?: string[];
+	dataset?: Record<string, string | undefined>;
+};
+
+/**
+ * Create an HTML element and apply attributes from an attribute map.
+ *
+ * Special keys:
+ * - `classList`: array of CSS class names → added via `classList.add`.
+ * - `dataset`: object of data attributes → assigned via `element.dataset`.
+ * - Any other key → treated as a valid HTML attribute/property.
+ *
+ * @param tagName - The HTML element tag name (e.g., "div", "input").
+ * @param attributeMap - Attributes, properties, classList, or dataset to apply.
+ * @returns The created element.
+ */
+export const createElement = <K extends keyof HTMLElementTagNameMap>(
+	tagName: K,
+	attributeMap: AttributeMap<K> = {},
+): HTMLElementTagNameMap[K] => {
+	const element = document.createElement(tagName);
+
+	for (const [key, value] of Object.entries(attributeMap)) {
+		if (key === 'classList' && Array.isArray(value)) {
+			element.classList.add(...value);
+		} else if (
+			key === 'dataset' &&
+			typeof value === 'object' &&
+			value !== null
+		) {
+			for (const [dataKey, dataVal] of Object.entries(value)) {
+				element.dataset[dataKey] = dataVal;
+			}
+		} else if (value !== undefined) {
+			// assign as property if exists, otherwise set as attribute
+			if (key in element) {
+				// @ts-expect-error TS can't always infer HTMLElement property assignment
+				element[key] = value;
+			} else {
+				element.setAttribute(key, String(value));
+			}
+		}
+	}
+
+	return element;
+};
+
 /**
  * Create a template for an element based on a existing element on the page
  * @param nullableReferenceElement - The element to clone
@@ -15,7 +65,6 @@ export const createElementTemplate = <T extends HTMLElement | SVGElement>(
 		nullableReferenceElement,
 		'Unable to create element template. Reference element not found',
 	);
-
 	const elementTemplate: T = referenceElement.cloneNode(true) as T;
 
 	elementTemplate.classList.add(CLASS.NEW);
@@ -30,13 +79,13 @@ export const createElementTemplate = <T extends HTMLElement | SVGElement>(
  * @returns An HTML span element containing the pill
  */
 export const createPill = (text?: string) => {
-	const div = document.createElement('div');
+	const div = createElement('div', {
+		classList: [CLASS.NEW, CLASS.PILL],
+	});
 
 	if (text) {
 		div.textContent = text;
 	}
-
-	div.classList.add(CLASS.NEW, CLASS.PILL);
 
 	return div;
 };
@@ -59,17 +108,19 @@ export const createButton = (
 		icon: SVGElement,
 	) => Promise<void> | null,
 ) => {
-	const button = document.createElement('button');
-	const span = document.createElement('span');
+	const button = createElement('button', {
+		classList: [CLASS.NEW, CLASS.BUTTON],
+	});
+	const span = createElement('span', {
+		textContent: text,
+	});
 
-	span.textContent = text;
-	button.onclick = (event) => {
-		debug('Button clicked');
+	button.addEventListener('click', (event) => {
+		debug('Button clicked:', text);
 
 		handleClick(event, button, span, icon);
-	};
+	});
 
-	button.classList.add(CLASS.NEW, CLASS.BUTTON);
 	button.appendChild(icon);
 	button.appendChild(span);
 
@@ -123,10 +174,10 @@ export const createTriStateCheckbox = (() => {
 		initialCheckedState: Trilean,
 		onClick: (checkedState: Trilean) => void,
 	) => {
-		const checkbox = document.createElement('input');
-
-		checkbox.type = 'checkbox';
-		checkbox.id = id;
+		const checkbox = createElement('input', {
+			type: 'checkbox',
+			id,
+		});
 
 		checkbox.addEventListener('click', () => {
 			let checkedState = stateMap[checkbox.value as keyof typeof stateMap];
