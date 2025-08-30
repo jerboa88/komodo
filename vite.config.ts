@@ -17,10 +17,7 @@ export default defineConfig({
 				name: `${PROJECT.NAME} - ${PROJECT.TAGLINE}`,
 				icon: iconBase64,
 				namespace: 'https://github.com/jerboa88',
-				match: [
-					'https://www.komoot.com/user/*/routes',
-					'https://www.komoot.com/tour/*',
-				],
+				match: ['https://www.komoot.com/*'],
 				grant: 'none',
 			},
 			build: {
