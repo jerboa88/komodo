@@ -22,7 +22,7 @@
 /* Overrides */
 /* --------- */
 
-/* Increase width of route rename dialog */
+/* Increase width of tour rename dialog */
 dialog[data-test-id='rename-tour-dialog'] > div {
 	width: 100%;
 	max-width: 64rem;

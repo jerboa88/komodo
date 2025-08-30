@@ -1,20 +1,25 @@
 import './style.css';
 import { debug } from './logger.ts';
-import { routeListRoute } from './pages/route-list';
-import { routeViewRoute } from './pages/route-view.ts';
+import { tourListRoute } from './pages/tour-list.ts';
+import { tourViewRoute } from './pages/tour-view.ts';
 import type { Route } from './types.ts';
 
 /**
- * Register route handlers for the given routes.
+ * Register handlers for the given routes.
  *
  * @param routes - The routes to register handlers for
  */
 const registerRouteHandlers = (routes: Route[]) => {
 	const path = location.pathname;
 
-	for (const { pattern, handler } of routes) {
-		if (pattern.test(path)) {
-			handler();
+	for (const { name, pattern, handler } of routes) {
+		const match = pattern.exec(path);
+
+		if (match) {
+			debug(`Router: Calling handler for '${name}' route`);
+
+			// Pass capturing groups to handler (excluding full match at index 0)
+			handler(...match.slice(1));
 
 			break;
 		}
@@ -27,7 +32,7 @@ const registerRouteHandlers = (routes: Route[]) => {
 const init = () => {
 	debug('Script loaded');
 
-	registerRouteHandlers([routeViewRoute, routeListRoute]);
+	registerRouteHandlers([tourListRoute, tourViewRoute]);
 
 	debug('Script unloaded');
 };

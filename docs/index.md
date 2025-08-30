@@ -21,7 +21,7 @@ hero:
 features:
   - icon: 🏷️
     title: Tags
-    details: Add custom tags like location, activity type, directionality, or difficulty to your routes. Filter your saved routes to find the perfect route by including or excluding certain tags. Advanced users can customize the appearance of tags and filter controls using CSS
+    details: Add custom tags like location, activity type, directionality, or difficulty to your saved routes or completed activities. Filter your saved routes to find the perfect one by including or excluding certain tags. Advanced users can customize the appearance of tags and filter controls using CSS
     link: /docs/usage/tags
 ---
 

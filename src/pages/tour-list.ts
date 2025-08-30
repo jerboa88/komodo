@@ -17,12 +17,14 @@ import {
 import type { Route, Trilean } from '../types.ts';
 import { assertDefined, toElementId } from '../utils.ts';
 
-const pattern = /^\/user\/\d*?\/routes$/;
+const ROUTE_NAME = 'tour list' as const;
+const ROUTE_PATTERN = /^\/user\/\d*?\/(routes|activities)$/;
 
 /**
- * Initialize the route list page.
+ * Initialize the page.
  */
-const init = async () => {
+const init = async (...capturingGroups: string[]) => {
+	const isRouteListPage = capturingGroups?.[0] === 'routes';
 	const tagMap = new TagMap(
 		TAG_DELIMITER.START,
 		TAG_DELIMITER.END,
@@ -39,11 +41,11 @@ const init = async () => {
 		document.querySelector(
 			'ul[data-test-id="tours-list"]',
 		) as HTMLUListElement | null,
-		'No route list found',
+		'No tour list found',
 	);
 
 	/**
-	 * Get all the list items in the route list.
+	 * Get all the list items in the tour list.
 	 *
 	 * @returns An array of HTMLLIElements
 	 */
@@ -51,17 +53,17 @@ const init = async () => {
 		[...ul.children].filter((li) => li.nodeName === 'LI') as HTMLLIElement[];
 
 	const scrollToLoadAll = async () => {
-		debug('Force loading all routes');
+		debug('Force loading all tours');
 
 		const initialScrollPos = window.scrollY;
-		const totalNumOfRoutes = Number(
+		const totalNumOfTours = Number(
 			assertDefined(
 				savedRoutesAnchor.lastElementChild?.textContent,
-				'Unable to get total number of routes. Required element not found',
+				'Unable to get total number of tours. Required element not found',
 			),
 		);
 
-		debug(`Found ${totalNumOfRoutes} total routes`);
+		debug(`Found ${totalNumOfTours} total tours`);
 
 		const loadMore = async () => {
 			ul.scrollTop = ul.scrollHeight;
@@ -70,7 +72,7 @@ const init = async () => {
 
 			await new Promise((r) => setTimeout(r, 100));
 
-			return totalNumOfRoutes > getLis().length;
+			return totalNumOfTours > getLis().length;
 		};
 
 		while (await loadMore());
@@ -81,11 +83,12 @@ const init = async () => {
 	};
 
 	/**
-	 * Add a button to the page that will force load all routes.
+	 * Add a button to the page that will force load all tours.
 	 */
-	const addLoadAllRoutesButton = () => {
-		debug('Adding load all routes button to page');
+	const addLoadAllToursButton = () => {
+		debug('Adding load all tours button to page');
 
+		const title = isRouteListPage ? 'Load All Routes' : 'Load All Activities';
 		const importLinkAnchor = document.querySelector(
 			'a[href="/upload"]',
 		) as HTMLAnchorElement;
@@ -93,20 +96,16 @@ const init = async () => {
 		const icon = createElementTemplate(
 			savedRoutesAnchor.firstElementChild as SVGElement | null,
 		);
-		const loadAllRoutesbutton = createButton(
-			'Load All Routes',
-			icon,
-			async (_event, button, span) => {
-				button.disabled = true;
-				span.textContent = 'Loading...';
+		const button = createButton(title, icon, async (_event, button, span) => {
+			button.disabled = true;
+			span.textContent = 'Loading...';
 
-				await scrollToLoadAll();
+			await scrollToLoadAll();
 
-				span.textContent = 'Loaded';
-			},
-		);
+			span.textContent = 'Loaded';
+		});
 
-		container.insertBefore(loadAllRoutesbutton, importLinkAnchor);
+		container.insertBefore(button, importLinkAnchor);
 	};
 
 	/**
@@ -219,7 +218,7 @@ const init = async () => {
 	};
 
 	/**
-	 * Parse the title of a route list item and extract any tags from it. This is used the first time a list item is parsed.
+	 * Parse the title of a tour list item and extract any tags from it. This is used the first time a list item is parsed.
 	 *
 	 * @param a - The anchor element containing the title
 	 * @returns An array of tags extracted from the title
@@ -229,7 +228,7 @@ const init = async () => {
 			warn('No a element found in li element', a);
 
 			return {
-				routeTagMap: new TagMap(),
+				tourTagMap: new TagMap(),
 				updated: false,
 			};
 		}
@@ -241,18 +240,18 @@ const init = async () => {
 
 		const {
 			text,
-			parsedTagMap: routeTagMap,
+			parsedTagMap: tourTagMap,
 			wasUpdated,
 		} = tagMap.parseAndAdd(originalTitle);
 
 		a.textContent = text;
 		a.title = originalTitle;
 
-		return { routeTagMap, wasUpdated };
+		return { tourTagMap, wasUpdated };
 	};
 
 	/**
-	 * Parse the pills of a route list item and extract any tags from it. This is used when a list item is already parsed and we need to update the tags.
+	 * Parse the pills of a tour list item and extract any tags from it. This is used when a list item is already parsed and we need to update the tags.
 	 *
 	 * @param li - The list item element containing the pills
 	 * @returns An array of tags extracted from the pills
@@ -261,7 +260,7 @@ const init = async () => {
 		const pills = li.getElementsByClassName(
 			CLASS.PILL,
 		) as HTMLCollectionOf<HTMLDivElement>;
-		const routeTagMap = new TagMap();
+		const tourTagMap = new TagMap();
 
 		for (const pill of pills) {
 			const name = pill.dataset[DATA_ATTRIBUTE.TAG_NAME];
@@ -270,10 +269,10 @@ const init = async () => {
 				`No tag value found in pill: ${pill.textContent}`,
 			);
 
-			routeTagMap.add(name, value);
+			tourTagMap.add(name, value);
 		}
 
-		return routeTagMap;
+		return tourTagMap;
 	};
 
 	/**
@@ -343,25 +342,25 @@ const init = async () => {
 			) as HTMLAnchorElement | null,
 			'No a element found in li element',
 		);
-		const { routeTagMap, wasUpdated } = updateLiTitle(a);
+		const { tourTagMap, wasUpdated } = updateLiTitle(a);
 
-		a.parentElement?.appendChild(createTagPillContainer(routeTagMap));
+		a.parentElement?.appendChild(createTagPillContainer(tourTagMap));
 
 		if (wasUpdated) {
 			updateTagFilterControls();
 		}
 
-		filterLi(li, routeTagMap);
+		filterLi(li, tourTagMap);
 	};
 
 	/**
 	 * Filter a li element based on the current filters.
 	 *
 	 * @param li - The li element to filter
-	 * @param routeTagMap - A map of tags belonging to the current route
+	 * @param tourTagMap - A map of tags belonging to the current tour
 	 */
-	const filterLi = (li: HTMLLIElement, routeTagMap: TagMap) => {
-		const doesMatchFilter = tagMap.matches(routeTagMap);
+	const filterLi = (li: HTMLLIElement, tourTagMap: TagMap) => {
+		const doesMatchFilter = tagMap.matches(tourTagMap);
 		const wasVisibilityChanged = showElement(li, doesMatchFilter);
 
 		if (wasVisibilityChanged) {
@@ -380,13 +379,11 @@ const init = async () => {
 		const lis = getLis();
 
 		for (const li of lis) {
-			const routeTagMap = parseLiTagPills(li);
+			const tourTagMap = parseLiTagPills(li);
 
-			filterLi(li, routeTagMap);
+			filterLi(li, tourTagMap);
 		}
 	};
-
-	debug('Setting up route list page');
 
 	const observer = new MutationObserver((mutations) => {
 		debug('Mutations observed on ul', mutations);
@@ -404,16 +401,18 @@ const init = async () => {
 
 	observer.observe(ul, { childList: true });
 	getLis().forEach(updateLi);
-	addLoadAllRoutesButton();
+	addLoadAllToursButton();
 	updateTagFilterControls();
 };
 
 /**
- * Handler for the route list page.
+ * Handler for the page.
  */
-const handler = () => onReactMounted(init);
+const handler = (...capturingGroups: string[]) =>
+	onReactMounted(() => init(...capturingGroups));
 
-export const routeListRoute: Route = {
-	pattern,
+export const tourListRoute: Route = {
+	name: ROUTE_NAME,
+	pattern: ROUTE_PATTERN,
 	handler,
 };
