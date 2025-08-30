@@ -1,7 +1,7 @@
 {
 	"name": "komodo",
 	"version": "2.0.1",
-	"description": "A userscript that adds additional features for route planning on Komoot.com.",
+	"description": "A userscript for Komoot.com that adds additional features for route planning.",
 	"keywords": [
 		"typescript",
 		"javascript",
@@ -11,7 +11,9 @@
 		"userscripts",
 		"tampermonkey",
 		"route-planning",
+		"activity-tracking",
 		"violentmonkey",
+		"scriptcat",
 		"user-script",
 		"komoot"
 	],

@@ -1,7 +1,9 @@
 <!-- Project Header -->
 <div align="center">
-  <img class="projectLogo" src="./docs/public/logo.png" alt="Project logo" title="Project logo" width="256">
-  <h1 class="projectName">Komodo - Mods for Komoot</h1>
+  <a href="https://komodo.johng.io" title="Komodo - Mods for Komoot">
+    <img class="projectLogo" src="./docs/public/logo.png" alt="Project logo" title="Project logo" width="256">
+    <h1 class="projectName">Komodo - Mods for Komoot</h1>
+  </a>
   <p class="projectBadges info">
     <img src="https://johng.io/badges/category/Script.svg" alt="Project category" title="Project category">
     <img src="https://img.shields.io/github/languages/top/jerboa88/komodo.svg" alt="Language" title="Language">
@@ -28,8 +30,8 @@ Using [Komoot](https://www.komoot.com/) for route planning? This script may help
 ### Features
 
 - **🏷️ Tags**:
-  - **Add**: Add custom tags like location, activity type, directionality, or difficulty to your routes
-  - **Filter**: Filter your saved routes to find the perfect route by including or excluding certain tags
+  - **Add**: Add custom tags like location, activity type, directionality, or difficulty to your saved routes or completed activities
+  - **Filter**: Filter your saved routes to find the perfect one by including or excluding certain tags
   - **Customize**: Advanced users can customize the appearance of tags and filter controls using CSS
 
 ### Screenshots
@@ -44,11 +46,7 @@ For installation and usage instructions, please see [the docs](https://komodo.jo
 
 ## 🤝 Contributing
 
-If you encounter any problems with the script, feel free to [create an issue](https://github.com/jerboa88/komodo/issues).
-
-Pull requests, bug reports, translations, and other kinds of contributions are greatly appreciated. By contributing code, you agree to license your contributions under the terms of the [the license].
-
-See [the contribution guide](https://komodo.johng.io/contributing) for more details.
+Pull requests, bug reports, translations, and other kinds of contributions are greatly appreciated. See [the contribution guide](https://komodo.johng.io/contributing) for more details.
 
 ## 🧾 License
 
