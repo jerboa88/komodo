@@ -1,17 +1,16 @@
 // ==UserScript==
 // @name         Komodo - Mods for Komoot
 // @namespace    https://github.com/jerboa88
-// @version      2.0.1
+// @version      2.1.0
 // @author       John Goodliff
-// @description  A userscript that adds additional features for route planning on Komoot.com.
+// @description  A userscript for Komoot.com that adds additional features for route planning.
 // @license      MIT
 // @icon         data:image/png;base64,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
 // @homepage     https://johng.io/p/komodo
 // @homepageURL  https://johng.io/p/komodo
 // @source       https://github.com/jerboa88/komodo.git
 // @supportURL   https://github.com/jerboa88/komodo/issues
-// @match        https://www.komoot.com/user/*/routes
-// @match        https://www.komoot.com/tour/*
+// @match        https://www.komoot.com/*
 // @grant        none
 // ==/UserScript==
 
@@ -20,7 +19,7 @@
 
   const d=new Set;const importCSS = async e=>{d.has(e)||(d.add(e),(t=>{typeof GM_addStyle=="function"?GM_addStyle(t):document.head.appendChild(document.createElement("style")).append(t);})(e));};
 
-  const styleCss = ':root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}dialog[data-test-id=rename-tour-dialog]>div{width:100%;max-width:64rem}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}.komodo-hide{display:none}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>p{align-items:center;display:flex;flex-direction:row;gap:1.5rem;justify-content:space-between;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter>div{border-bottom-width:1px;border-color:var(--theme-ui-colors-border);border-style:solid;width:100%;justify-self:stretch}.komodo-tag-filter>fieldset{align-items:stretch;display:flex;flex-direction:column;gap:.75rem;justify-content:end;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter>fieldset>label{align-items:center;border-color:var(--theme-ui-colors-border);border-radius:8px;border-style:solid;color:var(--theme-ui-colors-text);cursor:pointer;display:flex;flex-direction:row;gap:1.5rem;grid-area:grid-item-0;justify-content:space-between;padding:.5rem;width:initial;align-self:stretch;border-width:1px}.komodo-tag-filter>fieldset>label:hover{border-color:var(--theme-ui-colors-whisper)}.komodo-tag-filter>fieldset>label:has(input[type=checkbox][value=true]){color:var(--theme-ui-colors-primary)}.komodo-tag-filter>fieldset>label:has(input[type=checkbox][value=false]){color:var(--theme-ui-colors-error)}.komodo-tag-filter>fieldset>label>input[type=checkbox][value=true]{accent-color:var(--komodo-pill-bg-color)}.komodo-tag-filter>fieldset>label>input[type=checkbox][value=false]{accent-color:var(--theme-ui-colors-error)}.komodo-tag-filter>select{display:block;width:fit-content;margin-top:var(--komodo-spacing)}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;margin-top:var(--komodo-spacing);gap:var(--komodo-spacing)}.komodo-tag-pill-container>.komodo-pill>div>span:nth-child(2){white-space:pre}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"🦎";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0}';
+  const styleCss = ':root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}dialog[data-test-id=rename-tour-dialog]>div{width:100%;max-width:64rem}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}h1:has(>.komodo-tag-pill-container){display:flex;flex-direction:row;justify-content:center;align-items:center;gap:var(--komodo-spacing)}a[data-test-id=tours_list_item_title]{display:block;margin-bottom:var(--komodo-spacing)}.komodo-hide{display:none}.komodo-scrollable{max-height:350px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin}.komodo-divider{border-bottom-width:1px;border-color:var(--theme-ui-colors-border);border-style:solid;width:100%;justify-self:stretch}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>p{align-items:center;display:flex;flex-direction:row;gap:1.5rem;justify-content:space-between;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter fieldset{align-items:stretch;display:flex;flex-direction:column;gap:.75rem;justify-content:end;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter fieldset>label{align-items:center;border-color:var(--theme-ui-colors-border);border-radius:8px;border-style:solid;color:var(--theme-ui-colors-text);cursor:pointer;display:flex;flex-direction:row;gap:1.5rem;grid-area:grid-item-0;justify-content:space-between;padding:.5rem;width:initial;align-self:stretch;border-width:1px}.komodo-tag-filter fieldset>label:hover{border-color:var(--theme-ui-colors-whisper)}.komodo-tag-filter fieldset>label:has(input[type=checkbox][value=true]){color:var(--theme-ui-colors-primary)}.komodo-tag-filter fieldset>label:has(input[type=checkbox][value=false]){color:var(--theme-ui-colors-error)}.komodo-tag-filter fieldset>label>input[type=checkbox][value=true]{accent-color:var(--komodo-pill-bg-color)}.komodo-tag-filter fieldset>label>input[type=checkbox][value=false]{accent-color:var(--theme-ui-colors-error)}.komodo-tag-filter>select{display:block;width:fit-content;margin-top:var(--komodo-spacing)}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-pill-container>.komodo-pill>div>span:nth-child(2){white-space:pre}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"🦎";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0}';
   importCSS(styleCss);
   const PROJECT = {
     EMOJI: "🦎",
@@ -30,6 +29,8 @@
   const CLASS = {
     NEW: `${prefix}-new`,
     HIDE: `${prefix}-hide`,
+    SCROLLABLE: `${prefix}-scrollable`,
+    DIVIDER: `${prefix}-divider`,
     FILTER_CONTAINER: `${prefix}-filter-container`,
     TAG_FILTER_CONTAINER: `${prefix}-tag-filter-container`,
     TAG_FILTER: `${prefix}-tag-filter`,
@@ -94,6 +95,25 @@ TOUR_ID: "tourId",
     }
     return result;
   };
+  const createElement = (tagName, attributeMap = {}) => {
+    const element = document.createElement(tagName);
+    for (const [key, value] of Object.entries(attributeMap)) {
+      if (key === "classList" && Array.isArray(value)) {
+        element.classList.add(...value);
+      } else if (key === "dataset" && typeof value === "object" && value !== null) {
+        for (const [dataKey, dataVal] of Object.entries(value)) {
+          element.dataset[dataKey] = dataVal;
+        }
+      } else if (value !== void 0) {
+        if (key in element) {
+          element[key] = value;
+        } else {
+          element.setAttribute(key, String(value));
+        }
+      }
+    }
+    return element;
+  };
   const createElementTemplate = (nullableReferenceElement) => {
     const referenceElement = assertDefined(
       nullableReferenceElement,
@@ -104,19 +124,22 @@ TOUR_ID: "tourId",
     return elementTemplate;
   };
   const createPill = (text) => {
-    const div = document.createElement("div");
-    div.classList.add(CLASS.NEW, CLASS.PILL);
+    const div = createElement("div", {
+      classList: [CLASS.NEW, CLASS.PILL]
+    });
     return div;
   };
   const createButton = (text, icon, handleClick) => {
-    const button = document.createElement("button");
-    const span = document.createElement("span");
-    span.textContent = text;
-    button.onclick = (event) => {
-      debug("Button clicked");
+    const button = createElement("button", {
+      classList: [CLASS.NEW, CLASS.BUTTON]
+    });
+    const span = createElement("span", {
+      textContent: text
+    });
+    button.addEventListener("click", (event) => {
+      debug("Button clicked:", text);
       handleClick(event, button, span, icon);
-    };
-    button.classList.add(CLASS.NEW, CLASS.BUTTON);
+    });
     button.appendChild(icon);
     button.appendChild(span);
     return button;
@@ -134,9 +157,10 @@ TOUR_ID: "tourId",
       checkbox.value = String(checkedState);
     };
     return (id, initialCheckedState, onClick) => {
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.id = id;
+      const checkbox = createElement("input", {
+        type: "checkbox",
+        id
+      });
       checkbox.addEventListener("click", () => {
         let checkedState = stateMap[checkbox.value];
         const newCheckedStateIndex = (states.indexOf(checkedState) + 1) % states.length;
@@ -182,6 +206,37 @@ TOUR_ID: "tourId",
     });
     debug("Waiting for React to be mounted");
     observer.observe(document.body, { childList: true });
+  };
+  const createTagPill = (tag) => {
+    const pill = createPill();
+    const container = createElement("div");
+    const valueSpan = createElement("span", {
+      textContent: tag.value
+    });
+    pill.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tag.value;
+    if (tag.name) {
+      const nameSpan = createElement("span", {
+        textContent: tag.name
+      });
+      const separatorSpan = createElement("span", {
+        textContent: ": "
+      });
+      pill.dataset[DATA_ATTRIBUTE.TAG_NAME] = tag.name;
+      container.appendChild(nameSpan);
+      container.appendChild(separatorSpan);
+    }
+    container.appendChild(valueSpan);
+    pill.appendChild(container);
+    return pill;
+  };
+  const createTagPillContainer = (routeTagMap) => {
+    const div = createElement("div", {
+      classList: [CLASS.TAG_PILL_CONTAINER]
+    });
+    for (const tag of routeTagMap) {
+      div.appendChild(createTagPill(tag));
+    }
+    return div;
   };
   class TagMap {
     tagMap = new Map();
@@ -300,8 +355,10 @@ matches(candidate) {
       return true;
     }
   }
-  const pattern$1 = /^\/user\/\d*?\/routes$/;
-  const init$1 = async () => {
+  const ROUTE_NAME$2 = "tour list";
+  const ROUTE_PATTERN$2 = /^\/user\/\d*?\/(routes|activities)$/;
+  const init$2 = async (...capturingGroups) => {
+    const isRouteListPage = capturingGroups?.[0] === "routes";
     const tagMap = new TagMap(
       TAG_DELIMITER.START,
       TAG_DELIMITER.END,
@@ -318,31 +375,32 @@ matches(candidate) {
       document.querySelector(
         'ul[data-test-id="tours-list"]'
       ),
-      "No route list found"
+      "No tour list found"
     );
     const getLis = () => [...ul.children].filter((li) => li.nodeName === "LI");
     const scrollToLoadAll = async () => {
-      debug("Force loading all routes");
+      debug("Force loading all tours");
       const initialScrollPos = window.scrollY;
-      const totalNumOfRoutes = Number(
+      const totalNumOfTours = Number(
         assertDefined(
           savedRoutesAnchor.lastElementChild?.textContent,
-          "Unable to get total number of routes. Required element not found"
+          "Unable to get total number of tours. Required element not found"
         )
       );
-      debug(`Found ${totalNumOfRoutes} total routes`);
+      debug(`Found ${totalNumOfTours} total tours`);
       const loadMore = async () => {
         ul.scrollTop = ul.scrollHeight;
         window.scrollTo(0, document.body.scrollHeight);
         await new Promise((r) => setTimeout(r, 100));
-        return totalNumOfRoutes > getLis().length;
+        return totalNumOfTours > getLis().length;
       };
       while (await loadMore()) ;
       debug(`Restoring scroll position: ${initialScrollPos}`);
       window.scrollTo(0, initialScrollPos);
     };
-    const addLoadAllRoutesButton = () => {
-      debug("Adding load all routes button to page");
+    const addLoadAllToursButton = () => {
+      debug("Adding load all tours button to page");
+      const title = isRouteListPage ? "Load All Routes" : "Load All Activities";
       const importLinkAnchor = document.querySelector(
         'a[href="/upload"]'
       );
@@ -350,20 +408,19 @@ matches(candidate) {
       const icon = createElementTemplate(
         savedRoutesAnchor.firstElementChild
       );
-      const loadAllRoutesbutton = createButton(
-        "Load All Routes",
-        icon,
-        async (_event, button, span) => {
-          button.disabled = true;
-          span.textContent = "Loading...";
-          await scrollToLoadAll();
-          span.textContent = "Loaded";
-        }
-      );
-      container.insertBefore(loadAllRoutesbutton, importLinkAnchor);
+      const button = createButton(title, icon, async (_event, button2, span) => {
+        button2.disabled = true;
+        span.textContent = "Loading...";
+        await scrollToLoadAll();
+        span.textContent = "Loaded";
+      });
+      container.insertBefore(button, importLinkAnchor);
     };
     const createTagFilterSet = (tagName, tagValueToInclusionMap) => {
-      const container = document.createElement("fieldset");
+      const div = createElement("div", {
+        classList: [CLASS.SCROLLABLE]
+      });
+      const fieldset = createElement("fieldset");
       const sortedTagValueEntries = [...tagValueToInclusionMap.entries()].sort(
         ([tagValueA], [tagValueB]) => tagValueA.localeCompare(tagValueB)
       );
@@ -378,27 +435,39 @@ matches(candidate) {
           isIncluded,
           handleClick
         );
-        const label = document.createElement("label");
-        const span = document.createElement("span");
-        span.textContent = tagValue;
-        label.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tagValue;
+        const label = createElement("label", {
+          dataset: {
+            [DATA_ATTRIBUTE.TAG_VALUE]: tagValue
+          }
+        });
+        const span = createElement("span", {
+          textContent: tagValue
+        });
         label.appendChild(span);
         label.appendChild(checkbox);
-        container.appendChild(label);
+        fieldset.appendChild(label);
+        div.appendChild(fieldset);
       }
-      return container;
+      return div;
     };
     const createTagFiltersContainer = () => {
       debug("Creating tag filters container");
-      const tagFiltersContainer = document.createElement("form");
-      tagFiltersContainer.classList.add(CLASS.TAG_FILTER_CONTAINER);
+      const tagFiltersContainer = createElement("form", {
+        classList: [CLASS.TAG_FILTER_CONTAINER]
+      });
       for (const [tagName, tagValueToInclusionMap] of tagMap.getAsMap()) {
-        const tagFilter = document.createElement("div");
-        tagFilter.classList.add(CLASS.NEW, CLASS.TAG_FILTER);
-        tagFilter.dataset[DATA_ATTRIBUTE.TAG_NAME] = tagName;
-        const filterSetTitle = document.createElement("p");
-        const divider = document.createElement("div");
-        filterSetTitle.textContent = tagName ?? "...";
+        const tagFilter = createElement("div", {
+          classList: [CLASS.NEW, CLASS.TAG_FILTER],
+          dataset: {
+            [DATA_ATTRIBUTE.TAG_NAME]: tagName
+          }
+        });
+        const filterSetTitle = createElement("p", {
+          textContent: tagName ?? "..."
+        });
+        const divider = createElement("div", {
+          classList: [CLASS.DIVIDER]
+        });
         tagFilter.appendChild(filterSetTitle);
         tagFilter.appendChild(divider);
         const container = createTagFilterSet(tagName, tagValueToInclusionMap);
@@ -423,7 +492,7 @@ matches(candidate) {
       if (!a) {
         warn("No a element found in li element", a);
         return {
-          routeTagMap: new TagMap(),
+          tourTagMap: new TagMap(),
           updated: false
         };
       }
@@ -433,54 +502,27 @@ matches(candidate) {
       );
       const {
         text,
-        parsedTagMap: routeTagMap,
+        parsedTagMap: tourTagMap,
         wasUpdated
       } = tagMap.parseAndAdd(originalTitle);
       a.textContent = text;
       a.title = originalTitle;
-      return { routeTagMap, wasUpdated };
+      return { tourTagMap, wasUpdated };
     };
     const parseLiTagPills = (li) => {
       const pills = li.getElementsByClassName(
         CLASS.PILL
       );
-      const routeTagMap = new TagMap();
+      const tourTagMap = new TagMap();
       for (const pill of pills) {
         const name = pill.dataset[DATA_ATTRIBUTE.TAG_NAME];
         const value = assertDefined(
           pill.dataset[DATA_ATTRIBUTE.TAG_VALUE],
           `No tag value found in pill: ${pill.textContent}`
         );
-        routeTagMap.add(name, value);
+        tourTagMap.add(name, value);
       }
-      return routeTagMap;
-    };
-    const createTagPill = (tag) => {
-      const pill = createPill();
-      const container = document.createElement("div");
-      const valueSpan = document.createElement("span");
-      valueSpan.textContent = tag.value;
-      pill.dataset[DATA_ATTRIBUTE.TAG_VALUE] = tag.value;
-      if (tag.name) {
-        const nameSpan = document.createElement("span");
-        const separatorSpan = document.createElement("span");
-        nameSpan.textContent = tag.name;
-        separatorSpan.textContent = ": ";
-        pill.dataset[DATA_ATTRIBUTE.TAG_NAME] = tag.name;
-        container.appendChild(nameSpan);
-        container.appendChild(separatorSpan);
-      }
-      container.appendChild(valueSpan);
-      pill.appendChild(container);
-      return pill;
-    };
-    const createTagPillContainer = (routeTagMap) => {
-      const div = document.createElement("div");
-      for (const tag of routeTagMap) {
-        div.appendChild(createTagPill(tag));
-      }
-      div.classList.add(CLASS.TAG_PILL_CONTAINER);
-      return div;
+      return tourTagMap;
     };
     const updateLi = (li) => {
       debug("Updating li element");
@@ -490,15 +532,15 @@ matches(candidate) {
         ),
         "No a element found in li element"
       );
-      const { routeTagMap, wasUpdated } = updateLiTitle(a);
-      a.parentElement?.appendChild(createTagPillContainer(routeTagMap));
+      const { tourTagMap, wasUpdated } = updateLiTitle(a);
+      a.parentElement?.appendChild(createTagPillContainer(tourTagMap));
       if (wasUpdated) {
         updateTagFilterControls();
       }
-      filterLi(li, routeTagMap);
+      filterLi(li, tourTagMap);
     };
-    const filterLi = (li, routeTagMap) => {
-      const doesMatchFilter = tagMap.matches(routeTagMap);
+    const filterLi = (li, tourTagMap) => {
+      const doesMatchFilter = tagMap.matches(tourTagMap);
       const wasVisibilityChanged = showElement(li, doesMatchFilter);
       if (wasVisibilityChanged) {
         const msgPrefix = doesMatchFilter ? "Showing" : "Hiding";
@@ -509,11 +551,10 @@ matches(candidate) {
       debug("Applying filters");
       const lis = getLis();
       for (const li of lis) {
-        const routeTagMap = parseLiTagPills(li);
-        filterLi(li, routeTagMap);
+        const tourTagMap = parseLiTagPills(li);
+        filterLi(li, tourTagMap);
       }
     };
-    debug("Setting up route list page");
     const observer = new MutationObserver((mutations) => {
       debug("Mutations observed on ul", mutations);
       for (const mutation of mutations) {
@@ -527,34 +568,66 @@ matches(candidate) {
     debug("Waiting for li elements to be added to the list");
     observer.observe(ul, { childList: true });
     getLis().forEach(updateLi);
-    addLoadAllRoutesButton();
+    addLoadAllToursButton();
     updateTagFilterControls();
   };
-  const handler$1 = () => onReactMounted(init$1);
-  const routeListRoute = {
-    pattern: pattern$1,
+  const handler$2 = (...capturingGroups) => onReactMounted(() => init$2(...capturingGroups));
+  const tourListRoute = {
+    name: ROUTE_NAME$2,
+    pattern: ROUTE_PATTERN$2,
+    handler: handler$2
+  };
+  const ROUTE_NAME$1 = "tour view";
+  const ROUTE_PATTERN$1 = /^\/tour\/\d*?$/;
+  const handler$1 = async () => {
+  };
+  const tourViewRoute = {
+    name: ROUTE_NAME$1,
+    pattern: ROUTE_PATTERN$1,
     handler: handler$1
   };
-  const pattern = /^\/tour\/\d*?/;
-  const handler = async () => {
-    debug("Setting up route page");
+  const ROUTE_NAME = "tour zoom";
+  const ROUTE_PATTERN = /^\/tour\/\d*?\/zoom$/;
+  const init$1 = async () => {
+    const tagMap = new TagMap(
+      TAG_DELIMITER.START,
+      TAG_DELIMITER.END,
+      TAG_DELIMITER.KEY_VALUE,
+      TAG_DELIMITER.VALUE
+    );
+    const updatePageTitle = () => {
+      const h1 = assertDefined(
+        document.body.getElementsByTagName("h1")?.[0],
+        "Expected h1 to be defined, but it was not"
+      );
+      const originalTitle = h1.textContent;
+      const { text, parsedTagMap: tourTagMap } = tagMap.parseAndAdd(originalTitle);
+      h1.textContent = text;
+      h1.title = originalTitle;
+      h1.appendChild(createTagPillContainer(tourTagMap));
+    };
+    updatePageTitle();
   };
-  const routeViewRoute = {
-    pattern,
+  const handler = () => onReactMounted(init$1);
+  const tourZoomRoute = {
+    name: ROUTE_NAME,
+    pattern: ROUTE_PATTERN,
     handler
   };
   const registerRouteHandlers = (routes) => {
     const path = location.pathname;
-    for (const { pattern: pattern2, handler: handler2 } of routes) {
-      if (pattern2.test(path)) {
-        handler2();
+    for (const { name, pattern, handler: handler2 } of routes) {
+      const match = pattern.exec(path);
+      if (match) {
+        debug(`Router: Calling handler for '${name}' route`);
+        handler2(...match.slice(1));
         break;
       }
     }
   };
   const init = () => {
     debug("Script loaded");
-    registerRouteHandlers([routeViewRoute, routeListRoute]);
+    registerRouteHandlers([tourListRoute, tourViewRoute, tourZoomRoute]);
     debug("Script unloaded");
   };
   init();

@@ -1,6 +1,6 @@
 {
 	"name": "komodo",
-	"version": "2.0.1",
+	"version": "2.1.0",
 	"description": "A userscript for Komoot.com that adds additional features for route planning.",
 	"keywords": [
 		"typescript",
