@@ -2,6 +2,7 @@ import './style.css';
 import { debug } from './logger.ts';
 import { tourListRoute } from './pages/tour-list.ts';
 import { tourViewRoute } from './pages/tour-view.ts';
+import { tourZoomRoute } from './pages/tour-zoom.ts';
 import type { Route } from './types.ts';
 
 /**
@@ -32,7 +33,7 @@ const registerRouteHandlers = (routes: Route[]) => {
 const init = () => {
 	debug('Script loaded');
 
-	registerRouteHandlers([tourListRoute, tourViewRoute]);
+	registerRouteHandlers([tourListRoute, tourViewRoute, tourZoomRoute]);
 
 	debug('Script unloaded');
 };

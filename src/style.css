@@ -44,6 +44,21 @@ div:has(> a[href='/upload']) {
 	align-items: center;
 }
 
+/* Tour Zoom Page: Page title */
+h1:has(> .komodo-tag-pill-container) {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: var(--komodo-spacing);
+}
+
+/* Tour List Page: Add margin below tour titles  */
+a[data-test-id='tours_list_item_title'] {
+	display: block;
+	margin-bottom: var(--komodo-spacing);
+}
+
 /* Utilities */
 /* --------- */
 
@@ -180,7 +195,6 @@ div:has(> a[href='/upload']) {
 .komodo-tag-pill-container {
 	display: flex;
 	flex-wrap: wrap;
-	margin-top: var(--komodo-spacing);
 	gap: var(--komodo-spacing);
 
 	> .komodo-pill > div > span:nth-child(2) {
