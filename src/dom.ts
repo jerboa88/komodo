@@ -63,7 +63,7 @@ export const createElementTemplate = <T extends HTMLElement | SVGElement>(
 ) => {
 	const referenceElement = assertDefined(
 		nullableReferenceElement,
-		'Unable to create element template. Reference element not found',
+		'reference element',
 	);
 	const elementTemplate: T = referenceElement.cloneNode(true) as T;
 

@@ -32,16 +32,16 @@ const init = async (...capturingGroups: string[]) => {
 		TAG_DELIMITER.VALUE,
 	);
 	const savedRoutesAnchor = assertDefined(
-		document.querySelector(
+		document.body.querySelector<HTMLAnchorElement>(
 			'a[href^="/user/"][href$="/routes"]',
-		) as HTMLAnchorElement | null,
-		'No saved routes link found',
+		),
+		'saved routes link anchor (a)',
 	);
 	const ul = assertDefined(
-		document.querySelector(
+		document.body.querySelector<HTMLUListElement>(
 			'ul[data-test-id="tours-list"]',
-		) as HTMLUListElement | null,
-		'No tour list found',
+		),
+		'tour list (ul)',
 	);
 
 	/**
@@ -59,7 +59,7 @@ const init = async (...capturingGroups: string[]) => {
 		const totalNumOfTours = Number(
 			assertDefined(
 				savedRoutesAnchor.lastElementChild?.textContent,
-				'Unable to get total number of tours. Required element not found',
+				'total number of tours label',
 			),
 		);
 
@@ -89,10 +89,14 @@ const init = async (...capturingGroups: string[]) => {
 		debug('Adding load all tours button to page');
 
 		const title = isRouteListPage ? 'Load All Routes' : 'Load All Activities';
-		const importLinkAnchor = document.querySelector(
-			'a[href="/upload"]',
-		) as HTMLAnchorElement;
-		const container = assertDefined(importLinkAnchor.parentElement);
+		const importLinkAnchor = assertDefined(
+			document.body.querySelector<HTMLAnchorElement>('a[href="/upload"]'),
+			'import link anchor (a)',
+		);
+		const container = assertDefined(
+			importLinkAnchor.parentElement,
+			'import link anchor parent',
+		);
 		const icon = createElementTemplate(
 			savedRoutesAnchor.firstElementChild as SVGElement | null,
 		);
@@ -202,7 +206,7 @@ const init = async (...capturingGroups: string[]) => {
 	const updateTagFilterControls = () => {
 		debug('Updating tag filter controls on page');
 
-		const filterContainer = document.querySelector(
+		const filterContainer = document.querySelector<HTMLDivElement>(
 			'#js-filter-anchor div:not([data-bottomsheet-scroll-ignore="true"]):has(> button:not([type="button"])',
 		);
 		const existingTagFilterContainer = filterContainer?.getElementsByClassName(
@@ -235,7 +239,7 @@ const init = async (...capturingGroups: string[]) => {
 
 		const originalTitle = assertDefined(
 			a.textContent,
-			'Expected a.textContent to be defined, but it was not',
+			'tour title anchor text content (a.textContent)',
 		);
 
 		const {
@@ -266,7 +270,7 @@ const init = async (...capturingGroups: string[]) => {
 			const name = pill.dataset[DATA_ATTRIBUTE.TAG_NAME];
 			const value = assertDefined(
 				pill.dataset[DATA_ATTRIBUTE.TAG_VALUE],
-				`No tag value found in pill: ${pill.textContent}`,
+				`${pill.textContent} tag value`,
 			);
 
 			tourTagMap.add(name, value);
@@ -284,10 +288,10 @@ const init = async (...capturingGroups: string[]) => {
 		debug('Updating li element');
 
 		const a = assertDefined(
-			li.querySelector(
+			li.querySelector<HTMLAnchorElement>(
 				'a[data-test-id="tours_list_item_title"]',
-			) as HTMLAnchorElement | null,
-			'No a element found in li element',
+			),
+			'tour title anchor (a)',
 		);
 		const { tourTagMap, wasUpdated } = updateLiTitle(a);
 

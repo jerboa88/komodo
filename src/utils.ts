@@ -2,15 +2,17 @@
  * Assert that a value is defined. If not, throw an error.
  *
  * @param value - The value to check
- * @param message - An optional custom error message to print if the value is not defined
+ * @param label - An optional label to use in the error message
  * @returns The value if it is defined
  * @throws Error if the value is not defined
  */
 export const assertDefined = <T>(
 	value: T | undefined | null,
-	message = 'Value is not defined',
+	label = 'value',
 ): T => {
-	if (value == null) throw new Error(message);
+	if (value == null) {
+		throw new Error(`Expected ${label} to be defined, but it was not`);
+	}
 
 	return value;
 };

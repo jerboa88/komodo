@@ -25,9 +25,9 @@ const init = async () => {
 	const updatePageTitle = () => {
 		const h1 = assertDefined(
 			document.body.getElementsByTagName('h1')?.[0],
-			'Expected h1 to be defined, but it was not',
+			'h1',
 		);
-		const originalTitle = h1.textContent;
+		const originalTitle = assertDefined(h1.textContent);
 		const { text, parsedTagMap: tourTagMap } =
 			tagMap.parseAndAdd(originalTitle);
 
