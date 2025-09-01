@@ -1,4 +1,4 @@
-import './style.css';
+import './global.css';
 import { debug } from './logger.ts';
 import { tourListRoute } from './pages/tour-list.ts';
 import { tourViewRoute } from './pages/tour-view.ts';
