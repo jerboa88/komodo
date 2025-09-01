@@ -12,6 +12,8 @@ const ROUTE_PATTERN = /^\/tour\/\d*?\/zoom$/;
  * Initialize the page.
  */
 const init = async () => {
+	import('./style.css');
+
 	const tagMap = new TagMap(
 		TAG_DELIMITER.START,
 		TAG_DELIMITER.END,

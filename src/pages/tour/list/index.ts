@@ -24,6 +24,8 @@ const ROUTE_PATTERN = /^\/user\/\d*?\/(routes|activities)$/;
  * Initialize the page.
  */
 const init = async (...capturingGroups: string[]) => {
+	import('./style.css');
+
 	const isRouteListPage = capturingGroups?.[0] === 'routes';
 	const tagMap = new TagMap(
 		TAG_DELIMITER.START,
