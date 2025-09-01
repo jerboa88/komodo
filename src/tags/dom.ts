@@ -1,5 +1,5 @@
-import { CLASS, DATA_ATTRIBUTE } from '../constants.ts';
-import { createElement, createPill } from '../dom.ts';
+import { CLASS, DATA_ATTRIBUTE } from '@/constants.ts';
+import { createElement, createPill } from '@/dom.ts';
 import type { Tag, TagMap } from './tag-map.ts';
 
 /**

@@ -1,6 +1,6 @@
-import { TAG_DELIMITER } from '../constants.ts';
-import { debug } from '../logger.ts';
-import type { Trilean } from '../types.ts';
+import { TAG_DELIMITER } from '@/constants.ts';
+import { debug } from '@/logger.ts';
+import type { Trilean } from '@/types.ts';
 
 type TagName = string | undefined;
 type TagValue = string;

@@ -1,4 +1,4 @@
-import { CLASS, DATA_ATTRIBUTE, TAG_DELIMITER } from '../constants.ts';
+import { CLASS, DATA_ATTRIBUTE, TAG_DELIMITER } from '@/constants.ts';
 import {
 	createButton,
 	createElement,
@@ -6,16 +6,16 @@ import {
 	createTriStateCheckbox,
 	onReactMounted,
 	showElement,
-} from '../dom.ts';
-import { debug, warn } from '../logger.ts';
-import { createTagPillContainer } from '../tags/dom.ts';
+} from '@/dom.ts';
+import { debug, warn } from '@/logger.ts';
+import { createTagPillContainer } from '@/tags/dom.ts';
 import {
 	type Tag,
 	TagMap,
 	type TagValueToInclusionMap,
-} from '../tags/tag-map.ts';
-import type { Route, Trilean } from '../types.ts';
-import { assertDefined, toElementId } from '../utils.ts';
+} from '@/tags/tag-map.ts';
+import type { Route, Trilean } from '@/types.ts';
+import { assertDefined, toElementId } from '@/utils.ts';
 
 const ROUTE_NAME = 'tour list' as const;
 const ROUTE_PATTERN = /^\/user\/\d*?\/(routes|activities)$/;

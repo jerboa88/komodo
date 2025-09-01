@@ -1,4 +1,4 @@
-import type { Route } from '../types.ts';
+import type { Route } from '@/types.ts';
 
 const ROUTE_NAME = 'tour view' as const;
 const ROUTE_PATTERN = /^\/tour\/\d*?$/;

@@ -1,9 +1,9 @@
-import { TAG_DELIMITER } from '../constants.ts';
-import { onReactMounted } from '../dom.ts';
-import { createTagPillContainer } from '../tags/dom.ts';
-import { TagMap } from '../tags/tag-map.ts';
-import type { Route } from '../types.ts';
-import { assertDefined } from '../utils.ts';
+import { TAG_DELIMITER } from '@/constants.ts';
+import { onReactMounted } from '@/dom.ts';
+import { createTagPillContainer } from '@/tags/dom.ts';
+import { TagMap } from '@/tags/tag-map.ts';
+import type { Route } from '@/types.ts';
+import { assertDefined } from '@/utils.ts';
 
 const ROUTE_NAME = 'tour zoom' as const;
 const ROUTE_PATTERN = /^\/tour\/\d*?\/zoom$/;
