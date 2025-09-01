@@ -1,5 +1,6 @@
 /* Variables */
 /* ---------- */
+
 :root {
 	--komodo-spacing: 0.375rem;
 
@@ -22,156 +23,13 @@
 /* Overrides */
 /* --------- */
 
-/* Increase width of tour rename dialog */
-dialog[data-test-id='rename-tour-dialog'] > div {
-	width: 100%;
-	max-width: 64rem;
-}
-
-/* Enable flex gap and wrapping on filter container */
-.komodo-filter-container {
-	flex-wrap: wrap;
-	gap: var(--komodo-spacing);
-
-	/* Remove margin from filter buttons because we use flex gap instead */
-	> button {
-		margin-right: 0 !important;
-	}
-}
-
 /* Align buttons in button container */
 div:has(> a[href='/upload']) {
 	align-items: center;
 }
 
-/* Tour Zoom Page: Page title */
-h1:has(> .komodo-tag-pill-container) {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap: var(--komodo-spacing);
-}
-
-/* Tour List Page: Add margin below tour titles  */
-a[data-test-id='tours_list_item_title'] {
-	display: block;
-	margin-bottom: var(--komodo-spacing);
-}
-
-/* Utilities */
-/* --------- */
-
-.komodo-hide {
-	display: none;
-}
-
-.komodo-scrollable {
-	max-height: 350px;
-	overflow-y: auto;
-	overflow-x: hidden;
-	scrollbar-width: thin;
-}
-
 /* Custom elements */
 /* --------------- */
-
-.komodo-divider {
-	border-bottom-width: 1px;
-	border-color: var(--theme-ui-colors-border);
-	border-style: solid;
-	width: 100%;
-	justify-self: stretch;
-}
-
-.komodo-tag-filter-container {
-	flex: 1 1 auto;
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--komodo-spacing);
-}
-
-.komodo-tag-filter {
-	border-width: 1px;
-	font-weight: 700;
-	border-radius: 8px;
-	flex: 1 1 0%;
-	background-color: var(--theme-ui-colors-card);
-	color: var(--theme-ui-colors-text);
-	border-color: var(--theme-ui-colors-black20);
-
-	&:hover {
-		border-color: var(--theme-ui-colors-black30);
-	}
-
-	> p {
-		align-items: center;
-		display: flex;
-		flex-direction: row;
-		gap: 1.5rem;
-		justify-content: space-between;
-		padding: 1rem;
-		width: initial;
-		align-self: stretch;
-	}
-
-	fieldset {
-		align-items: stretch;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-		justify-content: end;
-		padding: 1rem;
-		width: initial;
-		align-self: stretch;
-
-		> label {
-			align-items: center;
-			border-color: var(--theme-ui-colors-border);
-			border-radius: 8px;
-			border-style: solid;
-			color: var(--theme-ui-colors-text);
-			cursor: pointer;
-			display: flex;
-			flex-direction: row;
-			gap: 1.5rem;
-			grid-area: grid-item-0;
-			justify-content: space-between;
-			padding: 0.5rem;
-			width: initial;
-			align-self: stretch;
-			border-width: 1px;
-
-			&:hover {
-				border-color: var(--theme-ui-colors-whisper);
-			}
-
-			&:has(input[type='checkbox'][value='true']) {
-				color: var(--theme-ui-colors-primary);
-			}
-
-			&:has(input[type='checkbox'][value='false']) {
-				color: var(--theme-ui-colors-error);
-			}
-
-			> input[type='checkbox'] {
-				&[value='true'] {
-					accent-color: var(--komodo-pill-bg-color);
-				}
-
-				&[value='false'] {
-					accent-color: var(--theme-ui-colors-error);
-				}
-			}
-		}
-	}
-
-	> select {
-		display: block;
-		width: fit-content;
-		margin-top: var(--komodo-spacing);
-	}
-}
 
 .komodo-pill {
 	align-items: center;
