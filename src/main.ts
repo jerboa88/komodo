@@ -1,8 +1,8 @@
 import './global.css';
 import { debug } from './logger.ts';
-import { tourListRoute } from './pages/tour-list.ts';
-import { tourViewRoute } from './pages/tour-view.ts';
-import { tourZoomRoute } from './pages/tour-zoom.ts';
+import { tourListRoute } from './pages/tour/list/index.ts';
+import { tourViewRoute } from './pages/tour/view/index.ts';
+import { tourZoomRoute } from './pages/tour/zoom/index.ts';
 import type { Route } from './types.ts';
 
 /**
