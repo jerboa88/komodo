@@ -31,6 +31,7 @@ const init = async () => {
 		const { text, parsedTagMap: tourTagMap } =
 			tagMap.parseAndAdd(originalTitle);
 
+		document.title = text;
 		h1.textContent = text;
 		h1.title = originalTitle;
 
