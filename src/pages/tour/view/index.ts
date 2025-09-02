@@ -1,6 +1,6 @@
 import { TAG_DELIMITER } from '@/constants.ts';
 import { onReactMounted } from '@/dom.ts';
-import { debug } from '@/logger.ts';
+import { Logger } from '@/logger.ts';
 import { NodeAddObserver } from '@/node-add-observer.ts';
 import { createTagPillContainer } from '@/tags/dom.ts';
 import { TagMap } from '@/tags/tag-map.ts';
@@ -9,6 +9,8 @@ import { assertDefined } from '@/utils.ts';
 
 const ROUTE_NAME = 'tour view' as const;
 const ROUTE_PATTERN = /^\/tour\/\d*?$/;
+
+const logger = new Logger(ROUTE_NAME);
 
 /**
  * Initialize the page.
@@ -48,7 +50,7 @@ const init = async () => {
 	 * Parse the tour title, store the original, and update it with parsed tags.
 	 */
 	const parseTourTitle = () => {
-		debug('Parsing tour title');
+		logger.debug('Parsing tour title');
 
 		originalTourTitle = assertDefined(
 			span.textContent,
@@ -56,15 +58,13 @@ const init = async () => {
 		);
 
 		tourTitle = tagMap.parseAndAdd(originalTourTitle).text;
-
-		console.warn(originalTourTitle, tourTitle);
 	};
 
 	/**
 	 * Update the page's <title>, h1, and span with the parsed tour title.
 	 */
 	const updateTourTitle = () => {
-		debug('Updating tour title');
+		logger.debug('Updating tour title');
 
 		h1.title = originalTourTitle;
 		document.title = tourTitle;
@@ -79,7 +79,7 @@ const init = async () => {
 	 * @param p - The breadcrumb paragraph element to update.
 	 */
 	const updateBreadcrumb = (p: HTMLParagraphElement) => {
-		debug('Updating breadcrumb');
+		logger.debug('Updating breadcrumb');
 
 		p.title = originalTourTitle;
 		p.textContent = tourTitle;
@@ -102,7 +102,7 @@ const init = async () => {
 		}
 	});
 
-	debug('Waiting for title to be edited');
+	logger.debug('Waiting for title to be edited');
 
 	new NodeAddObserver((_newNode, observer) => {
 		observer.reobserve(() => {
@@ -116,7 +116,7 @@ const init = async () => {
 				'breadcrumb parent',
 			);
 
-			debug('Waiting for breadcrumb to be updated');
+			logger.debug('Waiting for breadcrumb to be updated');
 
 			breadcrumbObserver.observe(parent);
 		}

@@ -7,7 +7,7 @@ import {
 	onReactMounted,
 	showElement,
 } from '@/dom.ts';
-import { debug, warn } from '@/logger.ts';
+import { Logger } from '@/logger.ts';
 import { NodeAddObserver } from '@/node-add-observer.ts';
 import { createTagPillContainer } from '@/tags/dom.ts';
 import {
@@ -20,6 +20,8 @@ import { assertDefined, toElementId } from '@/utils.ts';
 
 const ROUTE_NAME = 'tour list' as const;
 const ROUTE_PATTERN = /^\/user\/\d*?\/(routes|activities)$/;
+
+const logger = new Logger(ROUTE_NAME);
 
 /**
  * Initialize the page.
@@ -56,7 +58,7 @@ const init = async (...capturingGroups: string[]) => {
 		[...ul.children].filter((li) => li.nodeName === 'LI') as HTMLLIElement[];
 
 	const scrollToLoadAll = async () => {
-		debug('Force loading all tours');
+		logger.debug('Force loading all tours');
 
 		const initialScrollPos = window.scrollY;
 		const totalNumOfTours = Number(
@@ -66,7 +68,7 @@ const init = async (...capturingGroups: string[]) => {
 			),
 		);
 
-		debug(`Found ${totalNumOfTours} total tours`);
+		logger.debug(`Found ${totalNumOfTours} total tours`);
 
 		const loadMore = async () => {
 			ul.scrollTop = ul.scrollHeight;
@@ -80,7 +82,7 @@ const init = async (...capturingGroups: string[]) => {
 
 		while (await loadMore());
 
-		debug(`Restoring scroll position: ${initialScrollPos}`);
+		logger.debug(`Restoring scroll position: ${initialScrollPos}`);
 
 		window.scrollTo(0, initialScrollPos);
 	};
@@ -89,7 +91,7 @@ const init = async (...capturingGroups: string[]) => {
 	 * Add a button to the page that will force load all tours.
 	 */
 	const addLoadAllToursButton = () => {
-		debug('Adding load all tours button to page');
+		logger.debug('Adding load all tours button to page');
 
 		const title = isRouteListPage ? 'Load All Routes' : 'Load All Activities';
 		const importLinkAnchor = assertDefined(
@@ -171,7 +173,7 @@ const init = async (...capturingGroups: string[]) => {
 	 * @returns An HTML div element
 	 */
 	const createTagFiltersContainer = () => {
-		debug('Creating tag filters container');
+		logger.debug('Creating tag filters container');
 
 		const tagFiltersContainer = createElement('form', {
 			classList: [CLASS.TAG_FILTER_CONTAINER],
@@ -207,7 +209,7 @@ const init = async (...capturingGroups: string[]) => {
 	 * Recreate the tag filter controls on the page.
 	 */
 	const updateTagFilterControls = () => {
-		debug('Updating tag filter controls on page');
+		logger.debug('Updating tag filter controls on page');
 
 		const filterContainer = document.querySelector<HTMLDivElement>(
 			'#js-filter-anchor div:not([data-bottomsheet-scroll-ignore="true"]):has(> button:not([type="button"])',
@@ -232,7 +234,7 @@ const init = async (...capturingGroups: string[]) => {
 	 */
 	const updateLiTitle = (a: HTMLAnchorElement) => {
 		if (!a) {
-			warn('No a element found in li element', a);
+			logger.warn('No a element found in li element', a);
 
 			return {
 				tourTagMap: new TagMap(),
@@ -288,7 +290,7 @@ const init = async (...capturingGroups: string[]) => {
 	 * @param li - The li element to update
 	 */
 	const updateLi = (li: HTMLLIElement) => {
-		debug('Updating li element');
+		logger.debug('Updating li element');
 
 		const a = assertDefined(
 			li.querySelector<HTMLAnchorElement>(
@@ -320,7 +322,9 @@ const init = async (...capturingGroups: string[]) => {
 		if (wasVisibilityChanged) {
 			const msgPrefix = doesMatchFilter ? 'Showing' : 'Hiding';
 
-			debug(`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`);
+			logger.debug(
+				`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`,
+			);
 		}
 	};
 
@@ -328,7 +332,7 @@ const init = async (...capturingGroups: string[]) => {
 	 * Apply the current filters to all loaded li elements.
 	 */
 	const applyFilters = () => {
-		debug('Applying filters');
+		logger.debug('Applying filters');
 
 		const lis = getLis();
 
@@ -339,7 +343,7 @@ const init = async (...capturingGroups: string[]) => {
 		}
 	};
 
-	debug('Waiting for li elements to be added to the list');
+	logger.debug('Waiting for li elements to be added to the list');
 
 	new NodeAddObserver((newNode) => {
 		if (newNode.nodeName === 'LI') {

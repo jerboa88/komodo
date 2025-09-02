@@ -1,5 +1,7 @@
-import { debug } from './logger.ts';
+import { Logger } from './logger.ts';
 import { assertDefined } from './utils.ts';
+
+const logger = new Logger('NodeAddObserver');
 
 /**
  * Wrapper around `MutationObserver` that focuses on added nodes.
@@ -64,7 +66,7 @@ export class NodeAddObserver {
 	/** Disconnects the observer */
 	public disconnect(): void {
 		this.observer.disconnect();
-		debug('Disconnected');
+		logger.debug('Disconnected');
 	}
 
 	/**
@@ -73,7 +75,7 @@ export class NodeAddObserver {
 	 */
 	public observe(target: Node, options: MutationObserverInit = {}): void {
 		this.observer.observe(target, { childList: true, ...options });
-		debug('Observing:', target);
+		logger.debug('Observing:', target);
 	}
 
 	/**

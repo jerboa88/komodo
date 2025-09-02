@@ -1,5 +1,5 @@
 import { CLASS } from './constants.ts';
-import { debug } from './logger.ts';
+import { Logger } from './logger.ts';
 import { NodeAddObserver } from './node-add-observer.ts';
 import type { Trilean } from './types.ts';
 import { assertDefined } from './utils.ts';
@@ -10,6 +10,8 @@ type AttributeMap<K extends keyof HTMLElementTagNameMap> = Partial<
 	classList?: string[];
 	dataset?: Record<string, string | undefined>;
 };
+
+const logger = new Logger('dom');
 
 /**
  * Create an HTML element and apply attributes from an attribute map.
@@ -117,7 +119,7 @@ export const createButton = (
 	});
 
 	button.addEventListener('click', (event) => {
-		debug('Button clicked:', text);
+		logger.debug('Button clicked:', text);
 
 		handleClick(event, button, span, icon);
 	});
@@ -231,7 +233,7 @@ export const onReactMounted = (callback: () => void) => {
 	const canaryClassName = 'ReactModalPortal';
 
 	const continueCall = () => {
-		debug('React has been mounted');
+		logger.debug('React has been mounted');
 
 		callback();
 	};
@@ -244,7 +246,7 @@ export const onReactMounted = (callback: () => void) => {
 		return;
 	}
 
-	debug('Waiting for React to be mounted');
+	logger.debug('Waiting for React to be mounted');
 
 	new NodeAddObserver((newNode, observer) => {
 		if (
