@@ -8,7 +8,9 @@ Komodo lets you add arbitrary tags to tours to help you organize and filter them
 
 When viewing tours, you can choose to either include, exclude, or ignore them based on their tags.
 
-## Adding tags to tours
+## Add tags
+
+> Supported pages: [<Badge type="info">tour view</Badge>]
 
 Tags can be added to a tour by including a specially formatted label in the tour name using the Komoot website or app as usual. There is currently no visual editor for tags.
 
@@ -65,13 +67,15 @@ The special characters `[`, `]`, and `:`, and `,` are not allowed in tag names a
 > [!TIP]
 > The delimiters used by the script are defined in [src/constants.ts]. If you need to use different characters, you can change them and [build the script] yourself.
 
-## Loading all tours
+## View tags
 
-This script uses the tags found in the tour list to populate the filter controls.
+> Supported pages: [<Badge type="info">tour list</Badge>] [<Badge type="info">tour view</Badge>] [<Badge type="info">tour zoom</Badge>]
 
-By default, Komoot only loads a handful of tours at a time, so if you notice that some tag names/values are missing from the filter controls, click the `Load All Routes`/`Load All Activities` button to force load the entire list of tours. This may take a few seconds to complete.
+Tags are automatically extracted from tour titles and displayed as pills. If the tour title in multiple locations on the page, the associated tag pills will only be displayed once to prevent clutter. Tags will also be removed from the the page (document) title if applicable.
 
-## Filtering by tags
+## Filter by tags
+
+> Supported pages: [<Badge type="info">tour list</Badge>]
 
 On tour list pages (i.e. `Saved routes` and `Completed activities`), you can filter tours by tag. A group of checkboxes will be added to the `Filter by` section for each tag name.
 
@@ -90,6 +94,18 @@ You can filter by multiple tag names/values at the same time. By include/exclude
 >
 > For example, you could search for `[status:` to get all tours with tag name `status`.
 
+## Load all tours
+
+> Supported pages: [<Badge type="info">tour list</Badge>]
+
+This script uses the tags found in the tour list to populate the filter controls.
+
+By default, Komoot only loads a handful of tours at a time, so if you notice that some tag names/values are missing from the filter controls, click the `Load All Routes`/`Load All Activities` button to force load the entire list of tours. This may take a few seconds to complete.
+
 [src/constants.ts]: https://github.com/jerboa88/komodo/blob/main/src/constants.ts
+
 [advanced usage]: /docs/advanced-usage/customizing-the-ui
 [build the script]: /contributing/local-development
+[<Badge type="info">tour list</Badge>]: /docs/usage/#supported-pages
+[<Badge type="info">tour view</Badge>]: /docs/usage/#supported-pages
+[<Badge type="info">tour zoom</Badge>]: /docs/usage/#supported-pages
