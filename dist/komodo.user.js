@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Komodo - Mods for Komoot
 // @namespace    https://github.com/jerboa88
-// @version      2.1.0
+// @version      2.2.0
 // @author       John Goodliff
 // @description  A userscript for Komoot.com that adds additional features for route planning.
 // @license      MIT
@@ -19,8 +19,8 @@
 
   const d=new Set;const importCSS = async e=>{d.has(e)||(d.add(e),(t=>{typeof GM_addStyle=="function"?GM_addStyle(t):document.head.appendChild(document.createElement("style")).append(t);})(e));};
 
-  const styleCss = ':root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}dialog[data-test-id=rename-tour-dialog]>div{width:100%;max-width:64rem}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}div:has(>a[href="/upload"]){align-items:center}h1:has(>.komodo-tag-pill-container){display:flex;flex-direction:row;justify-content:center;align-items:center;gap:var(--komodo-spacing)}a[data-test-id=tours_list_item_title]{display:block;margin-bottom:var(--komodo-spacing)}.komodo-hide{display:none}.komodo-scrollable{max-height:350px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin}.komodo-divider{border-bottom-width:1px;border-color:var(--theme-ui-colors-border);border-style:solid;width:100%;justify-self:stretch}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>p{align-items:center;display:flex;flex-direction:row;gap:1.5rem;justify-content:space-between;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter fieldset{align-items:stretch;display:flex;flex-direction:column;gap:.75rem;justify-content:end;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter fieldset>label{align-items:center;border-color:var(--theme-ui-colors-border);border-radius:8px;border-style:solid;color:var(--theme-ui-colors-text);cursor:pointer;display:flex;flex-direction:row;gap:1.5rem;grid-area:grid-item-0;justify-content:space-between;padding:.5rem;width:initial;align-self:stretch;border-width:1px}.komodo-tag-filter fieldset>label:hover{border-color:var(--theme-ui-colors-whisper)}.komodo-tag-filter fieldset>label:has(input[type=checkbox][value=true]){color:var(--theme-ui-colors-primary)}.komodo-tag-filter fieldset>label:has(input[type=checkbox][value=false]){color:var(--theme-ui-colors-error)}.komodo-tag-filter fieldset>label>input[type=checkbox][value=true]{accent-color:var(--komodo-pill-bg-color)}.komodo-tag-filter fieldset>label>input[type=checkbox][value=false]{accent-color:var(--theme-ui-colors-error)}.komodo-tag-filter>select{display:block;width:fit-content;margin-top:var(--komodo-spacing)}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-pill-container>.komodo-pill>div>span:nth-child(2){white-space:pre}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"🦎";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0}';
-  importCSS(styleCss);
+  const globalCss = ':root{--komodo-spacing: .375rem;--komodo-pill-bg-color: var(--theme-ui-colors-primary);--komodo-pill-text-color: var(--theme-ui-colors-textOnDark);--komodo-button-bg-color: var(--theme-ui-colors-white);--komodo-button-border-color: var(--komodo-button-bg-color);--komodo-button-text-color: var(--theme-ui-colors-secondary);--komodo-button-hover-bg-color: rgba(0, 119, 217, .1);--komodo-button-hover-border-color: #0065b8;--komodo-button-hover-text-color: #0065b8;--komodo-button-disabled-bg-color: var(--theme-ui-colors-muted);--komodo-button-disabled-border-color: var(--komodo-button-disabled-bg-color);--komodo-button-disabled-text-color: var(--theme-ui-colors-disabled)}div:has(>a[href="/upload"]){align-items:center}.komodo-pill{align-items:center;background-color:var(--komodo-pill-bg-color);border-radius:4px;color:var(--komodo-pill-text-color);display:inline-flex;justify-content:center;min-width:2em;text-align:center;font-size:12px;font-weight:700;padding:.25em .5em;text-transform:inherit;flex-shrink:0}.komodo-tag-pill-container{display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-pill-container>.komodo-pill>div>span:nth-child(2){white-space:pre}.komodo-button{align-items:center;appearance:none;background-color:var(--komodo-button-bg-color);border-color:var(--komodo-button-border-color);border-radius:8px;border-style:solid;color:var(--komodo-button-text-color);cursor:pointer;display:inline-flex;justify-content:center;pointer-events:auto;text-align:center;width:unset;border-width:.0625rem;text-decoration:none;transition:all .2s;font-size:16px;font-weight:700;line-height:1.5rem;padding:.4375rem .6875rem}.komodo-button:hover{background-color:var(--komodo-button-hover-bg-color);border-color:var(--komodo-button-hover-border-color);color:var(--komodo-button-hover-text-color)}.komodo-button:disabled{cursor:default;background-color:var(--komodo-button-disabled-bg-color);border-color:var(--komodo-button-disabled-border-color);color:var(--komodo-button-disabled-text-color)}.komodo-button>svg{color:inherit}.komodo-button>span{display:inline-flex;text-align:center;flex-flow:column;padding-left:.25rem;padding-right:0}.komodo-new{position:relative}.komodo-new:after{content:"🦎";position:absolute;top:0;right:calc(var(--komodo-spacing) * -1);z-index:1;font-size:small;line-height:0}';
+  importCSS(globalCss);
   const PROJECT = {
     EMOJI: "🦎",
     NAME: "Komodo"
@@ -50,30 +50,47 @@ TOUR_ID: "tourId",
     VALUE: ","
   };
   const SCRIPT_NAME = `${PROJECT.EMOJI} ${PROJECT.NAME}`;
-  const buildLogPrefix = (() => {
-    const htmlNode = window.getComputedStyle(document.documentElement);
-    const colorMap = {
-      primary: htmlNode.getPropertyValue("--theme-ui-colors-primaryOnDark"),
-      debug: htmlNode.getPropertyValue("--theme-ui-colors-info"),
-      info: htmlNode.getPropertyValue("--theme-ui-colors-success"),
-      warn: htmlNode.getPropertyValue("--theme-ui-colors-warning"),
-      error: htmlNode.getPropertyValue("--theme-ui-colors-error")
-    };
-    return (severity) => [
-      `%c${SCRIPT_NAME} %c${severity}`,
-      `font-style:italic;color:${colorMap.primary};`,
-      `color:${colorMap[severity]};`
-    ];
-  })();
-  const buildLogFn = (severity) => {
-    const logFn = console[severity];
-    const logPrefix = buildLogPrefix(severity);
-    return (...args) => logFn(...logPrefix, ...args);
-  };
-  const debug = buildLogFn("debug");
-  const warn = buildLogFn("warn");
-  const assertDefined = (value, message = "Value is not defined") => {
-    if (value == null) throw new Error(message);
+  class Logger {
+    scope;
+    static colorMap = (() => {
+      const htmlNode = window.getComputedStyle(document.documentElement);
+      return {
+        primary: htmlNode.getPropertyValue("--theme-ui-colors-primaryOnDark"),
+        debug: htmlNode.getPropertyValue("--theme-ui-colors-info"),
+        info: htmlNode.getPropertyValue("--theme-ui-colors-success"),
+        warn: htmlNode.getPropertyValue("--theme-ui-colors-warning"),
+        error: htmlNode.getPropertyValue("--theme-ui-colors-error")
+      };
+    })();
+    debug;
+    info;
+    warn;
+    error;
+    constructor(scope) {
+      this.scope = scope;
+      this.debug = this.buildLogFn("debug");
+      this.info = this.buildLogFn("info");
+      this.warn = this.buildLogFn("warn");
+      this.error = this.buildLogFn("error");
+    }
+    buildLogPrefix(severity) {
+      return [
+        `%c${SCRIPT_NAME} %c${severity}(${this.scope})`,
+        `font-style:italic;color:${Logger.colorMap.primary};`,
+        `color:${Logger.colorMap[severity]};`
+      ];
+    }
+    buildLogFn(severity) {
+      const logFn = console[severity];
+      const logPrefix = this.buildLogPrefix(severity);
+      return (...args) => logFn(...logPrefix, ...args);
+    }
+  }
+  const styleCss$2 = "a[data-test-id=tours_list_item_title]{display:block;margin-bottom:var(--komodo-spacing)}.komodo-filter-container{flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-filter-container>button{margin-right:0!important}.komodo-divider{border-bottom-width:1px;border-color:var(--theme-ui-colors-border);border-style:solid;width:100%;justify-self:stretch}.komodo-tag-filter-container{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:var(--komodo-spacing)}.komodo-tag-filter{border-width:1px;font-weight:700;border-radius:8px;flex:1 1 0%;background-color:var(--theme-ui-colors-card);color:var(--theme-ui-colors-text);border-color:var(--theme-ui-colors-black20)}.komodo-tag-filter:hover{border-color:var(--theme-ui-colors-black30)}.komodo-tag-filter>p{align-items:center;display:flex;flex-direction:row;gap:1.5rem;justify-content:space-between;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter fieldset{align-items:stretch;display:flex;flex-direction:column;gap:.75rem;justify-content:end;padding:1rem;width:initial;align-self:stretch}.komodo-tag-filter fieldset>label{align-items:center;border-color:var(--theme-ui-colors-border);border-radius:8px;border-style:solid;color:var(--theme-ui-colors-text);cursor:pointer;display:flex;flex-direction:row;gap:1.5rem;grid-area:grid-item-0;justify-content:space-between;padding:.5rem;width:initial;align-self:stretch;border-width:1px}.komodo-tag-filter fieldset>label:hover{border-color:var(--theme-ui-colors-whisper)}.komodo-tag-filter fieldset>label:has(input[type=checkbox][value=true]){color:var(--theme-ui-colors-primary)}.komodo-tag-filter fieldset>label:has(input[type=checkbox][value=false]){color:var(--theme-ui-colors-error)}.komodo-tag-filter fieldset>label>input[type=checkbox][value=true]{accent-color:var(--komodo-pill-bg-color)}.komodo-tag-filter fieldset>label>input[type=checkbox][value=false]{accent-color:var(--theme-ui-colors-error)}.komodo-tag-filter>select{display:block;width:fit-content;margin-top:var(--komodo-spacing)}.komodo-hide{display:none}.komodo-scrollable{max-height:350px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin}";
+  const assertDefined = (value, label = "value") => {
+    if (value == null) {
+      throw new Error(`Expected ${label} to be defined, but it was not`);
+    }
     return value;
   };
   const toElementId = (value) => {
@@ -95,6 +112,51 @@ TOUR_ID: "tourId",
     }
     return result;
   };
+  const logger$5 = new Logger("NodeAddObserver");
+  class NodeAddObserver {
+    observer;
+    stopProcessing = false;
+    target;
+    options;
+constructor(callback, target, options) {
+      this.observer = new MutationObserver((mutations) => {
+        this.stopProcessing = false;
+        for (const mutation of mutations) {
+          for (const newNode of mutation.addedNodes) {
+            if (this.stopProcessing) {
+              return;
+            }
+            callback(newNode, this);
+          }
+        }
+      });
+      if (options) {
+        this.options = options;
+      }
+      if (target) {
+        this.target = target;
+        this.observe(target, options);
+      }
+    }
+disconnect() {
+      this.observer.disconnect();
+      logger$5.debug("Disconnected");
+    }
+observe(target, options = {}) {
+      this.observer.observe(target, { childList: true, ...options });
+      logger$5.debug("Observing:", target);
+    }
+reobserve(beforeObserve) {
+      const target = assertDefined(this.target);
+      this.disconnect();
+      beforeObserve();
+      this.observe(target, this.options);
+    }
+stop() {
+      this.stopProcessing = true;
+    }
+  }
+  const logger$4 = new Logger("dom");
   const createElement = (tagName, attributeMap = {}) => {
     const element = document.createElement(tagName);
     for (const [key, value] of Object.entries(attributeMap)) {
@@ -117,7 +179,7 @@ TOUR_ID: "tourId",
   const createElementTemplate = (nullableReferenceElement) => {
     const referenceElement = assertDefined(
       nullableReferenceElement,
-      "Unable to create element template. Reference element not found"
+      "reference element"
     );
     const elementTemplate = referenceElement.cloneNode(true);
     elementTemplate.classList.add(CLASS.NEW);
@@ -137,7 +199,7 @@ TOUR_ID: "tourId",
       textContent: text
     });
     button.addEventListener("click", (event) => {
-      debug("Button clicked:", text);
+      logger$4.debug("Button clicked:", text);
       handleClick(event, button, span, icon);
     });
     button.appendChild(icon);
@@ -184,7 +246,7 @@ TOUR_ID: "tourId",
   const onReactMounted = (callback) => {
     const canaryClassName = "ReactModalPortal";
     const continueCall = () => {
-      debug("React has been mounted");
+      logger$4.debug("React has been mounted");
       callback();
     };
     const canaries = document.body.getElementsByClassName(canaryClassName);
@@ -192,20 +254,14 @@ TOUR_ID: "tourId",
       continueCall();
       return;
     }
-    const observer = new MutationObserver((mutations) => {
-      debug("Mutations observed on body", mutations);
-      for (const mutation of mutations) {
-        for (const newNode of mutation.addedNodes) {
-          if (newNode instanceof HTMLElement && newNode.classList.contains(canaryClassName)) {
-            observer.disconnect();
-            continueCall();
-            return;
-          }
-        }
+    logger$4.debug("Waiting for React to be mounted");
+    new NodeAddObserver((newNode, observer) => {
+      if (newNode instanceof HTMLElement && newNode.classList.contains(canaryClassName)) {
+        observer.disconnect();
+        continueCall();
+        observer.stop();
       }
-    });
-    debug("Waiting for React to be mounted");
-    observer.observe(document.body, { childList: true });
+    }, document.body);
   };
   const createTagPill = (tag) => {
     const pill = createPill();
@@ -238,6 +294,7 @@ TOUR_ID: "tourId",
     }
     return div;
   };
+  const logger$3 = new Logger("TagMap");
   class TagMap {
     tagMap = new Map();
     startDelimiter;
@@ -340,14 +397,14 @@ matches(candidate) {
         const candidateValueToInclusionMap = candidate.tagMap.get(name);
         const existsInCandidate = candidateValueToInclusionMap?.has(value) ?? false;
         if (isIncluded === true && !existsInCandidate) {
-          debug(
-            `TagMap.matches: ${name}:${value} is included in reference but not in candidate`
+          logger$3.debug(
+            `${name}:${value} is included in reference but not in candidate`
           );
           return false;
         }
         if (isIncluded === false && existsInCandidate) {
-          debug(
-            `TagMap.matches: ${name}:${value} is excluded in reference but exists in candidate`
+          logger$3.debug(
+            `${name}:${value} is excluded in reference but exists in candidate`
           );
           return false;
         }
@@ -357,7 +414,9 @@ matches(candidate) {
   }
   const ROUTE_NAME$2 = "tour list";
   const ROUTE_PATTERN$2 = /^\/user\/\d*?\/(routes|activities)$/;
-  const init$2 = async (...capturingGroups) => {
+  const logger$2 = new Logger(ROUTE_NAME$2);
+  const init$3 = async (...capturingGroups) => {
+    importCSS(styleCss$2);
     const isRouteListPage = capturingGroups?.[0] === "routes";
     const tagMap = new TagMap(
       TAG_DELIMITER.START,
@@ -366,28 +425,28 @@ matches(candidate) {
       TAG_DELIMITER.VALUE
     );
     const savedRoutesAnchor = assertDefined(
-      document.querySelector(
+      document.body.querySelector(
         'a[href^="/user/"][href$="/routes"]'
       ),
-      "No saved routes link found"
+      "saved routes link anchor (a)"
     );
     const ul = assertDefined(
-      document.querySelector(
+      document.body.querySelector(
         'ul[data-test-id="tours-list"]'
       ),
-      "No tour list found"
+      "tour list (ul)"
     );
     const getLis = () => [...ul.children].filter((li) => li.nodeName === "LI");
     const scrollToLoadAll = async () => {
-      debug("Force loading all tours");
+      logger$2.debug("Force loading all tours");
       const initialScrollPos = window.scrollY;
       const totalNumOfTours = Number(
         assertDefined(
           savedRoutesAnchor.lastElementChild?.textContent,
-          "Unable to get total number of tours. Required element not found"
+          "total number of tours label"
         )
       );
-      debug(`Found ${totalNumOfTours} total tours`);
+      logger$2.debug(`Found ${totalNumOfTours} total tours`);
       const loadMore = async () => {
         ul.scrollTop = ul.scrollHeight;
         window.scrollTo(0, document.body.scrollHeight);
@@ -395,16 +454,20 @@ matches(candidate) {
         return totalNumOfTours > getLis().length;
       };
       while (await loadMore()) ;
-      debug(`Restoring scroll position: ${initialScrollPos}`);
+      logger$2.debug(`Restoring scroll position: ${initialScrollPos}`);
       window.scrollTo(0, initialScrollPos);
     };
     const addLoadAllToursButton = () => {
-      debug("Adding load all tours button to page");
+      logger$2.debug("Adding load all tours button to page");
       const title = isRouteListPage ? "Load All Routes" : "Load All Activities";
-      const importLinkAnchor = document.querySelector(
-        'a[href="/upload"]'
+      const importLinkAnchor = assertDefined(
+        document.body.querySelector('a[href="/upload"]'),
+        "import link anchor (a)"
       );
-      const container = assertDefined(importLinkAnchor.parentElement);
+      const container = assertDefined(
+        importLinkAnchor.parentElement,
+        "import link anchor parent"
+      );
       const icon = createElementTemplate(
         savedRoutesAnchor.firstElementChild
       );
@@ -451,7 +514,7 @@ matches(candidate) {
       return div;
     };
     const createTagFiltersContainer = () => {
-      debug("Creating tag filters container");
+      logger$2.debug("Creating tag filters container");
       const tagFiltersContainer = createElement("form", {
         classList: [CLASS.TAG_FILTER_CONTAINER]
       });
@@ -477,7 +540,7 @@ matches(candidate) {
       return tagFiltersContainer;
     };
     const updateTagFilterControls = () => {
-      debug("Updating tag filter controls on page");
+      logger$2.debug("Updating tag filter controls on page");
       const filterContainer = document.querySelector(
         '#js-filter-anchor div:not([data-bottomsheet-scroll-ignore="true"]):has(> button:not([type="button"])'
       );
@@ -490,7 +553,7 @@ matches(candidate) {
     };
     const updateLiTitle = (a) => {
       if (!a) {
-        warn("No a element found in li element", a);
+        logger$2.warn("No a element found in li element", a);
         return {
           tourTagMap: new TagMap(),
           updated: false
@@ -498,7 +561,7 @@ matches(candidate) {
       }
       const originalTitle = assertDefined(
         a.textContent,
-        "Expected a.textContent to be defined, but it was not"
+        "tour title anchor text content (a.textContent)"
       );
       const {
         text,
@@ -518,19 +581,19 @@ matches(candidate) {
         const name = pill.dataset[DATA_ATTRIBUTE.TAG_NAME];
         const value = assertDefined(
           pill.dataset[DATA_ATTRIBUTE.TAG_VALUE],
-          `No tag value found in pill: ${pill.textContent}`
+          `${pill.textContent} tag value`
         );
         tourTagMap.add(name, value);
       }
       return tourTagMap;
     };
     const updateLi = (li) => {
-      debug("Updating li element");
+      logger$2.debug("Updating li element");
       const a = assertDefined(
         li.querySelector(
           'a[data-test-id="tours_list_item_title"]'
         ),
-        "No a element found in li element"
+        "tour title anchor (a)"
       );
       const { tourTagMap, wasUpdated } = updateLiTitle(a);
       a.parentElement?.appendChild(createTagPillContainer(tourTagMap));
@@ -544,51 +607,118 @@ matches(candidate) {
       const wasVisibilityChanged = showElement(li, doesMatchFilter);
       if (wasVisibilityChanged) {
         const msgPrefix = doesMatchFilter ? "Showing" : "Hiding";
-        debug(`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`);
+        logger$2.debug(
+          `${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`
+        );
       }
     };
     const applyFilters = () => {
-      debug("Applying filters");
+      logger$2.debug("Applying filters");
       const lis = getLis();
       for (const li of lis) {
         const tourTagMap = parseLiTagPills(li);
         filterLi(li, tourTagMap);
       }
     };
-    const observer = new MutationObserver((mutations) => {
-      debug("Mutations observed on ul", mutations);
-      for (const mutation of mutations) {
-        for (const newNode of mutation.addedNodes) {
-          if (newNode.nodeName === "LI") {
-            updateLi(newNode);
-          }
-        }
+    logger$2.debug("Waiting for li elements to be added to the list");
+    new NodeAddObserver((newNode) => {
+      if (newNode.nodeName === "LI") {
+        updateLi(newNode);
       }
-    });
-    debug("Waiting for li elements to be added to the list");
-    observer.observe(ul, { childList: true });
+    }, ul);
     getLis().forEach(updateLi);
     addLoadAllToursButton();
     updateTagFilterControls();
   };
-  const handler$2 = (...capturingGroups) => onReactMounted(() => init$2(...capturingGroups));
+  const handler$2 = (...capturingGroups) => onReactMounted(() => init$3(...capturingGroups));
   const tourListRoute = {
     name: ROUTE_NAME$2,
     pattern: ROUTE_PATTERN$2,
     handler: handler$2
   };
+  const styleCss$1 = "dialog[data-test-id=rename-tour-dialog]>div{width:100%;max-width:64rem}h1>span[data-test-id=tour-title]:has(>.komodo-tag-pill-container){display:flex;flex-direction:column;gap:var(--komodo-spacing)}";
   const ROUTE_NAME$1 = "tour view";
   const ROUTE_PATTERN$1 = /^\/tour\/\d*?$/;
-  const handler$1 = async () => {
+  const logger$1 = new Logger(ROUTE_NAME$1);
+  const init$2 = async () => {
+    importCSS(styleCss$1);
+    const tagMap = new TagMap(
+      TAG_DELIMITER.START,
+      TAG_DELIMITER.END,
+      TAG_DELIMITER.KEY_VALUE,
+      TAG_DELIMITER.VALUE
+    );
+    const h1 = document.body.getElementsByTagName("h1")?.[0];
+    const span = assertDefined(
+      h1.querySelector('span[data-test-id="tour-title"]'),
+      "tour title span (h1.span)"
+    );
+    let originalTourTitle;
+    let tourTitle;
+    const getBreadcrumbs = () => assertDefined(
+      document.body.querySelectorAll(
+        'a[href^="/user/"] ~ p'
+      ),
+      "breadcrumb (a.p)"
+    );
+    const parseTourTitle = () => {
+      logger$1.debug("Parsing tour title");
+      originalTourTitle = assertDefined(
+        span.textContent,
+        "tour title span text content (span.textContent)"
+      );
+      tourTitle = tagMap.parseAndAdd(originalTourTitle).text;
+    };
+    const updateTourTitle = () => {
+      logger$1.debug("Updating tour title");
+      h1.title = originalTourTitle;
+      document.title = tourTitle;
+      span.textContent = tourTitle;
+      span.appendChild(createTagPillContainer(tagMap));
+    };
+    const updateBreadcrumb = (p) => {
+      logger$1.debug("Updating breadcrumb");
+      p.title = originalTourTitle;
+      p.textContent = tourTitle;
+    };
+    parseTourTitle();
+    updateTourTitle();
+    for (const breadcrumb of getBreadcrumbs()) {
+      updateBreadcrumb(breadcrumb);
+    }
+    const breadcrumbObserver = new NodeAddObserver((newNode, observer) => {
+      if (newNode.nodeName === "P") {
+        observer.disconnect();
+        updateBreadcrumb(newNode);
+      }
+    });
+    logger$1.debug("Waiting for title to be edited");
+    new NodeAddObserver((_newNode, observer) => {
+      observer.reobserve(() => {
+        parseTourTitle();
+        updateTourTitle();
+      });
+      for (const breadcrumb of getBreadcrumbs()) {
+        const parent = assertDefined(
+          breadcrumb.parentElement,
+          "breadcrumb parent"
+        );
+        logger$1.debug("Waiting for breadcrumb to be updated");
+        breadcrumbObserver.observe(parent);
+      }
+    }, span);
   };
+  const handler$1 = () => onReactMounted(init$2);
   const tourViewRoute = {
     name: ROUTE_NAME$1,
     pattern: ROUTE_PATTERN$1,
     handler: handler$1
   };
+  const styleCss = "h1:has(>.komodo-tag-pill-container){display:flex;flex-direction:row;justify-content:center;align-items:center;gap:var(--komodo-spacing)}";
   const ROUTE_NAME = "tour zoom";
   const ROUTE_PATTERN = /^\/tour\/\d*?\/zoom$/;
   const init$1 = async () => {
+    importCSS(styleCss);
     const tagMap = new TagMap(
       TAG_DELIMITER.START,
       TAG_DELIMITER.END,
@@ -598,10 +728,11 @@ matches(candidate) {
     const updatePageTitle = () => {
       const h1 = assertDefined(
         document.body.getElementsByTagName("h1")?.[0],
-        "Expected h1 to be defined, but it was not"
+        "h1"
       );
-      const originalTitle = h1.textContent;
+      const originalTitle = assertDefined(h1.textContent);
       const { text, parsedTagMap: tourTagMap } = tagMap.parseAndAdd(originalTitle);
+      document.title = text;
       h1.textContent = text;
       h1.title = originalTitle;
       h1.appendChild(createTagPillContainer(tourTagMap));
@@ -614,21 +745,22 @@ matches(candidate) {
     pattern: ROUTE_PATTERN,
     handler
   };
+  const logger = new Logger("router");
   const registerRouteHandlers = (routes) => {
     const path = location.pathname;
     for (const { name, pattern, handler: handler2 } of routes) {
       const match = pattern.exec(path);
       if (match) {
-        debug(`Router: Calling handler for '${name}' route`);
+        logger.debug(`Router: Calling handler for '${name}' route`);
         handler2(...match.slice(1));
         break;
       }
     }
   };
   const init = () => {
-    debug("Script loaded");
+    logger.debug("Script loaded");
     registerRouteHandlers([tourListRoute, tourViewRoute, tourZoomRoute]);
-    debug("Script unloaded");
+    logger.debug("Script unloaded");
   };
   init();
 
