@@ -22,9 +22,15 @@ Some features work with both activities and routes. In this case, we may use the
 
 The script adds enhancements to the following pages:
 
-| Name      | Path                                                            | Features                                                                                                                                                                           |
-| --------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tour list | `/user/YOUR_USER_ID/routes` and `/user/YOUR_USER_ID/activities` | <ul><li>Tags are extracted from tour titles and shown as pills.</li><li>Checkboxes are added to filter tours by tags.</li><li>A button is added to force load all tours.</li></ul> |
-| Tour zoom | `/tour/YOUR_TOUR_ID/zoom`                                       | <ul><li>Tags are extracted from tour titles and shown as pills.</li></ul>                                                                                                          |
+| Name          | Path                                                            | Features                                                                        |
+| ------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **Tour list** | `/user/YOUR_USER_ID/routes` and `/user/YOUR_USER_ID/activities` | <ul><li>[View tags]</li><li>[Filter by tags]</li><li>[Load all tours]</li></ul> |
+| **Tour view** | `/tour/YOUR_TOUR_ID`                                            | <ul><li>[Add tags]</li><li>[View tags]</li></ul>                                |
+| **Tour zoom** | `/tour/YOUR_TOUR_ID/zoom`                                       | <ul><li>[View tags]</li></ul>                                                   |
 
 All UI elements added to the Komoot website have a lizard icon (🦎) in the top right corner so they can be easily identified.
+
+[Add tags]: ./tags#add-tags
+[View tags]: ./tags#view-tags
+[Filter by tags]: ./tags#filter-by-tags
+[Load all tours]: ./tags#load-all-tours

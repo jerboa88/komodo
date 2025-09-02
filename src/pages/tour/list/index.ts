@@ -1,4 +1,4 @@
-import { CLASS, DATA_ATTRIBUTE, TAG_DELIMITER } from '../constants.ts';
+import { CLASS, DATA_ATTRIBUTE, TAG_DELIMITER } from '@/constants.ts';
 import {
 	createButton,
 	createElement,
@@ -6,24 +6,29 @@ import {
 	createTriStateCheckbox,
 	onReactMounted,
 	showElement,
-} from '../dom.ts';
-import { debug, warn } from '../logger.ts';
-import { createTagPillContainer } from '../tags/dom.ts';
+} from '@/dom.ts';
+import { Logger } from '@/logger.ts';
+import { NodeAddObserver } from '@/node-add-observer.ts';
+import { createTagPillContainer } from '@/tags/dom.ts';
 import {
 	type Tag,
 	TagMap,
 	type TagValueToInclusionMap,
-} from '../tags/tag-map.ts';
-import type { Route, Trilean } from '../types.ts';
-import { assertDefined, toElementId } from '../utils.ts';
+} from '@/tags/tag-map.ts';
+import type { Route, Trilean } from '@/types.ts';
+import { assertDefined, toElementId } from '@/utils.ts';
 
 const ROUTE_NAME = 'tour list' as const;
 const ROUTE_PATTERN = /^\/user\/\d*?\/(routes|activities)$/;
+
+const logger = new Logger(ROUTE_NAME);
 
 /**
  * Initialize the page.
  */
 const init = async (...capturingGroups: string[]) => {
+	import('./style.css');
+
 	const isRouteListPage = capturingGroups?.[0] === 'routes';
 	const tagMap = new TagMap(
 		TAG_DELIMITER.START,
@@ -32,16 +37,16 @@ const init = async (...capturingGroups: string[]) => {
 		TAG_DELIMITER.VALUE,
 	);
 	const savedRoutesAnchor = assertDefined(
-		document.querySelector(
+		document.body.querySelector<HTMLAnchorElement>(
 			'a[href^="/user/"][href$="/routes"]',
-		) as HTMLAnchorElement | null,
-		'No saved routes link found',
+		),
+		'saved routes link anchor (a)',
 	);
 	const ul = assertDefined(
-		document.querySelector(
+		document.body.querySelector<HTMLUListElement>(
 			'ul[data-test-id="tours-list"]',
-		) as HTMLUListElement | null,
-		'No tour list found',
+		),
+		'tour list (ul)',
 	);
 
 	/**
@@ -53,17 +58,17 @@ const init = async (...capturingGroups: string[]) => {
 		[...ul.children].filter((li) => li.nodeName === 'LI') as HTMLLIElement[];
 
 	const scrollToLoadAll = async () => {
-		debug('Force loading all tours');
+		logger.debug('Force loading all tours');
 
 		const initialScrollPos = window.scrollY;
 		const totalNumOfTours = Number(
 			assertDefined(
 				savedRoutesAnchor.lastElementChild?.textContent,
-				'Unable to get total number of tours. Required element not found',
+				'total number of tours label',
 			),
 		);
 
-		debug(`Found ${totalNumOfTours} total tours`);
+		logger.debug(`Found ${totalNumOfTours} total tours`);
 
 		const loadMore = async () => {
 			ul.scrollTop = ul.scrollHeight;
@@ -77,7 +82,7 @@ const init = async (...capturingGroups: string[]) => {
 
 		while (await loadMore());
 
-		debug(`Restoring scroll position: ${initialScrollPos}`);
+		logger.debug(`Restoring scroll position: ${initialScrollPos}`);
 
 		window.scrollTo(0, initialScrollPos);
 	};
@@ -86,13 +91,17 @@ const init = async (...capturingGroups: string[]) => {
 	 * Add a button to the page that will force load all tours.
 	 */
 	const addLoadAllToursButton = () => {
-		debug('Adding load all tours button to page');
+		logger.debug('Adding load all tours button to page');
 
 		const title = isRouteListPage ? 'Load All Routes' : 'Load All Activities';
-		const importLinkAnchor = document.querySelector(
-			'a[href="/upload"]',
-		) as HTMLAnchorElement;
-		const container = assertDefined(importLinkAnchor.parentElement);
+		const importLinkAnchor = assertDefined(
+			document.body.querySelector<HTMLAnchorElement>('a[href="/upload"]'),
+			'import link anchor (a)',
+		);
+		const container = assertDefined(
+			importLinkAnchor.parentElement,
+			'import link anchor parent',
+		);
 		const icon = createElementTemplate(
 			savedRoutesAnchor.firstElementChild as SVGElement | null,
 		);
@@ -164,7 +173,7 @@ const init = async (...capturingGroups: string[]) => {
 	 * @returns An HTML div element
 	 */
 	const createTagFiltersContainer = () => {
-		debug('Creating tag filters container');
+		logger.debug('Creating tag filters container');
 
 		const tagFiltersContainer = createElement('form', {
 			classList: [CLASS.TAG_FILTER_CONTAINER],
@@ -200,9 +209,9 @@ const init = async (...capturingGroups: string[]) => {
 	 * Recreate the tag filter controls on the page.
 	 */
 	const updateTagFilterControls = () => {
-		debug('Updating tag filter controls on page');
+		logger.debug('Updating tag filter controls on page');
 
-		const filterContainer = document.querySelector(
+		const filterContainer = document.querySelector<HTMLDivElement>(
 			'#js-filter-anchor div:not([data-bottomsheet-scroll-ignore="true"]):has(> button:not([type="button"])',
 		);
 		const existingTagFilterContainer = filterContainer?.getElementsByClassName(
@@ -225,7 +234,7 @@ const init = async (...capturingGroups: string[]) => {
 	 */
 	const updateLiTitle = (a: HTMLAnchorElement) => {
 		if (!a) {
-			warn('No a element found in li element', a);
+			logger.warn('No a element found in li element', a);
 
 			return {
 				tourTagMap: new TagMap(),
@@ -235,7 +244,7 @@ const init = async (...capturingGroups: string[]) => {
 
 		const originalTitle = assertDefined(
 			a.textContent,
-			'Expected a.textContent to be defined, but it was not',
+			'tour title anchor text content (a.textContent)',
 		);
 
 		const {
@@ -266,7 +275,7 @@ const init = async (...capturingGroups: string[]) => {
 			const name = pill.dataset[DATA_ATTRIBUTE.TAG_NAME];
 			const value = assertDefined(
 				pill.dataset[DATA_ATTRIBUTE.TAG_VALUE],
-				`No tag value found in pill: ${pill.textContent}`,
+				`${pill.textContent} tag value`,
 			);
 
 			tourTagMap.add(name, value);
@@ -281,13 +290,13 @@ const init = async (...capturingGroups: string[]) => {
 	 * @param li - The li element to update
 	 */
 	const updateLi = (li: HTMLLIElement) => {
-		debug('Updating li element');
+		logger.debug('Updating li element');
 
 		const a = assertDefined(
-			li.querySelector(
+			li.querySelector<HTMLAnchorElement>(
 				'a[data-test-id="tours_list_item_title"]',
-			) as HTMLAnchorElement | null,
-			'No a element found in li element',
+			),
+			'tour title anchor (a)',
 		);
 		const { tourTagMap, wasUpdated } = updateLiTitle(a);
 
@@ -313,7 +322,9 @@ const init = async (...capturingGroups: string[]) => {
 		if (wasVisibilityChanged) {
 			const msgPrefix = doesMatchFilter ? 'Showing' : 'Hiding';
 
-			debug(`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`);
+			logger.debug(
+				`${msgPrefix} li element: ${li.dataset[DATA_ATTRIBUTE.TOUR_ID]}`,
+			);
 		}
 	};
 
@@ -321,7 +332,7 @@ const init = async (...capturingGroups: string[]) => {
 	 * Apply the current filters to all loaded li elements.
 	 */
 	const applyFilters = () => {
-		debug('Applying filters');
+		logger.debug('Applying filters');
 
 		const lis = getLis();
 
@@ -332,21 +343,14 @@ const init = async (...capturingGroups: string[]) => {
 		}
 	};
 
-	const observer = new MutationObserver((mutations) => {
-		debug('Mutations observed on ul', mutations);
+	logger.debug('Waiting for li elements to be added to the list');
 
-		for (const mutation of mutations) {
-			for (const newNode of mutation.addedNodes) {
-				if (newNode.nodeName === 'LI') {
-					updateLi(newNode as HTMLLIElement);
-				}
-			}
+	new NodeAddObserver((newNode) => {
+		if (newNode.nodeName === 'LI') {
+			updateLi(newNode as HTMLLIElement);
 		}
-	});
+	}, ul);
 
-	debug('Waiting for li elements to be added to the list');
-
-	observer.observe(ul, { childList: true });
 	getLis().forEach(updateLi);
 	addLoadAllToursButton();
 	updateTagFilterControls();

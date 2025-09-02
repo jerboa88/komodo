@@ -1,6 +1,6 @@
-import { TAG_DELIMITER } from '../constants.ts';
-import { debug } from '../logger.ts';
-import type { Trilean } from '../types.ts';
+import { TAG_DELIMITER } from '@/constants.ts';
+import { Logger } from '@/logger.ts';
+import type { Trilean } from '@/types.ts';
 
 type TagName = string | undefined;
 type TagValue = string;
@@ -13,6 +13,8 @@ export type Tag = {
 };
 
 export type TagValueToInclusionMap = Map<TagValue, TagIsIncluded>;
+
+const logger = new Logger('TagMap');
 
 export class TagMap implements Iterable<Tag> {
 	private tagMap: Map<TagName, TagValueToInclusionMap> = new Map();
@@ -199,16 +201,16 @@ export class TagMap implements Iterable<Tag> {
 				candidateValueToInclusionMap?.has(value) ?? false;
 
 			if (isIncluded === true && !existsInCandidate) {
-				debug(
-					`TagMap.matches: ${name}:${value} is included in reference but not in candidate`,
+				logger.debug(
+					`${name}:${value} is included in reference but not in candidate`,
 				);
 
 				return false;
 			}
 
 			if (isIncluded === false && existsInCandidate) {
-				debug(
-					`TagMap.matches: ${name}:${value} is excluded in reference but exists in candidate`,
+				logger.debug(
+					`${name}:${value} is excluded in reference but exists in candidate`,
 				);
 
 				return false;

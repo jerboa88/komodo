@@ -1,5 +1,6 @@
 import { CLASS } from './constants.ts';
-import { debug } from './logger.ts';
+import { Logger } from './logger.ts';
+import { NodeAddObserver } from './node-add-observer.ts';
 import type { Trilean } from './types.ts';
 import { assertDefined } from './utils.ts';
 
@@ -9,6 +10,8 @@ type AttributeMap<K extends keyof HTMLElementTagNameMap> = Partial<
 	classList?: string[];
 	dataset?: Record<string, string | undefined>;
 };
+
+const logger = new Logger('dom');
 
 /**
  * Create an HTML element and apply attributes from an attribute map.
@@ -63,7 +66,7 @@ export const createElementTemplate = <T extends HTMLElement | SVGElement>(
 ) => {
 	const referenceElement = assertDefined(
 		nullableReferenceElement,
-		'Unable to create element template. Reference element not found',
+		'reference element',
 	);
 	const elementTemplate: T = referenceElement.cloneNode(true) as T;
 
@@ -116,7 +119,7 @@ export const createButton = (
 	});
 
 	button.addEventListener('click', (event) => {
-		debug('Button clicked:', text);
+		logger.debug('Button clicked:', text);
 
 		handleClick(event, button, span, icon);
 	});
@@ -230,7 +233,7 @@ export const onReactMounted = (callback: () => void) => {
 	const canaryClassName = 'ReactModalPortal';
 
 	const continueCall = () => {
-		debug('React has been mounted');
+		logger.debug('React has been mounted');
 
 		callback();
 	};
@@ -243,25 +246,16 @@ export const onReactMounted = (callback: () => void) => {
 		return;
 	}
 
-	const observer = new MutationObserver((mutations) => {
-		debug('Mutations observed on body', mutations);
+	logger.debug('Waiting for React to be mounted');
 
-		for (const mutation of mutations) {
-			for (const newNode of mutation.addedNodes) {
-				if (
-					newNode instanceof HTMLElement &&
-					newNode.classList.contains(canaryClassName)
-				) {
-					observer.disconnect();
-					continueCall();
-
-					return;
-				}
-			}
+	new NodeAddObserver((newNode, observer) => {
+		if (
+			newNode instanceof HTMLElement &&
+			newNode.classList.contains(canaryClassName)
+		) {
+			observer.disconnect();
+			continueCall();
+			observer.stop();
 		}
-	});
-
-	debug('Waiting for React to be mounted');
-
-	observer.observe(document.body, { childList: true });
+	}, document.body);
 };

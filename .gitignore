@@ -4,6 +4,7 @@ node_modules
 # output
 *.local
 *.tgz
+dist
 docs/.vitepress/dist
 docs/.vitepress/cache
 

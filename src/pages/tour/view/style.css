@@ -1,0 +1,15 @@
+/* Overrides */
+/* --------- */
+
+/* Increase width of tour rename dialog */
+dialog[data-test-id='rename-tour-dialog'] > div {
+	width: 100%;
+	max-width: 64rem;
+}
+
+/* Page title */
+h1 > span[data-test-id='tour-title']:has(> .komodo-tag-pill-container) {
+	display: flex;
+	flex-direction: column;
+	gap: var(--komodo-spacing);
+}

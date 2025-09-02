@@ -1,9 +1,9 @@
-import { TAG_DELIMITER } from '../constants.ts';
-import { onReactMounted } from '../dom.ts';
-import { createTagPillContainer } from '../tags/dom.ts';
-import { TagMap } from '../tags/tag-map.ts';
-import type { Route } from '../types.ts';
-import { assertDefined } from '../utils.ts';
+import { TAG_DELIMITER } from '@/constants.ts';
+import { onReactMounted } from '@/dom.ts';
+import { createTagPillContainer } from '@/tags/dom.ts';
+import { TagMap } from '@/tags/tag-map.ts';
+import type { Route } from '@/types.ts';
+import { assertDefined } from '@/utils.ts';
 
 const ROUTE_NAME = 'tour zoom' as const;
 const ROUTE_PATTERN = /^\/tour\/\d*?\/zoom$/;
@@ -12,6 +12,8 @@ const ROUTE_PATTERN = /^\/tour\/\d*?\/zoom$/;
  * Initialize the page.
  */
 const init = async () => {
+	import('./style.css');
+
 	const tagMap = new TagMap(
 		TAG_DELIMITER.START,
 		TAG_DELIMITER.END,
@@ -25,12 +27,13 @@ const init = async () => {
 	const updatePageTitle = () => {
 		const h1 = assertDefined(
 			document.body.getElementsByTagName('h1')?.[0],
-			'Expected h1 to be defined, but it was not',
+			'h1',
 		);
-		const originalTitle = h1.textContent;
+		const originalTitle = assertDefined(h1.textContent);
 		const { text, parsedTagMap: tourTagMap } =
 			tagMap.parseAndAdd(originalTitle);
 
+		document.title = text;
 		h1.textContent = text;
 		h1.title = originalTitle;
 
