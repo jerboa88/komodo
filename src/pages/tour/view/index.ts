@@ -1,6 +1,7 @@
 import { TAG_DELIMITER } from '@/constants.ts';
 import { onReactMounted } from '@/dom.ts';
 import { debug } from '@/logger.ts';
+import { NodeAddObserver } from '@/node-add-observer.ts';
 import { createTagPillContainer } from '@/tags/dom.ts';
 import { TagMap } from '@/tags/tag-map.ts';
 import type { Route } from '@/types.ts';
@@ -84,55 +85,6 @@ const init = async () => {
 		p.textContent = tourTitle;
 	};
 
-	/**
-	 * Observe breadcrumb changes and update when new breadcrumb nodes are added.
-	 */
-	const breadcrumbObserver = new MutationObserver((mutations) => {
-		debug('Mutations observed on breadcrumb', mutations);
-
-		for (const mutation of mutations) {
-			for (const newNode of mutation.addedNodes) {
-				if (newNode.nodeName === 'P') {
-					breadcrumbObserver.disconnect();
-					updateBreadcrumb(newNode as HTMLParagraphElement);
-				}
-			}
-		}
-	});
-
-	/**
-	 * Observe changes to the tour title span and update the UI accordingly.
-	 */
-	const tourTitleObserver = new MutationObserver((mutations) => {
-		debug('Mutations observed on tour title span', mutations);
-
-		for (const mutation of mutations) {
-			for (const _newNode of mutation.addedNodes) {
-				tourTitleObserver.disconnect();
-				parseTourTitle();
-				updateTourTitle();
-				tourTitleObserver.observe(span, {
-					childList: true,
-				});
-
-				for (const breadcrumb of getBreadcrumbs()) {
-					const parent = assertDefined(
-						breadcrumb.parentElement,
-						'breadcrumb parent',
-					);
-
-					debug('Waiting for breadcrumb to be updated');
-
-					breadcrumbObserver.observe(parent, {
-						childList: true,
-					});
-				}
-			}
-		}
-	});
-
-	debug('Waiting for title to be edited');
-
 	parseTourTitle();
 	updateTourTitle();
 
@@ -140,9 +92,35 @@ const init = async () => {
 		updateBreadcrumb(breadcrumb);
 	}
 
-	tourTitleObserver.observe(span, {
-		childList: true,
+	/**
+	 * Observe breadcrumb changes and update when new breadcrumb nodes are added.
+	 */
+	const breadcrumbObserver = new NodeAddObserver((newNode, observer) => {
+		if (newNode.nodeName === 'P') {
+			observer.disconnect();
+			updateBreadcrumb(newNode as HTMLParagraphElement);
+		}
 	});
+
+	debug('Waiting for title to be edited');
+
+	new NodeAddObserver((_newNode, observer) => {
+		observer.reobserve(() => {
+			parseTourTitle();
+			updateTourTitle();
+		});
+
+		for (const breadcrumb of getBreadcrumbs()) {
+			const parent = assertDefined(
+				breadcrumb.parentElement,
+				'breadcrumb parent',
+			);
+
+			debug('Waiting for breadcrumb to be updated');
+
+			breadcrumbObserver.observe(parent);
+		}
+	}, span);
 };
 
 /**

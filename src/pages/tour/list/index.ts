@@ -8,6 +8,7 @@ import {
 	showElement,
 } from '@/dom.ts';
 import { debug, warn } from '@/logger.ts';
+import { NodeAddObserver } from '@/node-add-observer.ts';
 import { createTagPillContainer } from '@/tags/dom.ts';
 import {
 	type Tag,
@@ -338,21 +339,14 @@ const init = async (...capturingGroups: string[]) => {
 		}
 	};
 
-	const observer = new MutationObserver((mutations) => {
-		debug('Mutations observed on ul', mutations);
-
-		for (const mutation of mutations) {
-			for (const newNode of mutation.addedNodes) {
-				if (newNode.nodeName === 'LI') {
-					updateLi(newNode as HTMLLIElement);
-				}
-			}
-		}
-	});
-
 	debug('Waiting for li elements to be added to the list');
 
-	observer.observe(ul, { childList: true });
+	new NodeAddObserver((newNode) => {
+		if (newNode.nodeName === 'LI') {
+			updateLi(newNode as HTMLLIElement);
+		}
+	}, ul);
+
 	getLis().forEach(updateLi);
 	addLoadAllToursButton();
 	updateTagFilterControls();

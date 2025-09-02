@@ -1,5 +1,6 @@
 import { CLASS } from './constants.ts';
 import { debug } from './logger.ts';
+import { NodeAddObserver } from './node-add-observer.ts';
 import type { Trilean } from './types.ts';
 import { assertDefined } from './utils.ts';
 
@@ -243,25 +244,16 @@ export const onReactMounted = (callback: () => void) => {
 		return;
 	}
 
-	const observer = new MutationObserver((mutations) => {
-		debug('Mutations observed on body', mutations);
-
-		for (const mutation of mutations) {
-			for (const newNode of mutation.addedNodes) {
-				if (
-					newNode instanceof HTMLElement &&
-					newNode.classList.contains(canaryClassName)
-				) {
-					observer.disconnect();
-					continueCall();
-
-					return;
-				}
-			}
-		}
-	});
-
 	debug('Waiting for React to be mounted');
 
-	observer.observe(document.body, { childList: true });
+	new NodeAddObserver((newNode, observer) => {
+		if (
+			newNode instanceof HTMLElement &&
+			newNode.classList.contains(canaryClassName)
+		) {
+			observer.disconnect();
+			continueCall();
+			observer.stop();
+		}
+	}, document.body);
 };
